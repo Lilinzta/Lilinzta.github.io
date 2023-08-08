@@ -16,22 +16,22 @@
   <meta name="author" content="Haotian Li">
   <meta name="keywords" content="">
   
-    <meta name="description" content="记录了我曾经安装Arch Linux的大致步骤">
+    <meta name="description" content="使用kdeconnect优雅地传文件(局域网)">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Arch base install">
-<meta property="og:url" content="https://giihhairwtw.github.io/2023/07/16/Arch-base-install/index.html">
+<meta property="og:title" content="kde-connect">
+<meta property="og:url" content="https://giihhairwtw.github.io/2023/08/08/kde-connect/index.html">
 <meta property="og:site_name" content="Lee&#39;s blog">
-<meta property="og:description" content="记录了我曾经安装Arch Linux的大致步骤">
+<meta property="og:description" content="使用kdeconnect优雅地传文件(局域网)">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-07-15T16:00:00.000Z">
-<meta property="article:modified_time" content="2023-08-08T09:34:39.641Z">
+<meta property="article:published_time" content="2023-08-08T09:27:02.000Z">
+<meta property="article:modified_time" content="2023-08-08T10:27:39.000Z">
 <meta property="article:author" content="Haotian Li">
-<meta property="article:tag" content="Arch Linux">
+<meta property="article:tag" content="kde connect">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>Arch base install - Lee&#39;s blog</title>
+  <title>kde-connect - Lee&#39;s blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -209,7 +209,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Arch base install"></span>
+            <span id="subtitle" data-typed-text="kde-connect"></span>
           
         </div>
 
@@ -220,8 +220,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-07-16 00:00" pubdate>
-          2023年7月16日 凌晨
+        <time datetime="2023-08-08 17:27" pubdate>
+          2023年8月8日 下午
         </time>
       </span>
     
@@ -232,7 +232,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.9k 字
+          2.2k 字
         
       </span>
     
@@ -243,7 +243,7 @@
         
         
         
-          17 分钟
+          19 分钟
         
       </span>
     
@@ -280,29 +280,27 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Arch base install</h1>
+            <h1 id="seo-header">kde-connect</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="记录了我曾经安装Arch-Linux的大致步骤"><a href="#记录了我曾经安装Arch-Linux的大致步骤" class="headerlink" title="记录了我曾经安装Arch Linux的大致步骤"></a>记录了我曾经安装Arch Linux的大致步骤</h1><span id="more"></span>
+                <h1 id="使用kdeconnect优雅地传文件-局域网"><a href="#使用kdeconnect优雅地传文件-局域网" class="headerlink" title="使用kdeconnect优雅地传文件(局域网)"></a>使用kdeconnect优雅地传文件(局域网)</h1><span id="more"></span>
+<h2 id="1-安装"><a href="#1-安装" class="headerlink" title="1.安装"></a>1.安装</h2><ul>
+<li>Windows: <a target="_blank" rel="noopener" href="https://apps.microsoft.com/store/detail/kde-connect/9N93MRMSXBF0">Microsoft Store</a></li>
+<li>Linux: pkg name is <code>kdeconnect-kde</code>, <code>kdeconnect-plasma</code>, just <code>kdeconnect</code> or <code>kde-connect</code></li>
+<li>Android: <a target="_blank" rel="noopener" href="https://play.google.com/store/apps/details?id=org.kde.kdeconnect_tp&pli=1">Play Store</a>or<a target="_blank" rel="noopener" href="https://f-droid.org/packages/org.kde.kdeconnect_tp/">F-Droid</a></li>
+<li>IOS: <a target="_blank" rel="noopener" href="https://apps.apple.com/us/app/kde-connect/id1580245991">App Store</a></li>
+</ul>
+<h2 id="2-cli"><a href="#2-cli" class="headerlink" title="2.cli"></a>2.cli</h2><p>图形界面的使用不再介绍，可以自行探索</p>
+<p>使用<code>kdeconnect-cli -h</code>查看帮助，获得以下信息</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><code class="hljs sh">Usage: kdeconnect-cli [options]<br>KDE Connect CLI tool<br><br>Options:<br>  -l, --list-devices            List all devices<br>  -a, --list-available          List available (paired and reachable) devices<br>  --id-only                     Make --list-devices or --list-available <span class="hljs-built_in">print</span><br>                                only the devices <span class="hljs-built_in">id</span>, to ease scripting<br>  --name-only                   Make --list-devices or --list-available <span class="hljs-built_in">print</span><br>                                only the devices name, to ease scripting<br>  --id-name-only                Make --list-devices or --list-available <span class="hljs-built_in">print</span><br>                                only the devices <span class="hljs-built_in">id</span> and name, to ease scripting<br>  --refresh                     Search <span class="hljs-keyword">for</span> devices <span class="hljs-keyword">in</span> the network and<br>                                re-establish connections<br>  --pair                        Request pairing to a said device<br>  --ring                        Find the said device by ringing it.<br>  --unpair                      Stop pairing to a said device<br>  --ping                        Sends a ping to said device<br>  --ping-msg &lt;message&gt;          Same as ping but you can <span class="hljs-built_in">set</span> the message to<br>                                display<br>  --share &lt;path or URL&gt;         Share a file/URL to a said device<br>  --share-text &lt;text&gt;           Share text to a said device<br>  --list-notifications          Display the notifications on a said device<br>  --lock                        Lock the specified device<br>  --unlock                      Unlock the specified device<br>  --send-sms &lt;message&gt;          Sends an SMS. Requires destination<br>  --destination &lt;phone number&gt;  Phone number to send the message<br>  --attachment &lt;file urls&gt;      File urls to send attachments with the message<br>                                (can be passed multiple <span class="hljs-built_in">times</span>)<br>  --device, -d &lt;dev&gt;            Device ID<br>  --name, -n &lt;name&gt;             Device Name<br>  --encryption-info             Get encryption info about said device<br>  --list-commands               Lists remote commands and their ids<br>  --execute-command &lt;<span class="hljs-built_in">id</span>&gt;        Executes a remote <span class="hljs-built_in">command</span> by <span class="hljs-built_in">id</span><br>  -k, --send-keys &lt;key&gt;         Sends keys to a said device<br>  --my-id                       Display this device<span class="hljs-string">&#x27;s id and exit</span><br><span class="hljs-string">  --photo &lt;path&gt;                Open the connected device&#x27;</span>s camera and transfer<br>                                the photo<br>  -h, --<span class="hljs-built_in">help</span>                    Displays <span class="hljs-built_in">help</span> on commandline options.<br>  --help-all                    Displays <span class="hljs-built_in">help</span> including Qt specific options.<br>  -v, --version                 Displays version information.<br>  --author                      Show author information.<br>  --license                     Show license information.<br>  --desktopfile &lt;file name&gt;     The base file name of the desktop entry <span class="hljs-keyword">for</span><br>                                this application.<br></code></pre></td></tr></table></figure>
+<h2 id="3-使用"><a href="#3-使用" class="headerlink" title="3.使用"></a>3.使用</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs sh"><span class="hljs-comment"># Arch -&gt; Android</span><br><span class="hljs-built_in">alias</span> kcp=<span class="hljs-string">&quot;kdeconnect-cli -n &lt;device name&gt; --share&quot;</span><br>kcp &lt;path_to_file&gt;<br><span class="hljs-comment"># Android -&gt; Arch</span><br>乖乖用GUI罢<br></code></pre></td></tr></table></figure>
+<p>高级用法请根据自己的习惯和文档自行探索</p>
 <blockquote>
-<p>update time：2023-4-16</p>
+<p>参考链接: <a target="_blank" rel="noopener" href="https://github.com/KDE/kdeconnect-kde">https://github.com/KDE/kdeconnect-kde</a></p>
 </blockquote>
-<h2 id="0-连接wifi"><a href="#0-连接wifi" class="headerlink" title="0.连接wifi"></a>0.连接wifi</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs sh"><span class="hljs-comment"># iwctl</span><br><span class="hljs-comment"># station wlan0 scan</span><br><span class="hljs-comment"># station wlan0 get-networks</span><br><span class="hljs-comment"># station wlan0 connect SSID</span><br><span class="hljs-comment"># exit</span><br></code></pre></td></tr></table></figure>
-<h2 id="1-确保UEFI模式启动"><a href="#1-确保UEFI模式启动" class="headerlink" title="1.确保UEFI模式启动"></a>1.确保UEFI模式启动</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh"><span class="hljs-comment"># ls /sys/firmware/efi/efivars</span><br></code></pre></td></tr></table></figure>
-<h2 id="2-禁用自动更新mirrorlist的reflector"><a href="#2-禁用自动更新mirrorlist的reflector" class="headerlink" title="2.禁用自动更新mirrorlist的reflector"></a>2.禁用自动更新mirrorlist的reflector</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh"><span class="hljs-comment"># systemctl stop reflector.service</span><br></code></pre></td></tr></table></figure>
-<h2 id="3-检查时钟服务状态"><a href="#3-检查时钟服务状态" class="headerlink" title="3.检查时钟服务状态"></a>3.检查时钟服务状态</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh"><span class="hljs-comment"># timedatectl status</span><br></code></pre></td></tr></table></figure>
-<h2 id="4-换源"><a href="#4-换源" class="headerlink" title="4.换源"></a>4.换源</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sh"><span class="hljs-comment"># vim /etc/pacman.d/mirrorlist</span><br><span class="hljs-comment"># Server = https://mirrors.ustc.edu.cn/archlinux/$repo/os/$arch</span><br><span class="hljs-comment"># Server = https://mirrors.hit.edu.cn/archlinux/$repo/os/$arch</span><br></code></pre></td></tr></table></figure>
-<h2 id="5-分区"><a href="#5-分区" class="headerlink" title="5.分区"></a>5.分区</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh"><span class="hljs-comment"># cfdisk /dev/sd(x)</span><br></code></pre></td></tr></table></figure>
-<h2 id="6-格式化"><a href="#6-格式化" class="headerlink" title="6.格式化"></a>6.格式化</h2><p>&#x2F;和&#x2F;home格式化成ext4类型，EFI分区格式化成vfat类型，交换分区使用mkswap初始化</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sh"><span class="hljs-comment"># mkfs.ext4 /dev/root_part</span><br><span class="hljs-comment"># mkfs.vfat /efi_system_part</span><br><span class="hljs-comment"># mkswap /dev/swap_part</span><br></code></pre></td></tr></table></figure>
-<h2 id="7-挂载"><a href="#7-挂载" class="headerlink" title="7.挂载"></a>7.挂载</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sh"><span class="hljs-comment"># mount /dev/root_part /mnt</span><br><span class="hljs-comment"># mount --mkdir /dev/efi_system_part /mnt/boot</span><br><span class="hljs-comment"># swapon /dev/swap_part</span><br></code></pre></td></tr></table></figure>
-<h2 id="8-安装必需的软件包"><a href="#8-安装必需的软件包" class="headerlink" title="8.安装必需的软件包"></a>8.安装必需的软件包</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh"><span class="hljs-comment"># pacstrap /mnt base base-devel linux linux-firmware dhcpcd iwd networkmanager wireless_tools wpa_supplicant vim git</span><br></code></pre></td></tr></table></figure>
-<h2 id="9-配置系统"><a href="#9-配置系统" class="headerlink" title="9.配置系统"></a>9.配置系统</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs sh"><span class="hljs-comment"># Fstab</span><br><span class="hljs-comment"># genfstab -U /mnt &gt;&gt; /mnt/etc/fstab</span><br><br><span class="hljs-comment"># Chroot</span><br><span class="hljs-comment"># arch-chroot /mnt</span><br><br><span class="hljs-comment"># 设置上海时区</span><br><span class="hljs-comment"># ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime</span><br><br><span class="hljs-comment"># 同步系统时间到硬件</span><br><span class="hljs-comment"># hwclock --systohc</span><br><br><span class="hljs-comment"># 本地化</span><br><span class="hljs-comment"># vim /etc/locale.gen</span><br><span class="hljs-comment"># locale-gen</span><br><span class="hljs-comment"># echo &quot;LANG=en_US.UTF-8&quot; &gt; /etc/locale.conf</span><br><br><span class="hljs-comment"># 安装微码</span><br><span class="hljs-comment"># pacman -S intel-ucode  # Intel</span><br><span class="hljs-comment"># pacman -S amd-ucode   # AMD</span><br><br><span class="hljs-comment"># 安装grub引导</span><br><span class="hljs-comment"># pacman -S grub efibootmgr</span><br><span class="hljs-comment"># grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=grub</span><br><span class="hljs-comment"># grub-mkconfig -o /boot/grub/grub.cfg</span><br></code></pre></td></tr></table></figure>
-<h2 id="10-完成安装"><a href="#10-完成安装" class="headerlink" title="10.完成安装"></a>10.完成安装</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs sh"><span class="hljs-comment"># 设置密码</span><br><span class="hljs-comment"># passwd</span><br><span class="hljs-comment"># exit</span><br><span class="hljs-comment"># umount -R /mnt</span><br><span class="hljs-comment"># reboot</span><br></code></pre></td></tr></table></figure>
-<h2 id="11-图形化安装"><a href="#11-图形化安装" class="headerlink" title="11.图形化安装"></a>11.图形化安装</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs sh"><span class="hljs-comment"># pacman -Syyu</span><br><span class="hljs-comment"># useradd -m -G wheel -s /bin/bash username</span><br><span class="hljs-comment"># passwd username</span><br><span class="hljs-comment"># EDITOR=vim visudo</span><br><span class="hljs-comment"># #wheel ALL=(ALL)ALL ---&gt; wheel ALL=(ALL)ALL</span><br><br><span class="hljs-comment"># pacman -S plasma-meta konsole dolphin</span><br><span class="hljs-comment"># systemctl enable sddm</span><br><br><span class="hljs-comment"># vim /etc/pacman.conf</span><br>+[archlinuxcn]<br>+SigLevel = Optional TrustAll<br>+Server = https://mirrors.ustc.edu.cn/archlinuxcn/<span class="hljs-variable">$arch</span><br><span class="hljs-comment"># pacman -Syyu</span><br></code></pre></td></tr></table></figure>
-<h2 id="12-基础功能包"><a href="#12-基础功能包" class="headerlink" title="12.基础功能包"></a>12.基础功能包</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs sh"><span class="hljs-comment"># sudo pacman -S ntfs-3g wqy-zenhei noto-fonts noto-fonts-cjk noto-fonts.emoji firefox yay</span><br><br><span class="hljs-comment"># fcitx5中文输入法</span><br><span class="hljs-comment"># sudo pacman -S fcitx5-im fcitx5-chinese-addons fcitx5-pinyin-moegirl fcitx5-pinyin-zhwiki</span><br><span class="hljs-comment"># yay -S fcitx5-material-color</span><br><span class="hljs-comment"># vim /etc/environment</span><br>+GTK_IM_MODULE=fcitx<br>+XMODIFIERS=@im=fcitx<br>+QT_IM_MODULE=fcitx<br></code></pre></td></tr></table></figure>
+
                 
               </div>
             
@@ -310,32 +308,11 @@
             <div>
               <div class="post-metas my-3">
   
-    <div class="post-meta mr-3 d-flex align-items-center">
-      <i class="iconfont icon-category"></i>
-      
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E6%8A%98%E8%85%BE/" class="category-chain-item">折腾</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-    </div>
-  
   
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/Arch-Linux/" class="print-no-link">#Arch Linux</a>
+        <a href="/tags/kde-connect/" class="print-no-link">#kde connect</a>
       
     </div>
   
@@ -347,8 +324,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Arch base install</div>
-      <div>https://giihhairwtw.github.io/2023/07/16/Arch-base-install/</div>
+      <div>kde-connect</div>
+      <div>https://giihhairwtw.github.io/2023/08/08/kde-connect/</div>
     </div>
     <div class="license-meta">
       
@@ -360,7 +337,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年7月16日</div>
+          <div>2023年8月8日</div>
         </div>
       
       
@@ -392,18 +369,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/07/29/3-%E5%8F%98%E9%87%8F%E7%BB%91%E5%AE%9A%E4%B8%8E%E8%A7%A3%E6%9E%84/" title="3.变量绑定与解构">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">3.变量绑定与解构</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/07/16/hello-world/" title="Hello World">
-                        <span class="hidden-mobile">Hello World</span>
+                      <a href="/2023/08/07/5-2-%E5%BC%95%E7%94%A8%E5%92%8C%E5%80%9F%E7%94%A8/" title="5.2.引用和借用">
+                        <span class="hidden-mobile">5.2.引用和借用</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -423,8 +394,8 @@
     
       <script type="text/javascript">
         var disqus_config = function() {
-          this.page.url = 'https://giihhairwtw.github.io/2023/07/16/Arch-base-install/';
-          this.page.identifier = '/2023/07/16/Arch-base-install/';
+          this.page.url = 'https://giihhairwtw.github.io/2023/08/08/kde-connect/';
+          this.page.identifier = '/2023/08/08/kde-connect/';
         };
         Fluid.utils.loadComments('#disqus_thread', function() {
           var d = document, s = d.createElement('script');
