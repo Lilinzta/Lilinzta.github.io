@@ -1,0 +1,729 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/static/icon.png">
+  <link rel="icon" href="/static/icon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Haotian Li">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="从一个windows小白,到Arch Linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="我的Linux之旅">
+<meta property="og:url" content="https://lilinzta.github.io/2023/08/25/%E6%88%91%E7%9A%84Linux%E4%B9%8B%E6%97%85/index.html">
+<meta property="og:site_name" content="Lilinzta&#39;s blog">
+<meta property="og:description" content="从一个windows小白,到Arch Linux">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-08-25T02:31:42.000Z">
+<meta property="article:modified_time" content="2023-08-26T04:08:13.739Z">
+<meta property="article:author" content="Haotian Li">
+<meta property="article:tag" content="Share">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>我的Linux之旅 - Lilinzta&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"lilinzta.github.io","root":"/","version":"1.9.5-a","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Lilinzta&#39;s blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="我的Linux之旅"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-08-25 10:31" pubdate>
+          2023年8月25日 上午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.7k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          23 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">我的Linux之旅</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="从一个windows小白-到Arch-Linux"><a href="#从一个windows小白-到Arch-Linux" class="headerlink" title="从一个windows小白,到Arch Linux"></a>从一个windows小白,到Arch Linux</h1><span id="more"></span>
+<blockquote>
+<p>Tips: 假如涉及到你不太了解的名词，请自行Google</p>
+</blockquote>
+<h2 id="Windows"><a href="#Windows" class="headerlink" title="Windows"></a>Windows</h2><p>大一时，我还是个windows小白。家里没有电脑，也没有去过网吧，所以一开始还和垃圾软件作过一段时间的斗争。当时不知道自由(开源)软件，也不知道Github，更不知道windows居然有包管，只知道打开浏览器下载软件，还用的是百毒搜索引擎，前几个必是xxx软件园。否则，我现在估计也还是会用windows的。从这个角度来看的话，还真的是要感谢百度了。</p>
+<h2 id="Linux初体验"><a href="#Linux初体验" class="headerlink" title="Linux初体验"></a>Linux初体验</h2><p>第一次体验GNU&#x2F;Linux distro，并没有觉得有什么了不起，因为<del>属于我的蒙娜丽莎，我早已遇见。</del></p>
+<p>我第一眼见到的是比特鹏哥在vmware中装的centOS，他主要是出于教学目的来演示GCC编译器。说实话，centOS确实比较老了，无论哪个DE都很丑。但是学习基础命令的话，还是挺合适的，中文资料也比较丰富。大概很多人都是从centOS或者Ubuntu开始起步的，毕竟对新手特别友好。</p>
+<p>现在，对于一个没有接触过Linux的人，我也会推荐他(她)使用Debian(系)。</p>
+<h2 id="从centOS到Ubuntu"><a href="#从centOS到Ubuntu" class="headerlink" title="从centOS到Ubuntu"></a>从centOS到Ubuntu</h2><p>这个‘从centOS’其实是可以省略的，因为我当时并没有在centOS上停留很多时间，仅仅是装了几次虚拟机。</p>
+<p>其实后来还是用过centOS的。Java课设用到了mysql，为了方便他人，我在aliyun上部署了个mysql，centOS上跑的Docker运行mysql。国内的公司还蛮喜欢centOS的，大多数云服务商也都支持centOS。其实，Debian系就已经占据了GNU&#x2F;Linux distro的半壁江山了，再加上redhat系，几乎就是全部了。BTW, I use Arch.</p>
+<p>说是两个distro，其实最大的不同也就包管理器。neofetch的输出不同? 你看，Debian的就像依托…，还是Arch的好看。没有传教的意思，绝对没有。</p>
+<h2 id="出轨"><a href="#出轨" class="headerlink" title="出轨"></a>出轨</h2><p>Ubuntu的内部错误令人难以忍受。于是，我出轨了。它是那么地令人难以捉摸，每一个男孩子的梦中OS &#x3D;&#x3D;&gt; Kali Linux(The quieter you become, the more you can hear)，哪个学计算机的没有做过成为Super Hacker的梦呢？</p>
+<p>官方很贴心，直接给了虚拟机的压缩文件。于是，我面临的第一个挑战是安装中文输入法。Kali不会中文，所以想要约它，就必须要有中文输入法这个媒介，或者你英文足够好。没有和centOS深入交流，就不需要输入法了，Ubuntu倒是入乡随俗，学了点中文。</p>
+<p>和Kali共度的那段时光真的很愉快。我们聊了很多，关于Github使用ssh认证，教它如何使用China的mirror。最后还送了它一份大礼，Jetbrains家的PyCharm。最终也没能俘获它的芳心，其实我们之间还是有可能的，只不过我没能坚持，出于周围环境的原因。</p>
+<h2 id="走上正规"><a href="#走上正规" class="headerlink" title="走上正规"></a>走上正规</h2><p>已经忘记了是从哪个时间段开始沉迷于配置vim了。无意之间，看到了一位大佬(TheCW)，虽然他现在已经在用麦金塔了，我真正意义上开始折腾大概就是从这里开始。</p>
+<p>打开他的视频，映入眼帘的是一个‘m’(指neofetch的输出，想必有人已经知道哪个distro了)，我首先想到了小米(PS:对小米印象不错，虽然阴差阳错没用过它家的手机，相较于蓝绿两厂好多了。我是真想给手机刷一个Magisk)，后来才知道，这跟小米没有半毛钱关系。是基于Arch Linux的distro，其名为manjaro。</p>
+<p>可以说在manjaro上我做了自己想做的所有事情，也是从manjaro开始装了双系统，体验到了装OS的快乐。可以说从按下开机键的那一刻起，你之后看到的所有东西都是可定制的(windows我只是把task bar移到了顶部，Linux你甚至可以手写或者抄别人写好的CSS样式从0开始定制bar)。</p>
+<p>如果说只是能够<del>定制</del>美化的话，那Linux不就成花瓶了？</p>
+<p>Linux不仅适合开发者和计算机专业的学生，普通人也可以。实际上，甚至部分维护者也并不是计算机专业的。</p>
+<p>以Arch Linux为例，假设你已经科学上网:</p>
+<ul>
+<li>开发环境<ul>
+<li>vscode:  <code>sudo pacman -S visual-studio-code-bin</code></li>
+<li>idea:    <code>yay -S intellij-idea-ultimate-edition-jre intellij-idea-ultimate-edition</code></li>
+<li>jdk:     <code>sudo pacman -S jdk17-openjdk</code></li>
+<li>docker:  <code>sudo pacman -S docker</code></li>
+<li>dbeaver: <code>sudo pacman -S dbeaver</code></li>
+<li>…</li>
+</ul>
+</li>
+<li>办公日常<ul>
+<li>wps(global):      <code>yay -S wps-office</code></li>
+<li>typora:           <code>yay -S typora-free</code></li>
+<li>Okular(文档阅读器): <code>sudo pacman -S okular</code></li>
+<li>scrcpy(安卓投屏):   <code>yay -S scrcpy</code></li>
+<li>telegram:         <code>sudo pacman -S telegram-desktop</code></li>
+<li>dingtalk:         <code>yay -S yay -S dingtalk-bin</code></li>
+<li>wemeet:           <code>yay -S wemeet-bin</code></li>
+<li>QQ:               <code>yay -S linuxqq</code></li>
+<li>WeChat(wine):     <code>yay -S com.qq.weixin.deepin</code></li>
+</ul>
+</li>
+<li>视频影音<ul>
+<li>网易云(无社交): <code>yay -S yesplaymusic</code></li>
+<li>落雪音乐:      <code>yay -S lx-music-desktop-bin</code></li>
+<li>mpv:          <code>sudo pacman -S mpv</code></li>
+<li>vlc:          <code>sudo pacman -S vlc</code></li>
+<li>obs:          <code>sudo pacman -S obs-studio</code></li>
+</ul>
+</li>
+<li>游戏娱乐<ul>
+<li>Steam:  <code>sudo pacman -S steam</code></li>
+<li>Lutris: <code>sudo pacman -S lutris</code></li>
+</ul>
+</li>
+<li>…</li>
+</ul>
+<h2 id="Yes-Arch"><a href="#Yes-Arch" class="headerlink" title="Yes, Arch!"></a>Yes, Arch!</h2><p>双系统也玩了挺长时间的，最终还是决定安装Arch Linux。</p>
+<p>安装Arch Linux本就是一个挑战。</p>
+<p>第一次安装Arch在虚拟机里试，我竟然一次成功了(因为不用连wifi)。实机安装的时候就踩坑了，安装之后，没有网络，后来才知道要开dhcpcd…</p>
+<p>安装完之后，每天开机<code>yay</code>更新系统，再折腾一下Linux下的工具(ranger,neovim,shell-gpt,寻找同类型的在用的软件的更好替代品之类的)，大概有半年了，它仍然健在。由此可见，我还是很保守的。</p>
+<p>现在，我仍然在用Arch Linux。</p>
+<h2 id="一些链接"><a href="#一些链接" class="headerlink" title="一些链接"></a>一些链接</h2><p><a target="_blank" rel="noopener" href="https://space.bilibili.com/456828781">B站 鹏哥</a></p>
+<p><a target="_blank" rel="noopener" href="https://missing.csail.mit.edu/2020/">MIT-Missing-Semester</a></p>
+<p><a target="_blank" rel="noopener" href="https://space.bilibili.com/13081489">B站 TheCW</a></p>
+<p><a target="_blank" rel="noopener" href="https://archlinuxstudio.github.io/ArchLinuxTutorial/#/">ArchLinuxTutorial</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.centos.org/download/">CentOS Download</a></p>
+<p><a target="_blank" rel="noopener" href="https://ubuntu.com/download/desktop">Ubuntu Download</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.kali.org/get-kali/#kali-platforms">Kali Linux Download</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.debian.org/download">Debian Download</a></p>
+<p><a target="_blank" rel="noopener" href="https://archlinux.org/download/">Arch Linux Download</a></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Share/" class="print-no-link">#Share</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>我的Linux之旅</div>
+      <div>https://lilinzta.github.io/2023/08/25/我的Linux之旅/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Haotian Li</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年8月25日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/08/20/10-3-%E7%89%B9%E5%BE%81Traits/" title="10.3.特征Trait">
+                        <span class="hidden-mobile">10.3.特征Trait</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    
+      <script type="text/javascript">
+        var disqus_config = function() {
+          this.page.url = 'https://lilinzta.github.io/2023/08/25/%E6%88%91%E7%9A%84Linux%E4%B9%8B%E6%97%85/';
+          this.page.identifier = '/2023/08/25/%E6%88%91%E7%9A%84Linux%E4%B9%8B%E6%97%85/';
+        };
+        Fluid.utils.loadComments('#disqus_thread', function() {
+          var d = document, s = d.createElement('script');
+          s.src = '//' + 'fluid' + '.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', new Date());
+          (d.head || d.body).appendChild(s);
+        });
+      </script>
+    
+    <noscript>Please enable JavaScript to view the comments</noscript>
+  </div>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"left","width":200,"height":300},"mobile":{"show":false},"rect":"opacity:0.7","log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
