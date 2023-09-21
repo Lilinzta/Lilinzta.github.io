@@ -16,21 +16,32 @@
   <meta name="author" content="Haotian Li">
   <meta name="keywords" content="">
   
-    <meta property="og:type" content="website">
-<meta property="og:title" content="归档">
-<meta property="og:url" content="https://lilinzta.github.io/archives/2023/08/page/2/index.html">
+    <meta name="description" content="HashMap 默认使用 SipHash 1-3 哈希算法，该算法对于抵抗 HashDos 攻击非常有效。在性能方面，如果你的 key 是中型大小的，那该算法非常不错，但是如果是小型的 key( 例如整数 )亦或是大型的 key ( 例如字符串 )，那你需要采用社区提供的其它算法来提高性能。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="11.3.KV存储HashMap">
+<meta property="og:url" content="https://lilinzta.github.io/2023/09/21/11-3-KV%E5%AD%98%E5%82%A8HashMap/index.html">
 <meta property="og:site_name" content="Lilinzta&#39;s blog">
+<meta property="og:description" content="HashMap 默认使用 SipHash 1-3 哈希算法，该算法对于抵抗 HashDos 攻击非常有效。在性能方面，如果你的 key 是中型大小的，那该算法非常不错，但是如果是小型的 key( 例如整数 )亦或是大型的 key ( 例如字符串 )，那你需要采用社区提供的其它算法来提高性能。">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-09-21T09:21:29.000Z">
+<meta property="article:modified_time" content="2023-09-21T09:27:27.562Z">
 <meta property="article:author" content="Haotian Li">
+<meta property="article:tag" content="Rust">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>归档 - Lilinzta&#39;s blog</title>
+  <title>11.3.KV存储HashMap - Lilinzta&#39;s blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
 
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
 
 
 
@@ -81,7 +92,7 @@
   <header>
     
 
-<div class="header-inner" style="height: 60vh;">
+<div class="header-inner" style="height: 70vh;">
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand" href="/">
@@ -193,15 +204,55 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('/res/banner/archive.png') no-repeat center center; background-size: cover;">
+     style="background: url('/res/banner/post.png') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="归档"></span>
+            <span id="subtitle" data-typed-text="11.3.KV存储HashMap"></span>
           
         </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-09-21 17:21" pubdate>
+          2023年9月21日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          131 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          2 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
 
         
       </div>
@@ -217,100 +268,212 @@
 
   <main>
     
-      <div class="container nopadding-x-md">
-        <div id="board"
-          >
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
-                
-
-<div class="list-group">
-  <p class="h4">共计 34 篇文章</p>
-  <hr>
-  
-  
-    
       
-      <p class="h5">2023</p>
-    
-    <a href="/2023/08/13/7-%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6/" class="list-group-item list-group-item-action">
-      <time>08-13</time>
-      <div class="list-group-item-title">7.流程控制</div>
-    </a>
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">11.3.KV存储HashMap</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>HashMap 默认使用 SipHash 1-3 哈希算法，该算法对于抵抗 HashDos 攻击非常有效。在性能方面，如果你的 key 是中型大小的，那该算法非常不错，但是如果是小型的 key( 例如整数 )亦或是大型的 key ( 例如字符串 )，那你需要采用社区提供的其它算法来提高性能。</p>
+<span id="more"></span>
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
   
     
-    <a href="/2023/08/12/6-6-%E6%9E%9A%E4%B8%BE/" class="list-group-item list-group-item-action">
-      <time>08-12</time>
-      <div class="list-group-item-title">6.6.枚举</div>
-    </a>
+      <span class="category-chain">
+        
+  <a href="/categories/Rust-By-Practice/" class="category-chain-item">Rust By Practice</a>
   
-    
-    <a href="/2023/08/11/6-5-%E7%BB%93%E6%9E%84%E4%BD%93/" class="list-group-item list-group-item-action">
-      <time>08-11</time>
-      <div class="list-group-item-title">6.5.结构体</div>
-    </a>
   
+
+      </span>
     
-    <a href="/2023/08/10/6-4-%E5%85%83%E7%BB%84/" class="list-group-item list-group-item-action">
-      <time>08-10</time>
-      <div class="list-group-item-title">6.4.元组</div>
-    </a>
   
-    
-    <a href="/2023/08/09/6-3-%E5%88%87%E7%89%87/" class="list-group-item list-group-item-action">
-      <time>08-09</time>
-      <div class="list-group-item-title">6.3.切片</div>
-    </a>
+</span>
+
+    </div>
   
-    
-    <a href="/2023/08/09/6-2-%E6%95%B0%E7%BB%84/" class="list-group-item list-group-item-action">
-      <time>08-09</time>
-      <div class="list-group-item-title">6.2.数组</div>
-    </a>
   
-    
-    <a href="/2023/08/08/6-1-%E5%AD%97%E7%AC%A6%E4%B8%B2/" class="list-group-item list-group-item-action">
-      <time>08-08</time>
-      <div class="list-group-item-title">6.1.字符串</div>
-    </a>
-  
-    
-    <a href="/2023/08/08/kde-connect/" class="list-group-item list-group-item-action">
-      <time>08-08</time>
-      <div class="list-group-item-title">kde-connect</div>
-    </a>
-  
-    
-    <a href="/2023/08/07/5-2-%E5%BC%95%E7%94%A8%E5%92%8C%E5%80%9F%E7%94%A8/" class="list-group-item list-group-item-action">
-      <time>08-07</time>
-      <div class="list-group-item-title">5.2.引用和借用</div>
-    </a>
-  
-    
-    <a href="/2023/08/07/Arch-Linux%E5%AE%89%E8%A3%85VMware-Workstation/" class="list-group-item list-group-item-action">
-      <time>08-07</time>
-      <div class="list-group-item-title">Arch Linux安装VMware Workstation</div>
-    </a>
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Rust/" class="print-no-link">#Rust</a>
+      
+    </div>
   
 </div>
 
 
-  <nav aria-label="navigation">
-    <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/archives/2023/08/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/archives/2023/08/">1</a><span class="page-number current">2</span><a class="page-number" href="/archives/2023/08/page/3/#board">3</a><a class="extend next" rel="next" href="/archives/2023/08/page/3/#board"><i class="iconfont icon-arrowright"></i></a>
-    </span>
-  </nav>
+              
+  
 
-
-
-
-              </div>
-            </div>
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>11.3.KV存储HashMap</div>
+      <div>https://lilinzta.github.io/2023/09/21/11-3-KV存储HashMap/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Haotian Li</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年9月21日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
           </div>
         </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/09/18/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%95%99%E5%AD%A6%E4%B8%AD%E6%B6%88%E5%A4%B1%E7%9A%84%E4%B8%80%E4%B8%AA%E5%AD%A6%E6%9C%9F/" title="计算机教学中消失的一个学期">
+                        <span class="hidden-mobile">计算机教学中消失的一个学期</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    
+      <script type="text/javascript">
+        var disqus_config = function() {
+          this.page.url = 'https://lilinzta.github.io/2023/09/21/11-3-KV%E5%AD%98%E5%82%A8HashMap/';
+          this.page.identifier = '/2023/09/21/11-3-KV%E5%AD%98%E5%82%A8HashMap/';
+        };
+        Fluid.utils.loadComments('#disqus_thread', function() {
+          var d = document, s = d.createElement('script');
+          s.src = '//' + 'fluid' + '.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', new Date());
+          (d.head || d.body).appendChild(s);
+        });
+      </script>
+    
+    <noscript>Please enable JavaScript to view the comments</noscript>
+  </div>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
       </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
     
 
     
@@ -404,6 +567,99 @@
 
 
 
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
 
   <script  src="/js/local-search.js" ></script>
 
