@@ -399,24 +399,23 @@
   
     <article id="comments" lazyload>
       
-  <div class="disqus" style="width:100%">
-    <div id="disqus_thread"></div>
-    
-      <script type="text/javascript">
-        var disqus_config = function() {
-          this.page.url = 'https://lilinzta.github.io/2023/09/18/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%95%99%E5%AD%A6%E4%B8%AD%E6%B6%88%E5%A4%B1%E7%9A%84%E4%B8%80%E4%B8%AA%E5%AD%A6%E6%9C%9F/';
-          this.page.identifier = '/2023/09/18/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%95%99%E5%AD%A6%E4%B8%AD%E6%B6%88%E5%A4%B1%E7%9A%84%E4%B8%80%E4%B8%AA%E5%AD%A6%E6%9C%9F/';
-        };
-        Fluid.utils.loadComments('#disqus_thread', function() {
-          var d = document, s = d.createElement('script');
-          s.src = '//' + 'fluid' + '.disqus.com/embed.js';
-          s.setAttribute('data-timestamp', new Date());
-          (d.head || d.body).appendChild(s);
-        });
-      </script>
-    
-    <noscript>Please enable JavaScript to view the comments</noscript>
-  </div>
+  <div id="gitalk-container"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#gitalk-container', function() {
+      Fluid.utils.createCssLink('/css/gitalk.css')
+      Fluid.utils.createScript('https://lib.baomitu.com/gitalk/1.8.0/gitalk.min.js', function() {
+        var options = Object.assign(
+          {"clientID":"9d74ad43577ce767f34d","clientSecret":"bcb1e82eff718d70dfa74c53fe966ab7765dc3b2","repo":"lilinzta.github.io","owner":"lilinzta","admin":["lilinzta"],"language":"zh-CN","labels":["Gitalk"],"perPage":10,"pagerDirection":"last","distractionFreeMode":false,"createIssueManually":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token"},
+          {
+            id: '68c5b969a1b70948036eff118c08fceb'
+          }
+        )
+        var gitalk = new Gitalk(options);
+        gitalk.render('gitalk-container');
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
 
 
     </article>
