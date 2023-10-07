@@ -16,22 +16,22 @@
   <meta name="author" content="Haotian Li">
   <meta name="keywords" content="">
   
-    <meta name="description" content="从一个windows小白,到Arch Linux">
+    <meta name="description" content="package 是你通过 Cargo 创建的工程或项目，因此在 package 的根目录下会有一个 Cargo.toml 文件。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="我的Linux之旅">
-<meta property="og:url" content="https://lilinzta.github.io/2023/08/25/%E6%88%91%E7%9A%84Linux%E4%B9%8B%E6%97%85/index.html">
+<meta property="og:title" content="14.1.包Crate">
+<meta property="og:url" content="https://lilinzta.github.io/2023/10/07/14-1-%E5%8C%85Crate/index.html">
 <meta property="og:site_name" content="Lilinzta&#39;s blog">
-<meta property="og:description" content="从一个windows小白,到Arch Linux">
+<meta property="og:description" content="package 是你通过 Cargo 创建的工程或项目，因此在 package 的根目录下会有一个 Cargo.toml 文件。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-08-25T02:31:42.000Z">
-<meta property="article:modified_time" content="2023-09-15T16:02:24.868Z">
+<meta property="article:published_time" content="2023-10-07T11:11:41.000Z">
+<meta property="article:modified_time" content="2023-10-07T12:06:48.338Z">
 <meta property="article:author" content="Haotian Li">
-<meta property="article:tag" content="Share">
+<meta property="article:tag" content="Rust">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>我的Linux之旅 - Lilinzta&#39;s blog</title>
+  <title>14.1.包Crate - Lilinzta&#39;s blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -210,7 +210,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="我的Linux之旅"></span>
+            <span id="subtitle" data-typed-text="14.1.包Crate"></span>
           
         </div>
 
@@ -221,8 +221,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-08-25 10:31" pubdate>
-          2023年8月25日 上午
+        <time datetime="2023-10-07 19:11" pubdate>
+          2023年10月7日 晚上
         </time>
       </span>
     
@@ -233,7 +233,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.7k 字
+          2.1k 字
         
       </span>
     
@@ -244,7 +244,7 @@
         
         
         
-          23 分钟
+          18 分钟
         
       </span>
     
@@ -281,82 +281,47 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">我的Linux之旅</h1>
+            <h1 id="seo-header">14.1.包Crate</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="从一个windows小白-到Arch-Linux"><a href="#从一个windows小白-到Arch-Linux" class="headerlink" title="从一个windows小白,到Arch Linux"></a>从一个windows小白,到Arch Linux</h1><span id="more"></span>
+                <p>package 是你通过 Cargo 创建的工程或项目，因此在 package 的根目录下会有一个 Cargo.toml 文件。</p>
+<span id="more"></span>
+<h3 id="1-🌟-创建一个-package，拥有以下目录结构"><a href="#1-🌟-创建一个-package，拥有以下目录结构" class="headerlink" title="1.🌟 创建一个 package，拥有以下目录结构:"></a>1.🌟 创建一个 package，拥有以下目录结构:</h3><p>Q:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs sh">.<br>├── Cargo.toml<br>└── src<br>    └── main.rs<br><br>1 directory, 2 files<br><br><span class="hljs-comment"># in Cargo.toml</span><br>[package]<br>name = <span class="hljs-string">&quot;hello-package&quot;</span><br>version = <span class="hljs-string">&quot;0.1.0&quot;</span><br>edition = <span class="hljs-string">&quot;2021&quot;</span><br></code></pre></td></tr></table></figure>
+<p>A:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">cargo new hello-package<br></code></pre></td></tr></table></figure>
 <blockquote>
-<p>Tips: 假如涉及到你不太了解的名词，请自行Google</p>
+<p>注意! 我们会在包与模块中使用上面的项目作为演示，因此不要删除</p>
 </blockquote>
-<h2 id="Windows"><a href="#Windows" class="headerlink" title="Windows"></a>Windows</h2><p>大一时，我还是个windows小白。家里没有电脑，也没有去过网吧，所以一开始还和垃圾软件作过一段时间的斗争。当时不知道自由(开源)软件，也不知道Github，更不知道windows居然有包管，只知道打开浏览器下载软件，还用的是百毒搜索引擎，前几个必是xxx软件园。否则，我现在估计也还是会用windows的。从这个角度来看的话，还真的是要感谢百度了。</p>
-<h2 id="Linux初体验"><a href="#Linux初体验" class="headerlink" title="Linux初体验"></a>Linux初体验</h2><p>第一次体验GNU&#x2F;Linux distro，并没有觉得有什么了不起，因为<del>属于我的蒙娜丽莎，我早已遇见。</del></p>
-<p>我第一眼见到的是比特鹏哥在vmware中装的centOS，他主要是出于教学目的来演示GCC编译器。说实话，centOS确实比较老了，无论哪个DE都很丑。但是学习基础命令的话，还是挺合适的，中文资料也比较丰富。大概很多人都是从centOS或者Ubuntu开始起步的，毕竟对新手特别友好。</p>
-<p>现在，对于一个没有接触过Linux的人，我也会推荐他(她)使用Debian(系)。</p>
-<h2 id="从centOS到Ubuntu"><a href="#从centOS到Ubuntu" class="headerlink" title="从centOS到Ubuntu"></a>从centOS到Ubuntu</h2><p>这个‘从centOS’其实是可以省略的，因为我当时并没有在centOS上停留很多时间，仅仅是装了几次虚拟机。</p>
-<p>其实后来还是用过centOS的。Java课设用到了mysql，为了方便他人，我在aliyun上部署了个mysql，centOS上跑的Docker运行mysql。国内的公司还蛮喜欢centOS的，大多数云服务商也都支持centOS。其实，Debian系就已经占据了GNU&#x2F;Linux distro的半壁江山了，再加上redhat系，几乎就是全部了。BTW, I use Arch.</p>
-<p>说是两个distro，其实最大的不同也就包管理器。neofetch的输出不同? 你看，Debian的就像依托…，还是Arch的好看。没有传教的意思，绝对没有。</p>
-<h2 id="出轨"><a href="#出轨" class="headerlink" title="出轨"></a>出轨</h2><p>Ubuntu的内部错误令人难以忍受。于是，我出轨了。它是那么地令人难以捉摸，每一个男孩子的梦中OS &#x3D;&#x3D;&gt; Kali Linux(The quieter you become, the more you can hear)，哪个学计算机的没有做过成为Super Hacker的梦呢？</p>
-<p>官方很贴心，直接给了虚拟机的压缩文件。于是，我面临的第一个挑战是安装中文输入法。Kali不会中文，所以想要约它，就必须要有中文输入法这个媒介，或者你英文足够好。没有和centOS深入交流，就不需要输入法了，Ubuntu倒是入乡随俗，学了点中文。</p>
-<p>和Kali共度的那段时光真的很愉快。我们聊了很多，关于Github使用ssh认证，教它如何使用China的mirror。最后还送了它一份大礼，Jetbrains家的PyCharm。最终也没能俘获它的芳心，其实我们之间还是有可能的，只不过我没能坚持，出于周围环境的原因。</p>
-<h2 id="走上正轨"><a href="#走上正轨" class="headerlink" title="走上正轨"></a>走上正轨</h2><p>已经忘记了是从哪个时间段开始沉迷于配置vim了。无意之间，看到了一位大佬(TheCW)，虽然他现在已经在用麦金塔了，我真正意义上开始折腾大概就是从这里开始。</p>
-<p>打开他的视频，映入眼帘的是一个‘m’(指neofetch的输出，想必有人已经知道哪个distro了)，我首先想到了小米(PS:对小米印象不错，虽然阴差阳错没用过它家的手机，相较于蓝绿两厂好多了。我是真想给手机刷一个Magisk)，后来才知道，这跟小米没有半毛钱关系。是基于Arch Linux的distro，其名为manjaro。</p>
-<p>可以说在manjaro上我做了自己想做的所有事情，也是从manjaro开始装了双系统，体验到了装OS的快乐。可以说从按下开机键的那一刻起，你之后看到的所有东西都是可定制的(windows我只是把task bar移到了顶部，Linux你甚至可以手写或者抄别人写好的CSS样式从0开始定制bar)。</p>
-<p>如果说只是能够<del>定制</del>美化的话，那Linux不就成花瓶了？</p>
-<p>Linux不仅适合开发者和计算机专业的学生，普通人也可以。实际上，甚至部分维护者也并不是计算机专业的。</p>
-<p>以Arch Linux为例，假设你已经科学上网:</p>
-<ul>
-<li>开发环境<ul>
-<li>vscode:  <code>sudo pacman -S visual-studio-code-bin</code></li>
-<li>idea:    <code>yay -S intellij-idea-ultimate-edition-jre intellij-idea-ultimate-edition</code></li>
-<li>jdk:     <code>sudo pacman -S jdk17-openjdk</code></li>
-<li>docker:  <code>sudo pacman -S docker</code></li>
-<li>dbeaver: <code>sudo pacman -S dbeaver</code></li>
-<li>…</li>
-</ul>
-</li>
-<li>办公日常<ul>
-<li>wps(global):      <code>yay -S wps-office</code></li>
-<li>typora:           <code>yay -S typora-free</code></li>
-<li>Okular(文档阅读器): <code>sudo pacman -S okular</code></li>
-<li>scrcpy(安卓投屏):   <code>yay -S scrcpy</code></li>
-<li>telegram:         <code>sudo pacman -S telegram-desktop</code></li>
-<li>dingtalk:         <code>yay -S yay -S dingtalk-bin</code></li>
-<li>wemeet:           <code>yay -S wemeet-bin</code></li>
-<li>QQ:               <code>yay -S linuxqq</code></li>
-<li>WeChat(wine):     <code>yay -S com.qq.weixin.deepin</code></li>
-</ul>
-</li>
-<li>视频影音<ul>
-<li>网易云(无社交): <code>yay -S yesplaymusic</code></li>
-<li>落雪音乐:      <code>yay -S lx-music-desktop-bin</code></li>
-<li>mpv:          <code>sudo pacman -S mpv</code></li>
-<li>vlc:          <code>sudo pacman -S vlc</code></li>
-<li>obs:          <code>sudo pacman -S obs-studio</code></li>
-</ul>
-</li>
-<li>游戏娱乐<ul>
-<li>Steam:  <code>sudo pacman -S steam</code></li>
-<li>Lutris: <code>sudo pacman -S lutris</code></li>
-</ul>
-</li>
-<li>…</li>
-</ul>
-<h2 id="Yes-Arch"><a href="#Yes-Arch" class="headerlink" title="Yes, Arch!"></a>Yes, Arch!</h2><p>双系统也玩了挺长时间的，出于种种原因，最终还是决定舍弃manjaro安装Arch Linux。</p>
-<p>安装Arch Linux本就是一个挑战。</p>
-<p>第一次安装Arch在虚拟机里试，我竟然一次成功了(因为不用连wifi)。实机安装的时候就踩坑了，安装之后，没有网络，后来才知道要开dhcpcd…</p>
-<p>安装完之后，每天开机<code>yay</code>更新系统，再折腾一下Linux下的工具(ranger,neovim,shell-gpt,寻找同类型的在用的软件的更好替代品之类的)，大概有半年了，它仍然健在。由此可见，我还是很保守的。</p>
-<p>现在，我仍然在用Arch Linux。</p>
-<h2 id="一些链接"><a href="#一些链接" class="headerlink" title="一些链接"></a>一些链接</h2><p><a target="_blank" rel="noopener" href="https://space.bilibili.com/456828781">B站 鹏哥</a></p>
-<p><a target="_blank" rel="noopener" href="https://missing.csail.mit.edu/2020/">MIT-Missing-Semester</a></p>
-<p><a target="_blank" rel="noopener" href="https://space.bilibili.com/13081489">B站 TheCW</a></p>
-<p><a target="_blank" rel="noopener" href="https://archlinuxstudio.github.io/ArchLinuxTutorial/#/">ArchLinuxTutorial</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.centos.org/download/">CentOS Download</a></p>
-<p><a target="_blank" rel="noopener" href="https://ubuntu.com/download/desktop">Ubuntu Download</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.kali.org/get-kali/#kali-platforms">Kali Linux Download</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.debian.org/download">Debian Download</a></p>
-<p><a target="_blank" rel="noopener" href="https://archlinux.org/download/">Arch Linux Download</a></p>
+<h3 id="2-🌟-创建一个-package，拥有以下目录结构"><a href="#2-🌟-创建一个-package，拥有以下目录结构" class="headerlink" title="2.🌟 创建一个 package，拥有以下目录结构:"></a>2.🌟 创建一个 package，拥有以下目录结构:</h3><p>Q:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs sh">.<br>├── Cargo.toml<br>└── src<br>    └── lib.rs<br><br>1 directory, 2 files<br><br><span class="hljs-comment"># in Cargo.toml</span><br>[package]<br>name = <span class="hljs-string">&quot;hello-package1&quot;</span><br>version = <span class="hljs-string">&quot;0.1.0&quot;</span><br>edition = <span class="hljs-string">&quot;2021&quot;</span><br></code></pre></td></tr></table></figure>
+<p>A:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">cargo new --lib hello-package1<br></code></pre></td></tr></table></figure>
+<blockquote>
+<p>该项目可以安全的移除</p>
+</blockquote>
+<h3 id="3-🌟"><a href="#3-🌟" class="headerlink" title="3.🌟"></a>3.🌟</h3><p>&#x2F;* 使用你的答案填空 *&#x2F;</p>
+<p>Q: package 1# 和 2# 的区别是什么 ?</p>
+<p>A:</p>
+<p>hello-package有一个二进制crate叫hello-package, src&#x2F;main.rs是根crate.</p>
+<p>hello-pacakge1有一个库crate叫hello-package1, src&#x2F;lib.rs是根crate.</p>
+<h2 id="包Crate"><a href="#包Crate" class="headerlink" title="包Crate"></a>包Crate</h2><p>一个包可以是二进制也可以一个依赖库。每一个包都有一个包根，例如二进制包的包根是 src&#x2F;main.rs，库包的包根是 src&#x2F;lib.rs。包根是编译器开始处理源代码文件的地方，同时也是包模块树的根部。</p>
+<p>在 package hello-package 中，有一个二进制包，该包与 package 同名 : hello-package, 其中 src&#x2F;main.rs 是该二进制包的包根.</p>
+<p>与 hello-package 类似, hello-package1 同样包含一个包，但是与之前的二进制包不同，该 package 包含的是库包，其中 src&#x2F;lib.rs 是其包根.</p>
+<h3 id="4-🌟"><a href="#4-🌟" class="headerlink" title="4.🌟"></a>4.🌟</h3><p>Q: package <code>hello-package1</code> 中的库包名称是?</p>
+<p>A: hello-package1</p>
+<h3 id="5-🌟🌟-为-hello-package-添加一个库包，并且完成以下目录结构的填空"><a href="#5-🌟🌟-为-hello-package-添加一个库包，并且完成以下目录结构的填空" class="headerlink" title="5.🌟🌟 为 hello-package 添加一个库包，并且完成以下目录结构的填空:"></a>5.🌟🌟 为 hello-package 添加一个库包，并且完成以下目录结构的填空:</h3><p>Q:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs sh"><span class="hljs-comment"># 填空</span><br>.<br>├── Cargo.lock<br>├── Cargo.toml<br>├── src<br>│   ├── __<br>│   └── __<br></code></pre></td></tr></table></figure>
+<p>A:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs sh"><span class="hljs-comment"># 填空</span><br>.<br>├── Cargo.lock<br>├── Cargo.toml<br>├── src<br>│   ├── main.rs<br>│   └── lib.rs<br></code></pre></td></tr></table></figure>
+<p>在上一个步骤后，我们的 hello-package 中已经存在两个包：一个二进制包和一个库包，两个包的名称都与 package 相同：hello-package。</p>
+<h3 id="6-🌟🌟🌟-一个-package-最多只能包含一个库包，但是却可以包含多个二进制包：通过将二进制文件放入到-src-bin-目录下实现-该目录下的每个文件都是一个独立的二进制包，包名与文件名相同，不再与-package-的名称相同。"><a href="#6-🌟🌟🌟-一个-package-最多只能包含一个库包，但是却可以包含多个二进制包：通过将二进制文件放入到-src-bin-目录下实现-该目录下的每个文件都是一个独立的二进制包，包名与文件名相同，不再与-package-的名称相同。" class="headerlink" title="6.🌟🌟🌟 一个 package 最多只能包含一个库包，但是却可以包含多个二进制包：通过将二进制文件放入到 src&#x2F;bin 目录下实现: 该目录下的每个文件都是一个独立的二进制包，包名与文件名相同，不再与 package 的名称相同。"></a>6.🌟🌟🌟 一个 package 最多只能包含一个库包，但是却可以包含多个二进制包：通过将二进制文件放入到 src&#x2F;bin 目录下实现: 该目录下的每个文件都是一个独立的二进制包，包名与文件名相同，不再与 package 的名称相同。</h3><p>Q:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs sh"><span class="hljs-comment"># 创建一个 package 包含以下包：</span><br><span class="hljs-comment"># 1. 三个二进制包: `hello-package`, `main1` and `main2`</span><br><span class="hljs-comment"># 2. 一个库包</span><br><span class="hljs-comment"># 并完成以下目录结构的填空</span><br>.<br>├── Cargo.toml<br>├── Cargo.lock<br>├── src<br>│   ├── __<br>│   ├── __<br>│   └── __<br>│       └── __<br>│       └── __<br>├── tests <span class="hljs-comment"># 存放集成测试文件的目录</span><br>│   └── some_integration_tests.rs<br>├── benches <span class="hljs-comment"># 存放 benchmark 文件的目录dir for benchmark files</span><br>│   └── simple_bench.rs<br>└── examples <span class="hljs-comment"># 存放示例文件的目录</span><br>    └── simple_example.rs<br></code></pre></td></tr></table></figure>
+<p>A:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs sh"><span class="hljs-comment"># 创建一个 package 包含以下包：</span><br><span class="hljs-comment"># 1. 三个二进制包: `hello-package`, `main1` and `main2`</span><br><span class="hljs-comment"># 2. 一个库包</span><br><span class="hljs-comment"># 并完成以下目录结构的填空</span><br>.<br>├── Cargo.toml<br>├── Cargo.lock<br>├── src<br>│   ├── main.rs<br>│   ├── lib.rs<br>│   └── bin<br>│       └── main1.rs<br>│       └── main2.rs<br>├── tests <span class="hljs-comment"># 存放集成测试文件的目录</span><br>│   └── some_integration_tests.rs<br>├── benches <span class="hljs-comment"># 存放 benchmark 文件的目录dir for benchmark files</span><br>│   └── simple_bench.rs<br>└── examples <span class="hljs-comment"># 存放示例文件的目录</span><br>    └── simple_example.rs<br></code></pre></td></tr></table></figure>
+<p>可以看到，上面的 package 结构非常标准，你可以在很多 Rust 项目中看到该结构的身影。</p>
 
                 
               </div>
@@ -365,11 +330,32 @@
             <div>
               <div class="post-metas my-3">
   
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Rust-By-Practice/" class="category-chain-item">Rust By Practice</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
   
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/Share/" class="print-no-link">#Share</a>
+        <a href="/tags/Rust/" class="print-no-link">#Rust</a>
       
     </div>
   
@@ -381,8 +367,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>我的Linux之旅</div>
-      <div>https://lilinzta.github.io/2023/08/25/我的Linux之旅/</div>
+      <div>14.1.包Crate</div>
+      <div>https://lilinzta.github.io/2023/10/07/14-1-包Crate/</div>
     </div>
     <div class="license-meta">
       
@@ -394,7 +380,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年8月25日</div>
+          <div>2023年10月7日</div>
         </div>
       
       
@@ -426,18 +412,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/08/26/shell-gpt/" title="shell_gpt">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">shell_gpt</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/08/20/10-3-%E7%89%B9%E5%BE%81Traits/" title="10.3.特征Trait">
-                        <span class="hidden-mobile">10.3.特征Trait</span>
+                      <a href="/2023/10/06/13-2-%E8%BF%94%E5%9B%9E%E5%80%BCresult%E5%92%8C/" title="13.2.返回值result和?">
+                        <span class="hidden-mobile">13.2.返回值result和?</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -460,7 +440,7 @@
         var options = Object.assign(
           {"clientID":"9d74ad43577ce767f34d","clientSecret":"bcb1e82eff718d70dfa74c53fe966ab7765dc3b2","repo":"lilinzta.github.io","owner":"lilinzta","admin":["lilinzta"],"language":"zh-CN","labels":["Gitalk"],"perPage":10,"pagerDirection":"last","distractionFreeMode":false,"createIssueManually":false,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token"},
           {
-            id: 'bc53c92f3fdfb6e550d0ad6c91437468'
+            id: 'e8faf7d76f2b42fda994865bff02ff34'
           }
         )
         var gitalk = new Gitalk(options);

@@ -24,7 +24,7 @@
 <meta property="og:description" content="Rust 并没有为基本类型提供隐式的类型转换( coercion )，但是我们可以通过 as 来进行显式地转换。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-09-28T01:09:10.000Z">
-<meta property="article:modified_time" content="2023-09-28T01:34:17.856Z">
+<meta property="article:modified_time" content="2023-10-07T11:22:13.972Z">
 <meta property="article:author" content="Haotian Li">
 <meta property="article:tag" content="Rust">
 <meta name="twitter:card" content="summary_large_image">
@@ -286,7 +286,8 @@
             
               <div class="markdown-body">
                 
-                <h3 id="Rust-并没有为基本类型提供隐式的类型转换-coercion-，但是我们可以通过-as-来进行显式地转换。"><a href="#Rust-并没有为基本类型提供隐式的类型转换-coercion-，但是我们可以通过-as-来进行显式地转换。" class="headerlink" title="Rust 并没有为基本类型提供隐式的类型转换( coercion )，但是我们可以通过 as 来进行显式地转换。"></a>Rust 并没有为基本类型提供隐式的类型转换( coercion )，但是我们可以通过 as 来进行显式地转换。</h3><span id="more"></span>
+                <p>Rust 并没有为基本类型提供隐式的类型转换( coercion )，但是我们可以通过 as 来进行显式地转换。</p>
+<span id="more"></span>
 <h3 id="1-🌟"><a href="#1-🌟" class="headerlink" title="1.🌟"></a>1.🌟</h3><p>Q:</p>
 <figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-comment">// 修复错误，填空</span><br><span class="hljs-comment">// 不要移除任何代码</span><br><span class="hljs-keyword">fn</span> <span class="hljs-title function_">main</span>() &#123;<br>    <span class="hljs-keyword">let</span> <span class="hljs-variable">decimal</span> = <span class="hljs-number">97.123_f32</span>;<br><br>    <span class="hljs-keyword">let</span> <span class="hljs-variable">integer</span>: __ = decimal <span class="hljs-keyword">as</span> <span class="hljs-type">u8</span>;<br><br>    <span class="hljs-keyword">let</span> <span class="hljs-variable">c1</span>: <span class="hljs-type">char</span> = decimal <span class="hljs-keyword">as</span> <span class="hljs-type">char</span>;<br>    <span class="hljs-keyword">let</span> <span class="hljs-variable">c2</span> = integer <span class="hljs-keyword">as</span> <span class="hljs-type">char</span>;<br><br>    <span class="hljs-built_in">assert_eq!</span>(integer, <span class="hljs-string">&#x27;b&#x27;</span> <span class="hljs-keyword">as</span> <span class="hljs-type">u8</span>);<br><br>    <span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;Success!&quot;</span>)<br>&#125;<br></code></pre></td></tr></table></figure>
 <p>A:</p>
