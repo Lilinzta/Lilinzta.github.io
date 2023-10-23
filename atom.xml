@@ -6,7 +6,7 @@
   <link href="https://lilinzta.github.io/atom.xml" rel="self"/>
   
   <link href="https://lilinzta.github.io/"/>
-  <updated>2023-10-14T13:04:31.159Z</updated>
+  <updated>2023-10-23T09:23:49.727Z</updated>
   <id>https://lilinzta.github.io/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Arch系切换java环境</title>
+    <link href="https://lilinzta.github.io/2023/10/23/Arch%E7%B3%BB%E5%88%87%E6%8D%A2java%E7%8E%AF%E5%A2%83/"/>
+    <id>https://lilinzta.github.io/2023/10/23/Arch%E7%B3%BB%E5%88%87%E6%8D%A2java%E7%8E%AF%E5%A2%83/</id>
+    <published>2023-10-23T09:06:06.000Z</published>
+    <updated>2023-10-23T09:23:49.727Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="快速切换jdk和jre"><a href="#快速切换jdk和jre" class="headerlink" title="快速切换jdk和jre"></a>快速切换jdk和jre</h1><span id="more"></span><h2 id="archlinux-java"><a href="#archlinux-java" class="headerlink" title="archlinux-java"></a>archlinux-java</h2><p>输出如下:</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs sh">❯ archlinux-java --<span class="hljs-built_in">help</span><br>archlinux-java &lt;COMMAND&gt;<br><br>COMMAND:<br>statusList installed Java environments and enabled one<br>getReturn the short name of the Java environment <span class="hljs-built_in">set</span> as default<br><span class="hljs-built_in">set</span> &lt;JAVA_ENV&gt;Force &lt;JAVA_ENV&gt; as default<br><span class="hljs-built_in">unset</span>Unset current default Java environment<br>fixFix an invalid/broken default Java environment configuration<br></code></pre></td></tr></table></figure><h2 id="Examples"><a href="#Examples" class="headerlink" title="Examples"></a>Examples</h2><p>获取当前设置:</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sh">❯ archlinux-java get<br>java-21-openjdk<br></code></pre></td></tr></table></figure><p>查看所有可用Java环境</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs sh">❯ archlinux-java status<br>Available Java environments:<br>  java-11-openjdk<br>  java-17-openjdk<br>  java-21-openjdk (default)<br>  java-8-openjdk<br></code></pre></td></tr></table></figure><p>要更改默认设置，请使用root权限:</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">❯ sudo archlinux-java <span class="hljs-built_in">set</span> java-17-openjdk<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;快速切换jdk和jre&quot;&gt;&lt;a href=&quot;#快速切换jdk和jre&quot; class=&quot;headerlink&quot; title=&quot;快速切换jdk和jre&quot;&gt;&lt;/a&gt;快速切换jdk和jre&lt;/h1&gt;</summary>
+    
+    
+    
+    <category term="技巧" scheme="https://lilinzta.github.io/categories/%E6%8A%80%E5%B7%A7/"/>
+    
+    
+    <category term="Arch Linux" scheme="https://lilinzta.github.io/tags/Arch-Linux/"/>
+    
+  </entry>
   
   <entry>
     <title>15.注释和文档</title>
