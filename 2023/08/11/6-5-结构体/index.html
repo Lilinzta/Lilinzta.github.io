@@ -16,15 +16,15 @@
   <meta name="author" content="Haotian Li">
   <meta name="keywords" content="">
   
-    <meta name="description" content="结构体">
+    <meta name="description" content="三种类型的结构体1.🌟 对于结构体，我们必须为其中的每一个字段都指定具体的值Q: 12345678910111213&#x2F;&#x2F; fix the errorstruct Person &amp;#123;    name: String,    age: u8,    hobby: String&amp;#125;fn main() &amp;#123;    let age &#x3D; 30;    let p &#x3D; Person &amp;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="6.5.结构体">
 <meta property="og:url" content="https://lilinzta.github.io/2023/08/11/6-5-%E7%BB%93%E6%9E%84%E4%BD%93/index.html">
 <meta property="og:site_name" content="Lilinzta&#39;s blog">
-<meta property="og:description" content="结构体">
+<meta property="og:description" content="三种类型的结构体1.🌟 对于结构体，我们必须为其中的每一个字段都指定具体的值Q: 12345678910111213&#x2F;&#x2F; fix the errorstruct Person &amp;#123;    name: String,    age: u8,    hobby: String&amp;#125;fn main() &amp;#123;    let age &#x3D; 30;    let p &#x3D; Person &amp;">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-08-11T13:54:39.000Z">
-<meta property="article:modified_time" content="2023-08-11T14:19:47.435Z">
+<meta property="article:modified_time" content="2023-10-23T09:39:15.876Z">
 <meta property="article:author" content="Haotian Li">
 <meta property="article:tag" content="Rust">
 <meta name="twitter:card" content="summary_large_image">
@@ -286,8 +286,7 @@
             
               <div class="markdown-body">
                 
-                <h1 id="结构体"><a href="#结构体" class="headerlink" title="结构体"></a>结构体</h1><span id="more"></span>
-<h2 id="三种类型的结构体"><a href="#三种类型的结构体" class="headerlink" title="三种类型的结构体"></a>三种类型的结构体</h2><h3 id="1-🌟-对于结构体，我们必须为其中的每一个字段都指定具体的值"><a href="#1-🌟-对于结构体，我们必须为其中的每一个字段都指定具体的值" class="headerlink" title="1.🌟 对于结构体，我们必须为其中的每一个字段都指定具体的值"></a>1.🌟 对于结构体，我们必须为其中的每一个字段都指定具体的值</h3><p>Q:</p>
+                <h2 id="三种类型的结构体"><a href="#三种类型的结构体" class="headerlink" title="三种类型的结构体"></a>三种类型的结构体</h2><h3 id="1-🌟-对于结构体，我们必须为其中的每一个字段都指定具体的值"><a href="#1-🌟-对于结构体，我们必须为其中的每一个字段都指定具体的值" class="headerlink" title="1.🌟 对于结构体，我们必须为其中的每一个字段都指定具体的值"></a>1.🌟 对于结构体，我们必须为其中的每一个字段都指定具体的值</h3><p>Q:</p>
 <figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-comment">// fix the error</span><br><span class="hljs-keyword">struct</span> <span class="hljs-title class_">Person</span> &#123;<br>    name: <span class="hljs-type">String</span>,<br>    age: <span class="hljs-type">u8</span>,<br>    hobby: <span class="hljs-type">String</span><br>&#125;<br><span class="hljs-keyword">fn</span> <span class="hljs-title function_">main</span>() &#123;<br>    <span class="hljs-keyword">let</span> <span class="hljs-variable">age</span> = <span class="hljs-number">30</span>;<br>    <span class="hljs-keyword">let</span> <span class="hljs-variable">p</span> = Person &#123;<br>        name: <span class="hljs-type">String</span>::<span class="hljs-title function_ invoke__">from</span>(<span class="hljs-string">&quot;sunface&quot;</span>),<br>        age,<br>    &#125;;<br>&#125;<br></code></pre></td></tr></table></figure>
 <p>A:</p>
 <figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-comment">// fix the error</span><br><span class="hljs-keyword">struct</span> <span class="hljs-title class_">Person</span> &#123;<br>    name: <span class="hljs-type">String</span>,<br>    age: <span class="hljs-type">u8</span>,<br>    hobby: <span class="hljs-type">String</span><br>&#125;<br><span class="hljs-keyword">fn</span> <span class="hljs-title function_">main</span>() &#123;<br>    <span class="hljs-keyword">let</span> <span class="hljs-variable">age</span> = <span class="hljs-number">30</span>;<br>    <span class="hljs-keyword">let</span> <span class="hljs-variable">p</span> = Person &#123;<br>        name: <span class="hljs-type">String</span>::<span class="hljs-title function_ invoke__">from</span>(<span class="hljs-string">&quot;sunface&quot;</span>),<br>        age,<br>        hobby: <span class="hljs-type">String</span>::<span class="hljs-title function_ invoke__">from</span>(<span class="hljs-string">&quot;coding&quot;</span>)<br>    &#125;;<br>&#125;<br></code></pre></td></tr></table></figure>

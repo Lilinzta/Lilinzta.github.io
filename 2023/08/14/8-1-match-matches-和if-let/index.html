@@ -16,15 +16,15 @@
   <meta name="author" content="Haotian Li">
   <meta name="keywords" content="">
   
-    <meta name="description" content="match,matches!和if let">
+    <meta name="description" content="match1.🌟🌟Q: 123456789101112131415161718&#x2F;&#x2F; 填空enum Direction &amp;#123;    East,    West,    North,    South,&amp;#125;fn main() &amp;#123;    let dire &#x3D; Direction::South;    match dire &amp;#123;        Direction::E">
 <meta property="og:type" content="article">
 <meta property="og:title" content="8.1.match,matches!和if let">
 <meta property="og:url" content="https://lilinzta.github.io/2023/08/14/8-1-match-matches-%E5%92%8Cif-let/index.html">
 <meta property="og:site_name" content="Lilinzta&#39;s blog">
-<meta property="og:description" content="match,matches!和if let">
+<meta property="og:description" content="match1.🌟🌟Q: 123456789101112131415161718&#x2F;&#x2F; 填空enum Direction &amp;#123;    East,    West,    North,    South,&amp;#125;fn main() &amp;#123;    let dire &#x3D; Direction::South;    match dire &amp;#123;        Direction::E">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-08-14T13:44:14.000Z">
-<meta property="article:modified_time" content="2023-08-14T14:08:22.100Z">
+<meta property="article:modified_time" content="2023-10-23T09:39:34.225Z">
 <meta property="article:author" content="Haotian Li">
 <meta property="article:tag" content="Rust">
 <meta name="twitter:card" content="summary_large_image">
@@ -286,8 +286,7 @@
             
               <div class="markdown-body">
                 
-                <h1 id="match-matches-和if-let"><a href="#match-matches-和if-let" class="headerlink" title="match,matches!和if let"></a>match,matches!和if let</h1><span id="more"></span>
-<h2 id="match"><a href="#match" class="headerlink" title="match"></a>match</h2><h3 id="1-🌟🌟"><a href="#1-🌟🌟" class="headerlink" title="1.🌟🌟"></a>1.🌟🌟</h3><p>Q:</p>
+                <h2 id="match"><a href="#match" class="headerlink" title="match"></a>match</h2><h3 id="1-🌟🌟"><a href="#1-🌟🌟" class="headerlink" title="1.🌟🌟"></a>1.🌟🌟</h3><p>Q:</p>
 <figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-comment">// 填空</span><br><span class="hljs-keyword">enum</span> <span class="hljs-title class_">Direction</span> &#123;<br>    East,<br>    West,<br>    North,<br>    South,<br>&#125;<br><br><span class="hljs-keyword">fn</span> <span class="hljs-title function_">main</span>() &#123;<br>    <span class="hljs-keyword">let</span> <span class="hljs-variable">dire</span> = Direction::South;<br>    <span class="hljs-keyword">match</span> dire &#123;<br>        Direction::East =&gt; <span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;East&quot;</span>),<br>        __  =&gt; &#123; <span class="hljs-comment">// 在这里匹配 South 或 North</span><br>            <span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;South or North&quot;</span>);<br>        &#125;,<br>        _ =&gt; <span class="hljs-built_in">println!</span>(__),<br>    &#125;;<br>&#125;<br></code></pre></td></tr></table></figure>
 <p>A:</p>
 <figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-comment">// 填空</span><br><span class="hljs-keyword">enum</span> <span class="hljs-title class_">Direction</span> &#123;<br>    East,<br>    West,<br>    North,<br>    South,<br>&#125;<br><br><span class="hljs-keyword">fn</span> <span class="hljs-title function_">main</span>() &#123;<br>    <span class="hljs-keyword">let</span> <span class="hljs-variable">dire</span> = Direction::South;<br>    <span class="hljs-keyword">match</span> dire &#123;<br>        Direction::East =&gt; <span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;East&quot;</span>),<br>        Direction::South | Direction::North  =&gt; &#123; <span class="hljs-comment">// 在这里匹配 South 或 North</span><br>            <span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;South or North&quot;</span>);<br>        &#125;,<br>        _ =&gt; <span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;West&quot;</span>),<br>    &#125;;<br>&#125;<br></code></pre></td></tr></table></figure>

@@ -16,15 +16,15 @@
   <meta name="author" content="Haotian Li">
   <meta name="keywords" content="">
   
-    <meta name="description" content="use and pub">
+    <meta name="description" content="1.🌟 使用 use 可以将两个同名类型引入到当前作用域中，但是别忘了 as 关键字.Q: 1234use std::fmt::Result;use std::io::Result;fn main() &amp;#123;&amp;#125; A: 1234use std::fmt::Result;use std::io::Result as IoResult;fn main() &amp;#123;&amp;#125; 2.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="14.3.使用use引入模块及受限可见性">
 <meta property="og:url" content="https://lilinzta.github.io/2023/10/11/14-3-%E4%BD%BF%E7%94%A8use%E5%BC%95%E5%85%A5%E6%A8%A1%E5%9D%97%E5%8F%8A%E5%8F%97%E9%99%90%E5%8F%AF%E8%A7%81%E6%80%A7/index.html">
 <meta property="og:site_name" content="Lilinzta&#39;s blog">
-<meta property="og:description" content="use and pub">
+<meta property="og:description" content="1.🌟 使用 use 可以将两个同名类型引入到当前作用域中，但是别忘了 as 关键字.Q: 1234use std::fmt::Result;use std::io::Result;fn main() &amp;#123;&amp;#125; A: 1234use std::fmt::Result;use std::io::Result as IoResult;fn main() &amp;#123;&amp;#125; 2.">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-10-11T13:12:43.000Z">
-<meta property="article:modified_time" content="2023-10-11T13:22:40.178Z">
+<meta property="article:modified_time" content="2023-10-23T09:40:56.888Z">
 <meta property="article:author" content="Haotian Li">
 <meta property="article:tag" content="Rust">
 <meta name="twitter:card" content="summary_large_image">
@@ -286,8 +286,7 @@
             
               <div class="markdown-body">
                 
-                <h1 id="use-and-pub"><a href="#use-and-pub" class="headerlink" title="use and pub"></a>use and pub</h1><span id="more"></span>
-<h3 id="1-🌟-使用-use-可以将两个同名类型引入到当前作用域中，但是别忘了-as-关键字"><a href="#1-🌟-使用-use-可以将两个同名类型引入到当前作用域中，但是别忘了-as-关键字" class="headerlink" title="1.🌟 使用 use 可以将两个同名类型引入到当前作用域中，但是别忘了 as 关键字."></a>1.🌟 使用 use 可以将两个同名类型引入到当前作用域中，但是别忘了 as 关键字.</h3><p>Q:</p>
+                <h3 id="1-🌟-使用-use-可以将两个同名类型引入到当前作用域中，但是别忘了-as-关键字"><a href="#1-🌟-使用-use-可以将两个同名类型引入到当前作用域中，但是别忘了-as-关键字" class="headerlink" title="1.🌟 使用 use 可以将两个同名类型引入到当前作用域中，但是别忘了 as 关键字."></a>1.🌟 使用 use 可以将两个同名类型引入到当前作用域中，但是别忘了 as 关键字.</h3><p>Q:</p>
 <figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-keyword">use</span> std::fmt::<span class="hljs-type">Result</span>;<br><span class="hljs-keyword">use</span> std::io::<span class="hljs-type">Result</span>;<br><br><span class="hljs-keyword">fn</span> <span class="hljs-title function_">main</span>() &#123;&#125;<br></code></pre></td></tr></table></figure>
 <p>A:</p>
 <figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-keyword">use</span> std::fmt::<span class="hljs-type">Result</span>;<br><span class="hljs-keyword">use</span> std::io::<span class="hljs-type">Result</span> <span class="hljs-keyword">as</span> IoResult;<br><br><span class="hljs-keyword">fn</span> <span class="hljs-title function_">main</span>() &#123;&#125;<br></code></pre></td></tr></table></figure>
