@@ -1,0 +1,732 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/res/favicon.png">
+  <link rel="icon" href="/res/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Haotian Li">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="注释1.🌟🌟1234567&#x2F;* 只使用注释让下面代码工作! *&#x2F;fn main() &amp;#123;    todo!();    unimplemented!();    assert_eq!(6, 5 + 3 + 2 + 1 )&amp;#125; 文档注释文档注释会被解析为 HTML 文件，并支持 Markdown 语法。 在开始之前，我们需要创建一个新的项目用于后面的练习: cargo new –">
+<meta property="og:type" content="article">
+<meta property="og:title" content="15.注释和文档">
+<meta property="og:url" content="https://lilinzta.github.io/2023/10/14/15-%E6%B3%A8%E9%87%8A%E5%92%8C%E6%96%87%E6%A1%A3/index.html">
+<meta property="og:site_name" content="Lilinzta&#39;s blog">
+<meta property="og:description" content="注释1.🌟🌟1234567&#x2F;* 只使用注释让下面代码工作! *&#x2F;fn main() &amp;#123;    todo!();    unimplemented!();    assert_eq!(6, 5 + 3 + 2 + 1 )&amp;#125; 文档注释文档注释会被解析为 HTML 文件，并支持 Markdown 语法。 在开始之前，我们需要创建一个新的项目用于后面的练习: cargo new –">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-10-14T12:41:04.000Z">
+<meta property="article:modified_time" content="2024-01-17T15:05:42.361Z">
+<meta property="article:author" content="Haotian Li">
+<meta property="article:tag" content="Rust">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>15.注释和文档 - Lilinzta&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"lilinzta.github.io","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Lilinzta's blog" type="application/atom+xml">
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Lilinzta&#39;s blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/res/banner/post.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="15.注释和文档"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-10-14 20:41" pubdate>
+          2023年10月14日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          9 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">15.注释和文档</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h2><h3 id="1-🌟🌟"><a href="#1-🌟🌟" class="headerlink" title="1.🌟🌟"></a>1.🌟🌟</h3><figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-comment">/* 只使用注释让下面代码工作! */</span><br><span class="hljs-keyword">fn</span> <span class="hljs-title function_">main</span>() &#123;<br>    todo!();<br>    <span class="hljs-built_in">unimplemented!</span>();<br><br>    <span class="hljs-built_in">assert_eq!</span>(<span class="hljs-number">6</span>, <span class="hljs-number">5</span> + <span class="hljs-number">3</span> + <span class="hljs-number">2</span> + <span class="hljs-number">1</span> )<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="文档注释"><a href="#文档注释" class="headerlink" title="文档注释"></a>文档注释</h2><p>文档注释会被解析为 HTML 文件，并支持 Markdown 语法。</p>
+<p>在开始之前，我们需要创建一个新的项目用于后面的练习: cargo new –lib doc-comments.</p>
+<h3 id="行文档注释"><a href="#行文档注释" class="headerlink" title="行文档注释 &#x2F;&#x2F;&#x2F;"></a>行文档注释 &#x2F;&#x2F;&#x2F;</h3><p>为 add_one 函数添加文档</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-comment">// in lib.rs</span><br><br><span class="hljs-comment">/// Add one to the given value and return the value</span><br><span class="hljs-comment">///</span><br><span class="hljs-comment">/// # Examples</span><br><span class="hljs-comment">///</span><br><span class="hljs-comment">/// ```</span><br><span class="hljs-comment">/// let arg = 5;</span><br><span class="hljs-comment">/// let answer = my_crate::add_one(arg);</span><br><span class="hljs-comment">///</span><br><span class="hljs-comment">/// assert_eq!(6, answer);</span><br><span class="hljs-comment">/// ```</span><br><span class="hljs-keyword">pub</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">add_one</span>(x: <span class="hljs-type">i32</span>) <span class="hljs-punctuation">-&gt;</span> <span class="hljs-type">i32</span> &#123;<br>    x + <span class="hljs-number">1</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="Cargo-doc"><a href="#Cargo-doc" class="headerlink" title="Cargo doc"></a>Cargo doc</h3><p>我们可以使用 cargo doc –open 来生成 HTML 文件，并自动在浏览器中打开网页。</p>
+<h3 id="块文档注释-…"><a href="#块文档注释-…" class="headerlink" title="块文档注释 &#x2F;** … *&#x2F;"></a>块文档注释 &#x2F;** … *&#x2F;</h3><p>为函数 add_two 添加文档:</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-comment">/** Add two to the given value and return a new value</span><br><span class="hljs-comment"></span><br><span class="hljs-comment"></span><br><span class="hljs-comment">let arg = 5;</span><br><span class="hljs-comment">let answer = my_crate::add_two(arg);</span><br><span class="hljs-comment"></span><br><span class="hljs-comment">assert_eq!(7, answer);</span><br><span class="hljs-comment"></span><br><span class="hljs-comment">*/</span><br><span class="hljs-keyword">pub</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">add_two</span>(x: <span class="hljs-type">i32</span>) <span class="hljs-punctuation">-&gt;</span> <span class="hljs-type">i32</span> &#123;<br>    x + <span class="hljs-number">2</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="为包和模块创建文档注释"><a href="#为包和模块创建文档注释" class="headerlink" title="为包和模块创建文档注释"></a>为包和模块创建文档注释</h3><p>我们还可以创建包和模块的注释，用于描述它们的功能。</p>
+<p>首先，来为我们的库包添加一些文档注释:</p>
+<blockquote>
+<p>注意：必须要将包、模块注释放置在包根或模块文件的最顶部</p>
+</blockquote>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-comment">//! # 文档注释</span><br><span class="hljs-comment">//!</span><br><span class="hljs-comment">//! 该库用于文档注释的教学</span><br><br><span class="hljs-comment">// in lib.rs</span><br><span class="hljs-keyword">pub</span> <span class="hljs-keyword">mod</span> compute;<br></code></pre></td></tr></table></figure>
+<p>同样的，我们还可以使用块注释来达成目的:</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-comment">/*! # 文档注释</span><br><span class="hljs-comment"></span><br><span class="hljs-comment"> 该库用于文档注释的教学 */</span><br></code></pre></td></tr></table></figure>
+<p>下一步，创建一个新的模块文件 src&#x2F;compute.rs, 然后在其中添加以下注释:</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-comment">//! 本模块用于处理一些复杂计算</span><br><br><span class="hljs-comment">// in compute.rs</span><br></code></pre></td></tr></table></figure>
+<p>然后运行 cargo doc –open 查看下结果。</p>
+<h3 id="文档测试"><a href="#文档测试" class="headerlink" title="文档测试"></a>文档测试</h3><p>细心的同学可能会发现之前的 add_one 和 add_tow 的文档注释中，包含了两个示例代码块.</p>
+<p>以上示例不仅仅是作为文档用于演示你的函数该如何使用，它的另一个作用就是用于文档测试 cargo test。</p>
+<h3 id="2-🌟🌟-但是在这两个函数的示例中，存在错误，请修复它们并使用-cargo-test-获取以下输出结果"><a href="#2-🌟🌟-但是在这两个函数的示例中，存在错误，请修复它们并使用-cargo-test-获取以下输出结果" class="headerlink" title="2.🌟🌟 但是在这两个函数的示例中，存在错误，请修复它们并使用 cargo test 获取以下输出结果:"></a>2.🌟🌟 但是在这两个函数的示例中，存在错误，请修复它们并使用 cargo test 获取以下输出结果:</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs sh">running 0 tests<br><br><span class="hljs-built_in">test</span> result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished <span class="hljs-keyword">in</span> 0.00s<br><br>   Doc-tests doc-comments<br><br>running 2 tests<br><span class="hljs-built_in">test</span> src/lib.rs - add_one (line 11) ... ok<br><span class="hljs-built_in">test</span> src/lib.rs - add_two (line 26) ... ok<br><br><span class="hljs-built_in">test</span> result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished <span class="hljs-keyword">in</span> 0.55s<br></code></pre></td></tr></table></figure>
+<h3 id="3-🌟🌟-有时我们会期望示例的结果是一个-panic。将以下代码添加到-src-compute-rs-，并且让-cargo-test-成功运行"><a href="#3-🌟🌟-有时我们会期望示例的结果是一个-panic。将以下代码添加到-src-compute-rs-，并且让-cargo-test-成功运行" class="headerlink" title="3.🌟🌟 有时我们会期望示例的结果是一个 panic。将以下代码添加到 src&#x2F;compute.rs ，并且让 cargo test 成功运行."></a>3.🌟🌟 有时我们会期望示例的结果是一个 panic。将以下代码添加到 src&#x2F;compute.rs ，并且让 cargo test 成功运行.</h3><blockquote>
+<p>你只能修改注释，不要修改 fn div</p>
+</blockquote>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-comment">// in src/compute.rs</span><br><br><span class="hljs-comment">/// # Panics</span><br><span class="hljs-comment">///</span><br><span class="hljs-comment">/// The function panics if the second argument is zero.</span><br><span class="hljs-comment">///</span><br><span class="hljs-comment">/// ```rust,should_panic</span><br><span class="hljs-comment">/// // panics on division by zero</span><br><span class="hljs-comment">/// doc_comments::compute::div(10, 0);</span><br><span class="hljs-comment">/// ```</span><br><span class="hljs-keyword">pub</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">div</span>(a: <span class="hljs-type">i32</span>, b: <span class="hljs-type">i32</span>) <span class="hljs-punctuation">-&gt;</span> <span class="hljs-type">i32</span> &#123;<br>    <span class="hljs-keyword">if</span> b == <span class="hljs-number">0</span> &#123;<br>        <span class="hljs-built_in">panic!</span>(<span class="hljs-string">&quot;Divide-by-zero error&quot;</span>);<br>    &#125;<br><br>    a / b<br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="4-🌟🌟有时我们会想要隐藏文档，但是保留文档测试"><a href="#4-🌟🌟有时我们会想要隐藏文档，但是保留文档测试" class="headerlink" title="4.🌟🌟有时我们会想要隐藏文档，但是保留文档测试"></a>4.🌟🌟有时我们会想要隐藏文档，但是保留文档测试</h3><p>将以下代码添加到 src&#x2F;compute.rs ,</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-comment">// in src/compute.rs</span><br><br><span class="hljs-comment">/// ```</span><br><span class="hljs-comment">/// # fn try_main() -&gt; Result&lt;(), String&gt; &#123;</span><br><span class="hljs-comment">/// let res = doc_comments::compute::try_div(10, 0)?;</span><br><span class="hljs-comment">/// # Ok(()) // returning from try_main</span><br><span class="hljs-comment">/// # &#125;</span><br><span class="hljs-comment">/// # fn main() &#123;</span><br><span class="hljs-comment">/// #    try_main().unwrap();</span><br><span class="hljs-comment">/// #</span><br><span class="hljs-comment">/// # &#125;</span><br><span class="hljs-comment">/// ```</span><br><span class="hljs-keyword">pub</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">try_div</span>(a: <span class="hljs-type">i32</span>, b: <span class="hljs-type">i32</span>) <span class="hljs-punctuation">-&gt;</span> <span class="hljs-type">Result</span>&lt;<span class="hljs-type">i32</span>, <span class="hljs-type">String</span>&gt; &#123;<br>    <span class="hljs-keyword">if</span> b == <span class="hljs-number">0</span> &#123;<br>        <span class="hljs-title function_ invoke__">Err</span>(<span class="hljs-type">String</span>::<span class="hljs-title function_ invoke__">from</span>(<span class="hljs-string">&quot;Divide-by-zero&quot;</span>))<br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-title function_ invoke__">Ok</span>(a / b)<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>然后修改以上代码已实现两个目标:</p>
+<ul>
+<li>文档注释不能出现在 cargo doc –open 生成的网页中</li>
+<li>运行测试，并成功看到以下结果:<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs sh">running 0 tests<br><br><span class="hljs-built_in">test</span> result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished <span class="hljs-keyword">in</span> 0.00s<br><br>   Doc-tests doc-comments<br><br>running 4 tests<br><span class="hljs-built_in">test</span> src/compute.rs - compute::div (line 7) ... ok<br><span class="hljs-built_in">test</span> src/lib.rs - add_two (line 27) ... ok<br><span class="hljs-built_in">test</span> src/lib.rs - add_one (line 11) ... ok<br><span class="hljs-built_in">test</span> src/compute.rs - compute::try_div (line 20) ... ok<br><br><span class="hljs-built_in">test</span> result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished <span class="hljs-keyword">in</span> 0.51s<br></code></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="代码跳转"><a href="#代码跳转" class="headerlink" title="代码跳转"></a>代码跳转</h3><p>Rust 为我们提供一个非常强大的特性：可以在文档注释中实现代码跳转。</p>
+<p>将以下代码添加到 src&#x2F;lib.rs:</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-comment">// in lib.rs</span><br><br><span class="hljs-comment">/// Add one to the given value and return a [`Option`] type</span><br><span class="hljs-keyword">pub</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">add_three</span>(x: <span class="hljs-type">i32</span>) <span class="hljs-punctuation">-&gt;</span> <span class="hljs-type">Option</span>&lt;<span class="hljs-type">i32</span>&gt; &#123;<br>    <span class="hljs-title function_ invoke__">Some</span>(x + <span class="hljs-number">3</span>)<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>除了跳转到标准库中，我们还能跳转到项目中的其它模块。</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-comment">// in lib.rs</span><br><br><span class="hljs-keyword">mod</span> a &#123;<br>    <span class="hljs-comment">/// Add four to the given value and return a [`Option`] type</span><br>    <span class="hljs-comment">/// [`crate::MySpecialFormatter`]</span><br>    <span class="hljs-keyword">pub</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">add_four</span>(x: <span class="hljs-type">i32</span>) <span class="hljs-punctuation">-&gt;</span> <span class="hljs-type">Option</span>&lt;<span class="hljs-type">i32</span>&gt; &#123;<br>        <span class="hljs-title function_ invoke__">Some</span>(x + <span class="hljs-number">4</span>)<br>    &#125;<br>&#125;<br><br><span class="hljs-keyword">struct</span> <span class="hljs-title class_">MySpecialFormatter</span>;<br></code></pre></td></tr></table></figure>
+<h3 id="文档属性"><a href="#文档属性" class="headerlink" title="文档属性"></a>文档属性</h3><p>下面是很常用的 #[doc] 属性，该属性可以被 rustdoc 所使用。</p>
+<h3 id="inline"><a href="#inline" class="headerlink" title="inline"></a>inline</h3><p>可以用于内联文档, 而不是链接到一个单独的页面。</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-meta">#[doc(inline)]</span><br><span class="hljs-keyword">pub</span> <span class="hljs-keyword">use</span> bar::Bar;<br><br><span class="hljs-comment">/// bar docs</span><br><span class="hljs-keyword">mod</span> bar &#123;<br>    <span class="hljs-comment">/// the docs for Bar</span><br>    <span class="hljs-keyword">pub</span> <span class="hljs-keyword">struct</span> <span class="hljs-title class_">Bar</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="no-inline"><a href="#no-inline" class="headerlink" title="no_inline"></a>no_inline</h3><p>用于防止链接到单独的页面或其它地方。</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-comment">// Example from libcore/prelude</span><br><span class="hljs-meta">#[doc(no_inline)]</span><br><span class="hljs-keyword">pub</span> <span class="hljs-keyword">use</span> crate::mem::drop;<br></code></pre></td></tr></table></figure>
+<h3 id="hidden"><a href="#hidden" class="headerlink" title="hidden"></a>hidden</h3><p>通过这个属性让 rustdoc 不要将下面的项包含在文档中:</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-comment">// Example from the futures-rs library</span><br><span class="hljs-meta">#[doc(hidden)]</span><br><span class="hljs-keyword">pub</span> <span class="hljs-keyword">use</span> self::async_await::*;<br></code></pre></td></tr></table></figure>
+<p>对文档来说，rustdoc 被社区广泛采用，大家所看到的<a target="_blank" rel="noopener" href="https://doc.rust-lang.org/std/">标准库文档</a>也是基于此生成的。</p>
+<h3 id="完整的代码"><a href="#完整的代码" class="headerlink" title="完整的代码"></a>完整的代码</h3><p>doc-comments 的完整代码可以在<a target="_blank" rel="noopener" href="https://github.com/sunface/rust-by-practice/tree/master/practices/doc-comments">这里找到</a>.</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Rust-By-Practice/" class="category-chain-item">Rust By Practice</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Rust/" class="print-no-link">#Rust</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>15.注释和文档</div>
+      <div>https://lilinzta.github.io/2023/10/14/15-注释和文档/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Haotian Li</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年10月14日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/10/23/Arch-Linux-%E5%88%87%E6%8D%A2-java-%E7%8E%AF%E5%A2%83/" title="Arch Linux 切换 java 环境">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Arch Linux 切换 java 环境</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/10/11/14-3-%E4%BD%BF%E7%94%A8-use-%E5%BC%95%E5%85%A5%E6%A8%A1%E5%9D%97%E5%8F%8A%E5%8F%97%E9%99%90%E5%8F%AF%E8%A7%81%E6%80%A7/" title="14.3.使用 use 引入模块及受限可见性">
+                        <span class="hidden-mobile">14.3.使用 use 引入模块及受限可见性</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="gitalk-container"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#gitalk-container', function() {
+      Fluid.utils.createCssLink('/css/gitalk.css')
+      Fluid.utils.createScript('https://lib.baomitu.com/gitalk/1.8.0/gitalk.min.js', function() {
+        var options = Object.assign(
+          {"clientID":"9d74ad43577ce767f34d","clientSecret":"bcb1e82eff718d70dfa74c53fe966ab7765dc3b2","repo":"Lilinzta.github.io","owner":"Lilinzta","admin":["Lilinzta"],"language":"zh-CN","labels":["Gitalk"],"perPage":10,"pagerDirection":"last","distractionFreeMode":false,"createIssueManually":false,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token"},
+          {
+            id: 'bd129d7d730bb755f71357ac7732c2bc'
+          }
+        )
+        var gitalk = new Gitalk(options);
+        gitalk.render('gitalk-container');
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"left","width":200,"height":300},"mobile":{"show":false},"rect":"opacity:0.7","log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

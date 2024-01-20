@@ -1,0 +1,722 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/res/favicon.png">
+  <link rel="icon" href="/res/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Haotian Li">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="std::string::String 是 UTF-8 编码、可增长的动态字符串. 它也是我们日常开发中最常用的字符串类型，同时对于它所拥有的内容拥有所有权。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="11.1.动态字符串 String">
+<meta property="og:url" content="https://lilinzta.github.io/2023/09/17/11-1-%E5%8A%A8%E6%80%81%E5%AD%97%E7%AC%A6%E4%B8%B2-String/index.html">
+<meta property="og:site_name" content="Lilinzta&#39;s blog">
+<meta property="og:description" content="std::string::String 是 UTF-8 编码、可增长的动态字符串. 它也是我们日常开发中最常用的字符串类型，同时对于它所拥有的内容拥有所有权。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-09-17T03:21:46.000Z">
+<meta property="article:modified_time" content="2024-01-20T11:35:54.968Z">
+<meta property="article:author" content="Haotian Li">
+<meta property="article:tag" content="Rust">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>11.1.动态字符串 String - Lilinzta&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"lilinzta.github.io","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Lilinzta's blog" type="application/atom+xml">
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Lilinzta&#39;s blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/res/banner/post.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="11.1.动态字符串 String"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-09-17 11:21" pubdate>
+          2023年9月17日 上午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.5k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          13 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">11.1.动态字符串 String</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>std::string::String 是 UTF-8 编码、可增长的动态字符串. 它也是我们日常开发中最常用的字符串类型，同时对于它所拥有的内容拥有所有权。</p>
+<span id="more"></span>
+<h2 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h2><h3 id="1-🌟🌟"><a href="#1-🌟🌟" class="headerlink" title="1.🌟🌟"></a>1.🌟🌟</h3><p>Q:</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-comment">// 填空并修复错误</span><br><span class="hljs-comment">// 1. 不要使用 `to_string()`</span><br><span class="hljs-comment">// 2. 不要添加/删除任何代码行</span><br><span class="hljs-keyword">fn</span> <span class="hljs-title function_">main</span>() &#123;<br>    <span class="hljs-keyword">let</span> <span class="hljs-keyword">mut </span><span class="hljs-variable">s</span>: <span class="hljs-type">String</span> = <span class="hljs-string">&quot;hello, &quot;</span>;<br>    s.<span class="hljs-title function_ invoke__">push_str</span>(<span class="hljs-string">&quot;world&quot;</span>.<span class="hljs-title function_ invoke__">to_string</span>());<br>    s.<span class="hljs-title function_ invoke__">push</span>(__);<br><br>    <span class="hljs-title function_ invoke__">move_ownership</span>(s);<br><br>    <span class="hljs-built_in">assert_eq!</span>(s, <span class="hljs-string">&quot;hello, world!&quot;</span>);<br><br>    <span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;Success!&quot;</span>)<br>&#125;<br><br><span class="hljs-keyword">fn</span> <span class="hljs-title function_">move_ownership</span>(s: <span class="hljs-type">String</span>) &#123;<br>    <span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;ownership of \&quot;&#123;&#125;\&quot; is moved here!&quot;</span>, s)<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>A:</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-comment">// 填空并修复错误</span><br><span class="hljs-comment">// 1. 不要使用 `to_string()`</span><br><span class="hljs-comment">// 2. 不要添加/删除任何代码行</span><br><span class="hljs-keyword">fn</span> <span class="hljs-title function_">main</span>() &#123;<br>    <span class="hljs-keyword">let</span> <span class="hljs-keyword">mut </span><span class="hljs-variable">s</span>: <span class="hljs-type">String</span> = <span class="hljs-type">String</span>::<span class="hljs-title function_ invoke__">from</span>(<span class="hljs-string">&quot;hello, &quot;</span>);<br>    s.<span class="hljs-title function_ invoke__">push_str</span>(<span class="hljs-string">&quot;world&quot;</span>);<br>    s.<span class="hljs-title function_ invoke__">push</span>(<span class="hljs-string">&#x27;!&#x27;</span>);<br><br>    <span class="hljs-title function_ invoke__">move_ownership</span>(s.<span class="hljs-title function_ invoke__">clone</span>());<br><br>    <span class="hljs-built_in">assert_eq!</span>(s, <span class="hljs-string">&quot;hello, world!&quot;</span>);<br><br>    <span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;Success!&quot;</span>)<br>&#125;<br><br><span class="hljs-keyword">fn</span> <span class="hljs-title function_">move_ownership</span>(s: <span class="hljs-type">String</span>) &#123;<br>    <span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;ownership of \&quot;&#123;&#125;\&quot; is moved here!&quot;</span>, s)<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="String-and-str"><a href="#String-and-str" class="headerlink" title="String and &amp;str"></a>String and &amp;str</h2><p>虽然 String 的底层是 Vec<u8> 也就是字节数组的形式存储的，但是它是基于 UTF-8 编码的字符序列。String 分配在堆上、可增长且不是以 null 结尾。<br>而 &amp;str 是切片引用类型( &amp;[u8] )，指向一个合法的 UTF-8 字符序列，总之，&amp;str 和 String 的关系类似于 &amp;[T] 和 Vec<T> 。</p>
+<h3 id="2-🌟🌟"><a href="#2-🌟🌟" class="headerlink" title="2.🌟🌟"></a>2.🌟🌟</h3><p>Q:</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-comment">// 填空</span><br><span class="hljs-keyword">fn</span> <span class="hljs-title function_">main</span>() &#123;<br>   <span class="hljs-keyword">let</span> <span class="hljs-keyword">mut </span><span class="hljs-variable">s</span> = <span class="hljs-type">String</span>::<span class="hljs-title function_ invoke__">from</span>(<span class="hljs-string">&quot;hello, world&quot;</span>);<br><br>   <span class="hljs-keyword">let</span> <span class="hljs-variable">slice1</span>: &amp;<span class="hljs-type">str</span> = __; <span class="hljs-comment">// 使用两种方法</span><br>   <span class="hljs-built_in">assert_eq!</span>(slice1, <span class="hljs-string">&quot;hello, world&quot;</span>);<br><br>   <span class="hljs-keyword">let</span> <span class="hljs-variable">slice2</span> = __;<br>   <span class="hljs-built_in">assert_eq!</span>(slice2, <span class="hljs-string">&quot;hello&quot;</span>);<br><br>   <span class="hljs-keyword">let</span> <span class="hljs-variable">slice3</span>: __ = __;<br>   slice3.<span class="hljs-title function_ invoke__">push</span>(<span class="hljs-string">&#x27;!&#x27;</span>);<br>   <span class="hljs-built_in">assert_eq!</span>(slice3, <span class="hljs-string">&quot;hello, world!&quot;</span>);<br><br>   <span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;Success!&quot;</span>)<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>A:</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-comment">// 填空</span><br><span class="hljs-keyword">fn</span> <span class="hljs-title function_">main</span>() &#123;<br>   <span class="hljs-keyword">let</span> <span class="hljs-keyword">mut </span><span class="hljs-variable">s</span> = <span class="hljs-type">String</span>::<span class="hljs-title function_ invoke__">from</span>(<span class="hljs-string">&quot;hello, world&quot;</span>);<br><br>   <span class="hljs-keyword">let</span> <span class="hljs-variable">slice1</span>: &amp;<span class="hljs-type">str</span> = &amp;s; <span class="hljs-comment">// 使用两种方法</span><br>   <span class="hljs-keyword">let</span> <span class="hljs-variable">slice1</span>: &amp;<span class="hljs-type">str</span> = s.<span class="hljs-title function_ invoke__">as_str</span>(); <span class="hljs-comment">// 使用两种方法</span><br>   <span class="hljs-built_in">assert_eq!</span>(slice1, <span class="hljs-string">&quot;hello, world&quot;</span>);<br><br>   <span class="hljs-keyword">let</span> <span class="hljs-variable">slice2</span> = &amp;s[<span class="hljs-number">0</span>..<span class="hljs-number">5</span>];<br>   <span class="hljs-built_in">assert_eq!</span>(slice2, <span class="hljs-string">&quot;hello&quot;</span>);<br><br>   <span class="hljs-keyword">let</span> <span class="hljs-variable">slice3</span>: &amp;<span class="hljs-keyword">mut</span> <span class="hljs-type">String</span> = &amp;<span class="hljs-keyword">mut</span> s;<br>   slice3.<span class="hljs-title function_ invoke__">push</span>(<span class="hljs-string">&#x27;!&#x27;</span>);<br>   <span class="hljs-built_in">assert_eq!</span>(slice3, <span class="hljs-string">&quot;hello, world!&quot;</span>);<br><br>   <span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;Success!&quot;</span>)<br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="3-🌟🌟"><a href="#3-🌟🌟" class="headerlink" title="3.🌟🌟"></a>3.🌟🌟</h3><figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-comment">// 问题:  我们的代码中发生了多少次堆内存分配？</span><br><span class="hljs-comment">// 你的回答: 2</span><br><span class="hljs-keyword">fn</span> <span class="hljs-title function_">main</span>() &#123;<br>    <span class="hljs-comment">// 基于 `&amp;str` 类型创建一个 String,</span><br>    <span class="hljs-comment">// 字符串字面量的类型是 `&amp;str`</span><br>   <span class="hljs-keyword">let</span> <span class="hljs-variable">s</span>: <span class="hljs-type">String</span> = <span class="hljs-type">String</span>::<span class="hljs-title function_ invoke__">from</span>(<span class="hljs-string">&quot;hello, world!&quot;</span>);<br><br>   <span class="hljs-comment">// 创建一个切片引用指向 String `s`</span><br>   <span class="hljs-keyword">let</span> <span class="hljs-variable">slice</span>: &amp;<span class="hljs-type">str</span> = &amp;s;<br><br>   <span class="hljs-comment">// 基于刚创建的切片来创建一个 String</span><br>   <span class="hljs-keyword">let</span> <span class="hljs-variable">s</span>: <span class="hljs-type">String</span> = slice.<span class="hljs-title function_ invoke__">to_string</span>();<br><br>   <span class="hljs-built_in">assert_eq!</span>(s, <span class="hljs-string">&quot;hello, world!&quot;</span>);<br><br>   <span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;Success!&quot;</span>)<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="UTF-8-索引"><a href="#UTF-8-索引" class="headerlink" title="UTF-8 &amp; 索引"></a>UTF-8 &amp; 索引</h2><p>由于 String 都是 UTF-8 编码的，这会带来几个影响:</p>
+<ul>
+<li>如果你需要的是非 UTF-8 字符串，可以考虑 OsString</li>
+<li>无法通过索引的方式访问一个 String</li>
+</ul>
+<h3 id="4-🌟🌟🌟-我们无法通过索引的方式访问字符串中的某个字符，但是可以通过切片的方式来获取字符串的某一部分-s1-start-end"><a href="#4-🌟🌟🌟-我们无法通过索引的方式访问字符串中的某个字符，但是可以通过切片的方式来获取字符串的某一部分-s1-start-end" class="headerlink" title="4.🌟🌟🌟 我们无法通过索引的方式访问字符串中的某个字符，但是可以通过切片的方式来获取字符串的某一部分 &amp;s1[start..end]"></a>4.🌟🌟🌟 我们无法通过索引的方式访问字符串中的某个字符，但是可以通过切片的方式来获取字符串的某一部分 &amp;s1[start..end]</h3><p>Q:</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-comment">// 填空并修复错误</span><br><span class="hljs-keyword">fn</span> <span class="hljs-title function_">main</span>() &#123;<br>    <span class="hljs-keyword">let</span> <span class="hljs-variable">s</span> = <span class="hljs-type">String</span>::<span class="hljs-title function_ invoke__">from</span>(<span class="hljs-string">&quot;hello, 世界&quot;</span>);<br>    <span class="hljs-keyword">let</span> <span class="hljs-variable">slice1</span> = s[<span class="hljs-number">0</span>]; <span class="hljs-comment">//提示: `h` 在 UTF-8 编码中只占用 1 个字节</span><br>    <span class="hljs-built_in">assert_eq!</span>(slice1, <span class="hljs-string">&quot;h&quot;</span>);<br><br>    <span class="hljs-keyword">let</span> <span class="hljs-variable">slice2</span> = &amp;s[<span class="hljs-number">3</span>..<span class="hljs-number">5</span>];<span class="hljs-comment">// 提示: `世` 在 UTF-8 编码中占用 3 个字节</span><br>    <span class="hljs-built_in">assert_eq!</span>(slice2, <span class="hljs-string">&quot;世&quot;</span>);<br><br>    <span class="hljs-comment">// 迭代 s 中的所有字符</span><br>    <span class="hljs-keyword">for</span> (i, c) <span class="hljs-keyword">in</span> s.__ &#123;<br>        <span class="hljs-keyword">if</span> i == <span class="hljs-number">7</span> &#123;<br>            <span class="hljs-built_in">assert_eq!</span>(c, <span class="hljs-string">&#x27;世&#x27;</span>)<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;Success!&quot;</span>)<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>A:</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-comment">// 填空并修复错误</span><br><span class="hljs-keyword">fn</span> <span class="hljs-title function_">main</span>() &#123;<br>    <span class="hljs-keyword">let</span> <span class="hljs-variable">s</span> = <span class="hljs-type">String</span>::<span class="hljs-title function_ invoke__">from</span>(<span class="hljs-string">&quot;hello, 世界&quot;</span>);<br>    <span class="hljs-keyword">let</span> <span class="hljs-variable">slice1</span> = &amp;s[<span class="hljs-number">0</span>..<span class="hljs-number">1</span>]; <span class="hljs-comment">//提示: `h` 在 UTF-8 编码中只占用 1 个字节</span><br>    <span class="hljs-built_in">assert_eq!</span>(slice1, <span class="hljs-string">&quot;h&quot;</span>);<br><br>    <span class="hljs-keyword">let</span> <span class="hljs-variable">slice2</span> = &amp;s[<span class="hljs-number">7</span>..<span class="hljs-number">10</span>];<span class="hljs-comment">// 提示: `世` 在 UTF-8 编码中占用 3 个字节</span><br>    <span class="hljs-built_in">assert_eq!</span>(slice2, <span class="hljs-string">&quot;世&quot;</span>);<br><br>    <span class="hljs-comment">// 迭代 s 中的所有字符</span><br>    <span class="hljs-keyword">for</span> (i, c) <span class="hljs-keyword">in</span> s.<span class="hljs-title function_ invoke__">chars</span>().<span class="hljs-title function_ invoke__">enumerate</span>() &#123;<br>        <span class="hljs-keyword">if</span> i == <span class="hljs-number">7</span> &#123;<br>            <span class="hljs-built_in">assert_eq!</span>(c, <span class="hljs-string">&#x27;世&#x27;</span>)<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;Success!&quot;</span>)<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="utf8-slice"><a href="#utf8-slice" class="headerlink" title="utf8_slice"></a>utf8_slice</h2><p>我们可以使用 utf8_slice 来按照字符的自然索引方式对 UTF-8 字符串进行切片访问，与之前的切片方式相比，它索引的是字符，而之前的方式索引的是字节.</p>
+<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-keyword">use</span> utf8_slice;<br><span class="hljs-keyword">fn</span> <span class="hljs-title function_">main</span>() &#123;<br>   <span class="hljs-keyword">let</span> <span class="hljs-variable">s</span> = <span class="hljs-string">&quot;The 🚀 goes to the 🌑!&quot;</span>;<br><br>   <span class="hljs-keyword">let</span> <span class="hljs-variable">rocket</span> = utf8_slice::<span class="hljs-title function_ invoke__">slice</span>(s, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>);<br>   <span class="hljs-comment">// Will equal &quot;🚀&quot;</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="5-🌟🌟🌟"><a href="#5-🌟🌟🌟" class="headerlink" title="5.🌟🌟🌟"></a>5.🌟🌟🌟</h3><blockquote>
+<p>tips:也许你需要使用 from_utf8 方法<br>Q:</p>
+</blockquote>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-comment">// 填空</span><br><span class="hljs-keyword">fn</span> <span class="hljs-title function_">main</span>() &#123;<br>    <span class="hljs-keyword">let</span> <span class="hljs-keyword">mut </span><span class="hljs-variable">s</span> = <span class="hljs-type">String</span>::<span class="hljs-title function_ invoke__">new</span>();<br>    __;<br><br>    <span class="hljs-keyword">let</span> <span class="hljs-variable">v</span> = <span class="hljs-built_in">vec!</span>[<span class="hljs-number">104</span>, <span class="hljs-number">101</span>, <span class="hljs-number">108</span>, <span class="hljs-number">108</span>, <span class="hljs-number">111</span>];<br><br>    <span class="hljs-comment">// 将字节数组转换成 String</span><br>    <span class="hljs-keyword">let</span> <span class="hljs-variable">s1</span> = __;<br><br><br>    <span class="hljs-built_in">assert_eq!</span>(s, s1);<br><br>    <span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;Success!&quot;</span>)<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>A:</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-comment">// 填空</span><br><span class="hljs-keyword">fn</span> <span class="hljs-title function_">main</span>() &#123;<br>    <span class="hljs-keyword">let</span> <span class="hljs-keyword">mut </span><span class="hljs-variable">s</span> = <span class="hljs-type">String</span>::<span class="hljs-title function_ invoke__">new</span>();<br>    s.<span class="hljs-title function_ invoke__">push_str</span>(<span class="hljs-string">&quot;hello&quot;</span>);<br><br>    <span class="hljs-keyword">let</span> <span class="hljs-variable">v</span> = <span class="hljs-built_in">vec!</span>[<span class="hljs-number">104</span>, <span class="hljs-number">101</span>, <span class="hljs-number">108</span>, <span class="hljs-number">108</span>, <span class="hljs-number">111</span>];<br><br>    <span class="hljs-comment">// 将字节数组转换成 String</span><br>    <span class="hljs-keyword">let</span> <span class="hljs-variable">s1</span> = <span class="hljs-type">String</span>::<span class="hljs-title function_ invoke__">from_utf8</span>(v).<span class="hljs-title function_ invoke__">unwrap</span>();<br><br><br>    <span class="hljs-built_in">assert_eq!</span>(s, s1);<br><br>    <span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;Success!&quot;</span>)<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="内部表示"><a href="#内部表示" class="headerlink" title="内部表示"></a>内部表示</h2><p>事实上 String 是一个智能指针，它作为一个结构体存储在栈上，然后指向存储在堆上的字符串底层数据。<br>存储在栈上的智能指针结构体由三部分组成：一个指针只指向堆上的字节数组，已使用的长度以及已分配的容量 capacity (已使用的长度小于等于已分配的容量，当容量不够时，会重新分配内存空间)。</p>
+<h3 id="6-🌟🌟-如果-String-的当前容量足够，那么添加字符将不会导致新的内存分配"><a href="#6-🌟🌟-如果-String-的当前容量足够，那么添加字符将不会导致新的内存分配" class="headerlink" title="6.🌟🌟 如果 String 的当前容量足够，那么添加字符将不会导致新的内存分配"></a>6.🌟🌟 如果 String 的当前容量足够，那么添加字符将不会导致新的内存分配</h3><p>Q:</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-comment">// 修改下面的代码以打印如下内容:</span><br><span class="hljs-comment">// 25</span><br><span class="hljs-comment">// 25</span><br><span class="hljs-comment">// 25</span><br><span class="hljs-comment">// 循环中不会发生任何内存分配</span><br><span class="hljs-keyword">fn</span> <span class="hljs-title function_">main</span>() &#123;<br>    <span class="hljs-keyword">let</span> <span class="hljs-keyword">mut </span><span class="hljs-variable">s</span> = <span class="hljs-type">String</span>::<span class="hljs-title function_ invoke__">new</span>();<br><br>    <span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;&#123;&#125;&quot;</span>, s.<span class="hljs-title function_ invoke__">capacity</span>());<br><br>    <span class="hljs-keyword">for</span> <span class="hljs-variable">_</span> <span class="hljs-keyword">in</span> <span class="hljs-number">0</span>..<span class="hljs-number">2</span> &#123;<br>        s.<span class="hljs-title function_ invoke__">push_str</span>(<span class="hljs-string">&quot;hello&quot;</span>);<br>        <span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;&#123;&#125;&quot;</span>, s.<span class="hljs-title function_ invoke__">capacity</span>());<br>    &#125;<br><br>    <span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;Success!&quot;</span>)<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>A:</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-comment">// 修改下面的代码以打印如下内容:</span><br><span class="hljs-comment">// 25</span><br><span class="hljs-comment">// 25</span><br><span class="hljs-comment">// 25</span><br><span class="hljs-comment">// 循环中不会发生任何内存分配</span><br><span class="hljs-keyword">fn</span> <span class="hljs-title function_">main</span>() &#123;<br>    <span class="hljs-keyword">let</span> <span class="hljs-keyword">mut </span><span class="hljs-variable">s</span> = <span class="hljs-type">String</span>::<span class="hljs-title function_ invoke__">with_capacity</span>(<span class="hljs-number">25</span>);<br><br>    <span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;&#123;&#125;&quot;</span>, s.<span class="hljs-title function_ invoke__">capacity</span>());<br><br>    <span class="hljs-keyword">for</span> <span class="hljs-variable">_</span> <span class="hljs-keyword">in</span> <span class="hljs-number">0</span>..<span class="hljs-number">2</span> &#123;<br>        s.<span class="hljs-title function_ invoke__">push_str</span>(<span class="hljs-string">&quot;hello&quot;</span>);<br>        <span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;&#123;&#125;&quot;</span>, s.<span class="hljs-title function_ invoke__">capacity</span>());<br>    &#125;<br><br>    <span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;Success!&quot;</span>)<br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="7-🌟🌟🌟"><a href="#7-🌟🌟🌟" class="headerlink" title="7.🌟🌟🌟"></a>7.🌟🌟🌟</h3><p>Q:</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-comment">// 填空</span><br><span class="hljs-keyword">use</span> std::mem;<br><br><span class="hljs-keyword">fn</span> <span class="hljs-title function_">main</span>() &#123;<br>    <span class="hljs-keyword">let</span> <span class="hljs-variable">story</span> = <span class="hljs-type">String</span>::<span class="hljs-title function_ invoke__">from</span>(<span class="hljs-string">&quot;Rust By Practice&quot;</span>);<br><br>    <span class="hljs-comment">// 阻止 String 的数据被自动 drop</span><br>    <span class="hljs-keyword">let</span> <span class="hljs-keyword">mut </span><span class="hljs-variable">story</span> = mem::ManuallyDrop::<span class="hljs-title function_ invoke__">new</span>(story);<br><br>    <span class="hljs-keyword">let</span> <span class="hljs-variable">ptr</span> = story.__();<br>    <span class="hljs-keyword">let</span> <span class="hljs-variable">len</span> = story.__();<br>    <span class="hljs-keyword">let</span> <span class="hljs-variable">capacity</span> = story.__();<br><br>    <span class="hljs-built_in">assert_eq!</span>(<span class="hljs-number">16</span>, len);<br><br>    <span class="hljs-comment">// 我们可以基于 ptr 指针、长度和容量来重新构建 String.</span><br>    <span class="hljs-comment">// 这种操作必须标记为 unsafe，因为我们需要自己来确保这里的操作是安全的</span><br>    <span class="hljs-keyword">let</span> <span class="hljs-variable">s</span> = <span class="hljs-keyword">unsafe</span> &#123; <span class="hljs-type">String</span>::<span class="hljs-title function_ invoke__">from_raw_parts</span>(ptr, len, capacity) &#125;;<br><br>    <span class="hljs-built_in">assert_eq!</span>(*story, s);<br><br>    <span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;Success!&quot;</span>)<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>A:</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-comment">// 填空</span><br><span class="hljs-keyword">use</span> std::mem;<br><br><span class="hljs-keyword">fn</span> <span class="hljs-title function_">main</span>() &#123;<br>    <span class="hljs-keyword">let</span> <span class="hljs-variable">story</span> = <span class="hljs-type">String</span>::<span class="hljs-title function_ invoke__">from</span>(<span class="hljs-string">&quot;Rust By Practice&quot;</span>);<br><br>    <span class="hljs-comment">// 阻止 String 的数据被自动 drop</span><br>    <span class="hljs-keyword">let</span> <span class="hljs-keyword">mut </span><span class="hljs-variable">story</span> = mem::ManuallyDrop::<span class="hljs-title function_ invoke__">new</span>(story);<br><br>    <span class="hljs-keyword">let</span> <span class="hljs-variable">ptr</span> = story.<span class="hljs-title function_ invoke__">as_mut_ptr</span>();<br>    <span class="hljs-keyword">let</span> <span class="hljs-variable">len</span> = story.<span class="hljs-title function_ invoke__">len</span>();<br>    <span class="hljs-keyword">let</span> <span class="hljs-variable">capacity</span> = story.<span class="hljs-title function_ invoke__">capacity</span>();<br><br>    <span class="hljs-built_in">assert_eq!</span>(<span class="hljs-number">16</span>, len);<br><br>    <span class="hljs-comment">// 我们可以基于 ptr 指针、长度和容量来重新构建 String.</span><br>    <span class="hljs-comment">// 这种操作必须标记为 unsafe，因为我们需要自己来确保这里的操作是安全的</span><br>    <span class="hljs-keyword">let</span> <span class="hljs-variable">s</span> = <span class="hljs-keyword">unsafe</span> &#123; <span class="hljs-type">String</span>::<span class="hljs-title function_ invoke__">from_raw_parts</span>(ptr, len, capacity) &#125;;<br><br>    <span class="hljs-built_in">assert_eq!</span>(*story, s);<br><br>    <span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;Success!&quot;</span>)<br>&#125;<br></code></pre></td></tr></table></figure>
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Rust-By-Practice/" class="category-chain-item">Rust By Practice</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Rust/" class="print-no-link">#Rust</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>11.1.动态字符串 String</div>
+      <div>https://lilinzta.github.io/2023/09/17/11-1-动态字符串-String/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Haotian Li</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年9月17日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/09/18/11-2-%E5%8A%A8%E6%80%81%E6%95%B0%E7%BB%84-Vector/" title="11.2.动态数组 Vector">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">11.2.动态数组 Vector</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/09/15/10-5-%E8%BF%9B%E4%B8%80%E6%AD%A5%E6%B7%B1%E5%85%A5%E7%89%B9%E5%BE%81/" title="10.5.进一步深入特征">
+                        <span class="hidden-mobile">10.5.进一步深入特征</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="gitalk-container"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#gitalk-container', function() {
+      Fluid.utils.createCssLink('/css/gitalk.css')
+      Fluid.utils.createScript('https://lib.baomitu.com/gitalk/1.8.0/gitalk.min.js', function() {
+        var options = Object.assign(
+          {"clientID":"9d74ad43577ce767f34d","clientSecret":"bcb1e82eff718d70dfa74c53fe966ab7765dc3b2","repo":"Lilinzta.github.io","owner":"Lilinzta","admin":["Lilinzta"],"language":"zh-CN","labels":["Gitalk"],"perPage":10,"pagerDirection":"last","distractionFreeMode":false,"createIssueManually":false,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token"},
+          {
+            id: '7a035aec91984e1a5f394f148182e3a5'
+          }
+        )
+        var gitalk = new Gitalk(options);
+        gitalk.render('gitalk-container');
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"left","width":200,"height":300},"mobile":{"show":false},"rect":"opacity:0.7","log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
