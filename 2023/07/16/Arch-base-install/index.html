@@ -24,7 +24,7 @@
 <meta property="og:description" content="记录了我曾经安装Arch Linux的大致步骤">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-07-15T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-01-25T14:09:01.527Z">
+<meta property="article:modified_time" content="2024-02-25T08:46:11.214Z">
 <meta property="article:author" content="Haotian Li">
 <meta property="article:tag" content="Arch Linux">
 <meta name="twitter:card" content="summary_large_image">
@@ -291,11 +291,11 @@
 <blockquote>
 <p>update time：2023-4-16</p>
 </blockquote>
-<h3 id="0-连接wifi"><a href="#0-连接wifi" class="headerlink" title="0.连接wifi"></a>0.连接wifi</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">iwctl<br>station wlan0 scan<br>station wlan0 get-networks<br>station wlan0 connect SSID<br><span class="hljs-built_in">exit</span><br></code></pre></td></tr></table></figure>
+<h3 id="0-连接-wifi"><a href="#0-连接-wifi" class="headerlink" title="0.连接 wifi"></a>0.连接 wifi</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">iwctl<br>station wlan0 scan<br>station wlan0 get-networks<br>station wlan0 connect SSID<br><span class="hljs-built_in">exit</span><br></code></pre></td></tr></table></figure>
 
-<h3 id="1-确保UEFI模式启动"><a href="#1-确保UEFI模式启动" class="headerlink" title="1.确保UEFI模式启动"></a>1.确保UEFI模式启动</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">ls</span> /sys/firmware/efi/efivars<br></code></pre></td></tr></table></figure>
+<h3 id="1-确保-UEFI-模式启动"><a href="#1-确保-UEFI-模式启动" class="headerlink" title="1.确保 UEFI 模式启动"></a>1.确保 UEFI 模式启动</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">ls</span> /sys/firmware/efi/efivars<br></code></pre></td></tr></table></figure>
 
-<h3 id="2-禁用自动更新mirrorlist的reflector"><a href="#2-禁用自动更新mirrorlist的reflector" class="headerlink" title="2.禁用自动更新mirrorlist的reflector"></a>2.禁用自动更新mirrorlist的reflector</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">systemctl stop reflector.service<br></code></pre></td></tr></table></figure>
+<h3 id="2-禁用自动更新-mirrorlist-的-reflector"><a href="#2-禁用自动更新-mirrorlist-的-reflector" class="headerlink" title="2.禁用自动更新 mirrorlist 的 reflector"></a>2.禁用自动更新 mirrorlist 的 reflector</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">systemctl stop reflector.service<br></code></pre></td></tr></table></figure>
 
 <h3 id="3-检查时钟服务状态"><a href="#3-检查时钟服务状态" class="headerlink" title="3.检查时钟服务状态"></a>3.检查时钟服务状态</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">timedatectl status<br></code></pre></td></tr></table></figure>
 
@@ -303,7 +303,7 @@
 
 <h3 id="5-分区"><a href="#5-分区" class="headerlink" title="5.分区"></a>5.分区</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">cfdisk /dev/sd(x)<br></code></pre></td></tr></table></figure>
 
-<h3 id="6-格式化"><a href="#6-格式化" class="headerlink" title="6.格式化"></a>6.格式化</h3><p>&#x2F;和&#x2F;home格式化成ext4类型，EFI分区格式化成vfat类型，交换分区使用mkswap初始化</p>
+<h3 id="6-格式化"><a href="#6-格式化" class="headerlink" title="6.格式化"></a>6.格式化</h3><p>&#x2F; 和 &#x2F;home 格式化成 ext4 类型，EFI 分区格式化成 vfat 类型，交换分区使用 mkswap 初始化</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">mkfs.ext4 /dev/root_part<br>mkfs.vfat /efi_system_part<br>mkswap /dev/swap_part<br></code></pre></td></tr></table></figure>
 
 <h3 id="7-挂载"><a href="#7-挂载" class="headerlink" title="7.挂载"></a>7.挂载</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">mount /dev/root_part /mnt<br>mount --<span class="hljs-built_in">mkdir</span> /dev/efi_system_part /mnt/boot<br>swapon /dev/swap_part<br></code></pre></td></tr></table></figure>
@@ -316,7 +316,7 @@
 
 <h3 id="11-图形化安装"><a href="#11-图形化安装" class="headerlink" title="11.图形化安装"></a>11.图形化安装</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs bash">pacman -Syyu<br>useradd -m -G wheel -s /bin/bash username<br>passwd username<br>EDITOR=vim visudo<br><span class="hljs-comment"># wheel ALL=(ALL)ALL ---&gt; wheel ALL=(ALL)ALL</span><br><br>pacman -S plasma-meta konsole dolphin<br>systemctl <span class="hljs-built_in">enable</span> sddm<br><br><span class="hljs-comment"># vim /etc/pacman.conf</span><br>[archlinuxcn]<br>SigLevel = Optional TrustAll<br>Server = https://mirrors.ustc.edu.cn/archlinuxcn/<span class="hljs-variable">$arch</span><br>pacman -Syyu<br></code></pre></td></tr></table></figure>
 
-<h3 id="12-基础功能包"><a href="#12-基础功能包" class="headerlink" title="12.基础功能包"></a>12.基础功能包</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo pacman -S ntfs-3g wqy-zenhei noto-fonts noto-fonts-cjk noto-fonts.emoji firefox yay<br><br><span class="hljs-comment"># fcitx5中文输入法</span><br>sudo pacman -S fcitx5-im fcitx5-chinese-addons fcitx5-pinyin-moegirl fcitx5-pinyin-zhwiki<br>yay -S fcitx5-material-color<br>vim /etc/environment<br>GTK_IM_MODULE=fcitx<br>XMODIFIERS=@im=fcitx<br>QT_IM_MODULE=fcitx<br></code></pre></td></tr></table></figure>
+<h3 id="12-基础功能包"><a href="#12-基础功能包" class="headerlink" title="12.基础功能包"></a>12.基础功能包</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo pacman -S ntfs-3g wqy-zenhei noto-fonts noto-fonts-cjk noto-fonts.emoji firefox yay<br><br><span class="hljs-comment"># fcitx5 中文输入法</span><br>sudo pacman -S fcitx5-im fcitx5-chinese-addons fcitx5-pinyin-moegirl fcitx5-pinyin-zhwiki<br>yay -S fcitx5-material-color<br>vim /etc/environment<br>GTK_IM_MODULE=fcitx<br>XMODIFIERS=@im=fcitx<br>QT_IM_MODULE=fcitx<br></code></pre></td></tr></table></figure>
 
 
                 

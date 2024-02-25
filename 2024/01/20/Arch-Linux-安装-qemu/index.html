@@ -16,15 +16,15 @@
   <meta name="author" content="Haotian Li">
   <meta name="keywords" content="">
   
-    <meta name="description" content="1.前置条件KVM需要主机支持虚拟化，通过下列命令查看是否支持(虚拟化支持可在BIOS中开启) 1❯ LC_ALL&#x3D;C lscpu | grep Virtualization  2.安装1❯ pacman -S qemu libvirt ovmf virt-manager virt-viewer dnsmasq vde2 bridge-utils openbsd-netcat ebtables i">
+    <meta name="description" content="1.前置条件KVM 需要主机支持虚拟化，通过下列命令查看是否支持(虚拟化支持可在 BIOS 中开启) 1❯ LC_ALL&#x3D;C lscpu | grep Virtualization  2.安装1❯ pacman -S qemu libvirt ovmf virt-manager virt-viewer dnsmasq vde2 bridge-utils openbsd-netcat ebtable">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Arch Linux 安装 qemu">
 <meta property="og:url" content="https://lilinzta.github.io/2024/01/20/Arch-Linux-%E5%AE%89%E8%A3%85-qemu/index.html">
 <meta property="og:site_name" content="Lilinzta&#39;s blog">
-<meta property="og:description" content="1.前置条件KVM需要主机支持虚拟化，通过下列命令查看是否支持(虚拟化支持可在BIOS中开启) 1❯ LC_ALL&#x3D;C lscpu | grep Virtualization  2.安装1❯ pacman -S qemu libvirt ovmf virt-manager virt-viewer dnsmasq vde2 bridge-utils openbsd-netcat ebtables i">
+<meta property="og:description" content="1.前置条件KVM 需要主机支持虚拟化，通过下列命令查看是否支持(虚拟化支持可在 BIOS 中开启) 1❯ LC_ALL&#x3D;C lscpu | grep Virtualization  2.安装1❯ pacman -S qemu libvirt ovmf virt-manager virt-viewer dnsmasq vde2 bridge-utils openbsd-netcat ebtable">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-01-20T11:28:25.000Z">
-<meta property="article:modified_time" content="2024-01-25T14:02:18.613Z">
+<meta property="article:modified_time" content="2024-02-25T08:45:57.257Z">
 <meta property="article:author" content="Haotian Li">
 <meta property="article:tag" content="Arch Linux">
 <meta name="twitter:card" content="summary_large_image">
@@ -286,14 +286,14 @@
             
               <div class="markdown-body">
                 
-                <h3 id="1-前置条件"><a href="#1-前置条件" class="headerlink" title="1.前置条件"></a>1.前置条件</h3><p>KVM需要主机支持虚拟化，通过下列命令查看是否支持(虚拟化支持可在BIOS中开启)</p>
+                <h3 id="1-前置条件"><a href="#1-前置条件" class="headerlink" title="1.前置条件"></a>1.前置条件</h3><p>KVM 需要主机支持虚拟化，通过下列命令查看是否支持(虚拟化支持可在 BIOS 中开启)</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">❯ LC_ALL=C lscpu | grep Virtualization<br></code></pre></td></tr></table></figure>
 
 <h3 id="2-安装"><a href="#2-安装" class="headerlink" title="2.安装"></a>2.安装</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">❯ pacman -S qemu libvirt ovmf virt-manager virt-viewer dnsmasq vde2 bridge-utils openbsd-netcat ebtables iptables libguestfs<br></code></pre></td></tr></table></figure>
 
-<h3 id="3-启动KVM-libvirt服务"><a href="#3-启动KVM-libvirt服务" class="headerlink" title="3.启动KVM libvirt服务"></a>3.启动KVM libvirt服务</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">❯ sudo systemctl <span class="hljs-built_in">enable</span> --now libvirtd.service<br></code></pre></td></tr></table></figure>
+<h3 id="3-启动-KVM-libvirt-服务"><a href="#3-启动-KVM-libvirt-服务" class="headerlink" title="3.启动 KVM libvirt 服务"></a>3.启动 KVM libvirt 服务</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">❯ sudo systemctl <span class="hljs-built_in">enable</span> --now libvirtd.service<br></code></pre></td></tr></table></figure>
 
-<h3 id="4-普通用户使用KVM"><a href="#4-普通用户使用KVM" class="headerlink" title="4.普通用户使用KVM"></a>4.普通用户使用KVM</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs bash">❯ sudo vim /etc/libvirt/libvirtd.conf<br><br>85 unix_sock_group = <span class="hljs-string">&quot;libvirt&quot;</span><br>108 unix_sock_rw_perms = <span class="hljs-string">&quot;0770&quot;</span><br><br>❯ sudo usermod -aG libvirt $(<span class="hljs-built_in">whoami</span>)<br>❯ sudo systemctl restart libvirtd.service<br></code></pre></td></tr></table></figure>
+<h3 id="4-普通用户使用-KVM"><a href="#4-普通用户使用-KVM" class="headerlink" title="4.普通用户使用 KVM"></a>4.普通用户使用 KVM</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs bash">❯ sudo vim /etc/libvirt/libvirtd.conf<br><br>85 unix_sock_group = <span class="hljs-string">&quot;libvirt&quot;</span><br>108 unix_sock_rw_perms = <span class="hljs-string">&quot;0770&quot;</span><br><br>❯ sudo usermod -aG libvirt $(<span class="hljs-built_in">whoami</span>)<br>❯ sudo systemctl restart libvirtd.service<br></code></pre></td></tr></table></figure>
 
 <h3 id="5-嵌套虚拟化"><a href="#5-嵌套虚拟化" class="headerlink" title="5.嵌套虚拟化"></a>5.嵌套虚拟化</h3><p>不讨论</p>
 
@@ -364,6 +364,12 @@
                 <div class="post-prevnext my-3">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2024/02/25/%E5%86%85%E6%A0%B8%E6%97%A0%E6%B3%95%E5%8A%A0%E8%BD%BD-%E6%B2%A1%E6%9C%89%E8%BF%99%E4%B8%AA%E6%96%87%E4%BB%B6/" title="内核无法加载,没有这个文件">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">内核无法加载,没有这个文件</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">
