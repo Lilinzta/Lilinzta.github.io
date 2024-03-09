@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>在本地启动并运行大型语言模型</title>
+    <link href="/2024/03/09/%E5%9C%A8%E6%9C%AC%E5%9C%B0%E5%90%AF%E5%8A%A8%E5%B9%B6%E8%BF%90%E8%A1%8C%E5%A4%A7%E5%9E%8B%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B/"/>
+    <url>/2024/03/09/%E5%9C%A8%E6%9C%AC%E5%9C%B0%E5%90%AF%E5%8A%A8%E5%B9%B6%E8%BF%90%E8%A1%8C%E5%A4%A7%E5%9E%8B%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B/</url>
+    
+    <content type="html"><![CDATA[<h2 id="ollama"><a href="#ollama" class="headerlink" title="ollama"></a><a href="https://ollama.com/">ollama</a></h2><p>Run Llama 2, Code Llama, and other models. Customize and create your own.<br>运行 Llama 2、Code Llama 和其他模型。自定义并创建您自己的。</p><h2 id="installation"><a href="#installation" class="headerlink" title="installation"></a>installation</h2><p><a href="https://ollama.com/download/Ollama-darwin.zip">macOS</a><br><a href="https://ollama.com/download/OllamaSetup.exe">Windows preview</a><br>Linux:</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">curl -fsSL https://ollama.com/install.sh | sh<br></code></pre></td></tr></table></figure><p>Arch Linux:</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sh">sudo pacman -S ollama<br><span class="hljs-comment"># or</span><br>sudo pacman -S ollama-cuda<br></code></pre></td></tr></table></figure><h2 id="Docker-and-cpu-only"><a href="#Docker-and-cpu-only" class="headerlink" title="Docker and cpu only"></a>Docker and cpu only</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs sh"><span class="hljs-comment"># CPU only</span><br>docker run -d -v ollama:/root/.ollama -p 11434:11434 --name ollama ollama/ollama<br><br><span class="hljs-comment"># Run model locally</span><br>docker <span class="hljs-built_in">exec</span> -it ollama ollama run llama2<br><br></code></pre></td></tr></table></figure><h2 id="preview"><a href="#preview" class="headerlink" title="preview"></a>preview</h2><p>本人核显，视频是在朋友的电脑上运行的。</p><video id="video" width="100%" height="100%" controls="" preload="none" poster="/res/post/ollama/eos_ollama.png">      <source id="show" src="/res/post/ollama/eos_ollama.mp4" type="video/mp4"></videos>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>Share</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>内核无法加载,没有这个文件</title>
     <link href="/2024/02/25/%E5%86%85%E6%A0%B8%E6%97%A0%E6%B3%95%E5%8A%A0%E8%BD%BD-%E6%B2%A1%E6%9C%89%E8%BF%99%E4%B8%AA%E6%96%87%E4%BB%B6/"/>
     <url>/2024/02/25/%E5%86%85%E6%A0%B8%E6%97%A0%E6%B3%95%E5%8A%A0%E8%BD%BD-%E6%B2%A1%E6%9C%89%E8%BF%99%E4%B8%AA%E6%96%87%E4%BB%B6/</url>
