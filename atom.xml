@@ -6,7 +6,7 @@
   <link href="https://lilinzta.github.io/atom.xml" rel="self"/>
   
   <link href="https://lilinzta.github.io/"/>
-  <updated>2024-03-27T11:12:47.700Z</updated>
+  <updated>2024-04-13T02:36:27.073Z</updated>
   <id>https://lilinzta.github.io/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>ansible 快速开始</title>
+    <link href="https://lilinzta.github.io/2024/04/13/ansible-%E5%BF%AB%E9%80%9F%E5%BC%80%E5%A7%8B/"/>
+    <id>https://lilinzta.github.io/2024/04/13/ansible-%E5%BF%AB%E9%80%9F%E5%BC%80%E5%A7%8B/</id>
+    <published>2024-04-13T01:52:47.000Z</published>
+    <updated>2024-04-13T02:36:27.073Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="1-前置条件"><a href="#1-前置条件" class="headerlink" title="1.前置条件"></a>1.前置条件</h2><p>准备至少三台虚拟机，我的环境如下：</p><table><thead><tr><th align="center">OS</th><th align="center">IP</th><th align="center">hostname</th></tr></thead><tbody><tr><td align="center">Fedora Linux 39 (Server Edition)</td><td align="center">10.1.1.130</td><td align="center">fd-master</td></tr><tr><td align="center">Fedora Linux 39 (Server Edition)</td><td align="center">10.1.1.131</td><td align="center">fd-node1</td></tr><tr><td align="center">Fedora Linux 39 (Server Edition)</td><td align="center">10.1.1.132</td><td align="center">fd-node2</td></tr></tbody></table><h2 id="2-基本配置"><a href="#2-基本配置" class="headerlink" title="2.基本配置"></a>2.基本配置</h2><p><code>fd-master</code>安装ansible，并配置<code>fd-node1</code>和<code>fd-node2</code>的ssh免密登录。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">[root@fd-master:~]<span class="hljs-comment"># dnf install -y ansible</span><br>[root@fd-master:~]<span class="hljs-comment"># ssh-copy-id -i /root/.ssh/id_ed25519.pub root@10.1.1.131</span><br>[root@fd-master:~]<span class="hljs-comment"># ssh-copy-id -i /root/.ssh/id_ed25519.pub root@10.1.1.132</span><br></code></pre></td></tr></table></figure><p>编辑<code>fd-master</code>的<code>hosts</code>文件，添加<code>fd-node1</code>和<code>fd-node2</code>的IP地址。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">[root@fd-master:~]<span class="hljs-comment"># vim /etc/hosts</span><br>10.1.1.130 ansible<br>10.1.1.131 node1<br>10.1.1.132 node2<br></code></pre></td></tr></table></figure><h2 id="3-ansible-相关配置"><a href="#3-ansible-相关配置" class="headerlink" title="3.ansible 相关配置"></a>3.ansible 相关配置</h2><p>把<code>fd-node1</code>和<code>fd-node2</code>两个主机添加进<code>fd-master</code>的主机列表里，两主机同属ws组。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">[root@fd-master:~]<span class="hljs-comment"># vim /etc/ansible/hosts</span><br>[ws]<br>node[1:2]<br></code></pre></td></tr></table></figure><h2 id="4-测试连接"><a href="#4-测试连接" class="headerlink" title="4.测试连接"></a>4.测试连接</h2><img src=/res/post/ansible/node1_ping.jpg width=100%><img src=/res/post/ansible/ws_ping.jpg width=100%>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;1-前置条件&quot;&gt;&lt;a href=&quot;#1-前置条件&quot; class=&quot;headerlink&quot; title=&quot;1.前置条件&quot;&gt;&lt;/a&gt;1.前置条件&lt;/h2&gt;&lt;p&gt;准备至少三台虚拟机，我的环境如下：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align=&quot;</summary>
+      
+    
+    
+    
+    <category term="GNU/Linux" scheme="https://lilinzta.github.io/categories/GNU-Linux/"/>
+    
+    
+    <category term="ansible" scheme="https://lilinzta.github.io/tags/ansible/"/>
+    
+  </entry>
   
   <entry>
     <title>Spotify on Arch Linux</title>
