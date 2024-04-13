@@ -16,15 +16,15 @@
   <meta name="author" content="Haotian Li">
   <meta name="keywords" content="">
   
-    <meta name="description" content="0.效果展示  1.安装所有需要的软件包1yay -S spotify spotx-git spicetify-cli  2.自定义主题 注意: 先执行spotx，再更改主题。  123456789101112131415161718# 拉取官方的主题仓库(当然你也可以自己找其它的)git clone --depth&#x3D;1 https:&#x2F;&#x2F;github.com&#x2F;spicetify&#x2F;spicetify">
+    <meta name="description" content="0.效果展示  1.安装所有需要的软件包1yay -S spotify spotx-git spicetify-cli  2.自定义主题 注意: 先执行 spotx，再更改主题。  123456789101112131415161718# 拉取官方的主题仓库(当然你也可以自己找其它的)git clone --depth&#x3D;1 https:&#x2F;&#x2F;github.com&#x2F;spicetify&#x2F;spicetif">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Spotify on Arch Linux">
 <meta property="og:url" content="https://lilinzta.github.io/2024/03/12/Spotify-on-Arch-Linux/index.html">
 <meta property="og:site_name" content="Lilinzta&#39;s blog">
-<meta property="og:description" content="0.效果展示  1.安装所有需要的软件包1yay -S spotify spotx-git spicetify-cli  2.自定义主题 注意: 先执行spotx，再更改主题。  123456789101112131415161718# 拉取官方的主题仓库(当然你也可以自己找其它的)git clone --depth&#x3D;1 https:&#x2F;&#x2F;github.com&#x2F;spicetify&#x2F;spicetify">
+<meta property="og:description" content="0.效果展示  1.安装所有需要的软件包1yay -S spotify spotx-git spicetify-cli  2.自定义主题 注意: 先执行 spotx，再更改主题。  123456789101112131415161718# 拉取官方的主题仓库(当然你也可以自己找其它的)git clone --depth&#x3D;1 https:&#x2F;&#x2F;github.com&#x2F;spicetify&#x2F;spicetif">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-03-12T11:29:09.000Z">
-<meta property="article:modified_time" content="2024-03-27T11:12:47.700Z">
+<meta property="article:modified_time" content="2024-04-13T03:01:24.809Z">
 <meta property="article:author" content="Haotian Li">
 <meta property="article:tag" content="Spotify">
 <meta name="twitter:card" content="summary_large_image">
@@ -291,7 +291,7 @@
 <h2 id="1-安装所有需要的软件包"><a href="#1-安装所有需要的软件包" class="headerlink" title="1.安装所有需要的软件包"></a>1.安装所有需要的软件包</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">yay -S spotify spotx-git spicetify-cli<br></code></pre></td></tr></table></figure>
 
 <h2 id="2-自定义主题"><a href="#2-自定义主题" class="headerlink" title="2.自定义主题"></a>2.自定义主题</h2><blockquote>
-<p>注意: 先执行<code>spotx</code>，再更改主题。</p>
+<p>注意: 先执行 <code>spotx</code>，再更改主题。</p>
 </blockquote>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs sh"><span class="hljs-comment"># 拉取官方的主题仓库(当然你也可以自己找其它的)</span><br>git <span class="hljs-built_in">clone</span> --depth=1 https://github.com/spicetify/spicetify-themes.git<br><br><span class="hljs-comment"># 复制所有主题到spicetify指定的位置</span><br><span class="hljs-built_in">cd</span> spicetify-themes<br><span class="hljs-built_in">cp</span> -r * <span class="hljs-variable">$HOME</span>/.config/spicetify/Themes<br><br><span class="hljs-comment"># 执行spicetify生成配置文件</span><br><br><span class="hljs-comment"># 配置主题和配色(也可以直接修改配置文件~/.config/spicetify/config-xpui.ini)</span><br>spicetify config current_theme THEME_NAME<br>spicetify config color_scheme SCHEME_NAME<br><br><span class="hljs-comment"># 或许你还需要配置这个选项</span><br>prefs_path             = <span class="hljs-variable">$HOME</span>/.config/spotify/prefs<br><br><span class="hljs-comment"># 应用配置</span><br>spicetify apply<br></code></pre></td></tr></table></figure>
 

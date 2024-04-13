@@ -24,7 +24,7 @@
 <meta property="og:description" content="1.前置条件准备至少三台虚拟机，我的环境如下：    OS IP hostname    Fedora Linux 39 (Server Edition) 10.1.1.130 fd-master   Fedora Linux 39 (Server Edition) 10.1.1.131 fd-node1   Fedora Linux 39 (Server Edition) 10.1.1.132">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-04-13T01:52:47.000Z">
-<meta property="article:modified_time" content="2024-04-13T02:36:27.073Z">
+<meta property="article:modified_time" content="2024-04-13T02:58:35.907Z">
 <meta property="article:author" content="Haotian Li">
 <meta property="article:tag" content="ansible">
 <meta name="twitter:card" content="summary_large_image">
@@ -233,7 +233,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          173 字
+          382 字
         
       </span>
     
@@ -244,7 +244,7 @@
         
         
         
-          2 分钟
+          4 分钟
         
       </span>
     
@@ -311,17 +311,19 @@
 <td align="center">fd-node2</td>
 </tr>
 </tbody></table>
-<h2 id="2-基本配置"><a href="#2-基本配置" class="headerlink" title="2.基本配置"></a>2.基本配置</h2><p><code>fd-master</code>安装ansible，并配置<code>fd-node1</code>和<code>fd-node2</code>的ssh免密登录。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">[root@fd-master:~]<span class="hljs-comment"># dnf install -y ansible</span><br>[root@fd-master:~]<span class="hljs-comment"># ssh-copy-id -i /root/.ssh/id_ed25519.pub root@10.1.1.131</span><br>[root@fd-master:~]<span class="hljs-comment"># ssh-copy-id -i /root/.ssh/id_ed25519.pub root@10.1.1.132</span><br></code></pre></td></tr></table></figure>
+<h2 id="2-基本配置"><a href="#2-基本配置" class="headerlink" title="2.基本配置"></a>2.基本配置</h2><p><code>fd-master</code> 安装ansible，并配置 <code>fd-node1</code> 和 <code>fd-node2</code> 的ssh免密登录。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">[root@fd-master:~]<span class="hljs-comment"># dnf install -y ansible</span><br>[root@fd-master:~]<span class="hljs-comment"># ssh-keygen -t ed25519 -C &quot;example@mail.com&quot;</span><br>[root@fd-master:~]<span class="hljs-comment"># ssh-copy-id -i /root/.ssh/id_ed25519.pub root@10.1.1.131</span><br>[root@fd-master:~]<span class="hljs-comment"># ssh-copy-id -i /root/.ssh/id_ed25519.pub root@10.1.1.132</span><br></code></pre></td></tr></table></figure>
 
-<p>编辑<code>fd-master</code>的<code>hosts</code>文件，添加<code>fd-node1</code>和<code>fd-node2</code>的IP地址。</p>
+<p>编辑 <code>fd-master</code> 的 <code>hosts</code> 文件，添加 <code>fd-node1</code> 和 <code>fd-node2</code> 的IP地址。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">[root@fd-master:~]<span class="hljs-comment"># vim /etc/hosts</span><br>10.1.1.130 ansible<br>10.1.1.131 node1<br>10.1.1.132 node2<br></code></pre></td></tr></table></figure>
 
-<h2 id="3-ansible-相关配置"><a href="#3-ansible-相关配置" class="headerlink" title="3.ansible 相关配置"></a>3.ansible 相关配置</h2><p>把<code>fd-node1</code>和<code>fd-node2</code>两个主机添加进<code>fd-master</code>的主机列表里，两主机同属ws组。</p>
+<h2 id="3-ansible-相关配置"><a href="#3-ansible-相关配置" class="headerlink" title="3.ansible 相关配置"></a>3.ansible 相关配置</h2><p>把 <code>fd-node1</code> 和 <code>fd-node2</code> 两个主机添加进 <code>fd-master</code> 的主机列表里，两主机同属ws组。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">[root@fd-master:~]<span class="hljs-comment"># vim /etc/ansible/hosts</span><br>[ws]<br>node[1:2]<br></code></pre></td></tr></table></figure>
 
-<h2 id="4-测试连接"><a href="#4-测试连接" class="headerlink" title="4.测试连接"></a>4.测试连接</h2><img src=/res/post/ansible/node1_ping.jpg width=100%>
-<img src=/res/post/ansible/ws_ping.jpg width=100%>
+<h2 id="4-测试连接"><a href="#4-测试连接" class="headerlink" title="4.测试连接"></a>4.测试连接</h2><p>测试 <code>fd-node1</code> 连通性<br><img src=/res/post/ansible/node1_ping.jpg width=100%></p>
+<p>测试 <code>ws</code> 组连通性<br><img src=/res/post/ansible/ws_ping.jpg width=100%></p>
+<h2 id="5-示例用法"><a href="#5-示例用法" class="headerlink" title="5.示例用法"></a>5.示例用法</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 从 fd-master 拷贝文件到 ws 组中的所有机器，并设置权限，开启备份(即不覆盖原文件)</span><br>[root@fd-master:~]<span class="hljs-comment"># ansible ws -m copy -a &#x27;src=/path/to/source dest=/path/to/destination owner=root group=bin mode=777 backup=yes&#x27;</span><br><br><span class="hljs-comment"># ws 组中的所有机器创建用户(lilin)</span><br>[root@fd-master:~]<span class="hljs-comment"># ansible ws -m user -a &#x27;name=lilin state=present&#x27;</span><br><br><span class="hljs-comment"># ws 组中的所有机器为用户(lilin)设置密码</span><br>[root@fd-master:~]<span class="hljs-comment"># echo &quot;password&quot; | openssl passwd -1 -stdin</span><br>$1$nvX4skcy<span class="hljs-variable">$EoJIwBB6WOf9keRecRJtq</span>.<br>[root@fd-master:~]<span class="hljs-comment"># ansible ws -m user -a &#x27;name=lilin password=&quot;$1$nvX4skcy$EoJIwBB6WOf9keRecRJtq.&quot;&#x27;</span><br><br><span class="hljs-comment"># ws 组中的所有机器为用户(lilin)设置登录shell(nologin意为禁止登录)</span><br>[root@fd-master:~]<span class="hljs-comment"># ansible ws -m user -a &#x27;name=lilin shell=/sbin/nologin append=yes&#x27;</span><br><br><span class="hljs-comment"># ws 组中的所有机器删除用户(lilin)</span><br>[root@fd-master:~]<span class="hljs-comment"># ansible ws -m user -a &#x27;name=lilin state=absent&#x27;</span><br></code></pre></td></tr></table></figure>
+
                 
               </div>
             
