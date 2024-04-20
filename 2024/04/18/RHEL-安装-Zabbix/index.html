@@ -24,7 +24,7 @@
 <meta property="og:description" content="RHEL 安装 Zabbix(以 Fedora Linux 39 Server Edition 为例)">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-04-18T02:06:15.000Z">
-<meta property="article:modified_time" content="2024-04-18T02:56:27.393Z">
+<meta property="article:modified_time" content="2024-04-20T08:35:48.511Z">
 <meta property="article:author" content="Haotian Li">
 <meta property="article:tag" content="Zabbix">
 <meta name="twitter:card" content="summary_large_image">
@@ -233,7 +233,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          309 字
+          314 字
         
       </span>
     
@@ -315,7 +315,7 @@
 <h2 id="3-Install-Zabbix-server-frontend-agent"><a href="#3-Install-Zabbix-server-frontend-agent" class="headerlink" title="3.Install Zabbix server, frontend, agent"></a>3.Install Zabbix server, frontend, agent</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">[root@fedora:~]<span class="hljs-comment"># dnf install zabbix-server-mysql zabbix-web-mysql zabbix-nginx-conf zabbix-sql-scripts zabbix-selinux-policy zabbix-agent</span><br></code></pre></td></tr></table></figure>
 
 <h2 id="4-Create-initial-database"><a href="#4-Create-initial-database" class="headerlink" title="4.Create initial database"></a>4.Create initial database</h2><p>请确保已启动并运行数据库服务器。<br>在数据库主机上运行以下命令。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs bash">[root@fedora:~]<span class="hljs-comment"># mysql -uroot -p</span><br>password<br>mysql&gt; create database zabbix character <span class="hljs-built_in">set</span> utf8mb4 collate utf8mb4_bin;<br>mysql&gt; create user zabbix@localhost identified by <span class="hljs-string">&#x27;your_password&#x27;</span>;<br>mysql&gt; grant all privileges on zabbix.* to zabbix@localhost;<br>mysql&gt; <span class="hljs-built_in">set</span> global log_bin_trust_function_creators = 1;<br>mysql&gt; quit;<br></code></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs bash">[root@fedora:~]<span class="hljs-comment"># mysql -uroot -p</span><br>password<br>mysql&gt; create database zabbix character <span class="hljs-built_in">set</span> utf8mb4 collate utf8mb4_bin;<br>mysql&gt; create user zabbix@localhost identified by <span class="hljs-string">&#x27;&lt;your_password&gt;&#x27;</span>;<br>mysql&gt; grant all privileges on zabbix.* to zabbix@localhost;<br>mysql&gt; <span class="hljs-built_in">set</span> global log_bin_trust_function_creators = 1;<br>mysql&gt; quit;<br></code></pre></td></tr></table></figure>
 
 <p>在 Zabbix Server 主机上，导入初始模式和数据。系统将提示您输入新创建的密码。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">[root@fedora:~]<span class="hljs-comment"># zcat /usr/share/zabbix-sql-scripts/mysql/server.sql.gz | mysql --default-character-set=utf8mb4 -uzabbix -p zabbix</span><br></code></pre></td></tr></table></figure>
@@ -324,7 +324,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">[root@fedora:~]<span class="hljs-comment"># mysql -uroot -p</span><br>password<br>mysql&gt; <span class="hljs-built_in">set</span> global log_bin_trust_function_creators = 0;<br>mysql&gt; quit;<br></code></pre></td></tr></table></figure>
 
 <h2 id="5-Configure-the-database-for-Zabbix-server"><a href="#5-Configure-the-database-for-Zabbix-server" class="headerlink" title="5.Configure the database for Zabbix server"></a>5.Configure the database for Zabbix server</h2><p>编辑文件 &#x2F;etc&#x2F;zabbix_server.conf</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">DBPassword=your_password<br></code></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">DBPassword=&lt;your_password&gt;<br></code></pre></td></tr></table></figure>
 
 <h2 id="6-Configure-PHP-for-Zabbix-frontend"><a href="#6-Configure-PHP-for-Zabbix-frontend" class="headerlink" title="6.Configure PHP for Zabbix frontend"></a>6.Configure PHP for Zabbix frontend</h2><p>编辑文件 &#x2F;etc&#x2F;nginx&#x2F;conf.d&#x2F;zabbix.conf 取消注释并设置 ‘listen’ 和 ‘server_name’。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># listen 8080;</span><br><span class="hljs-comment"># server_name example.com;</span><br></code></pre></td></tr></table></figure>
