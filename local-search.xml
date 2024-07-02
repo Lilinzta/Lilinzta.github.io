@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>auto_giwifi_python</title>
+    <link href="/2024/07/02/auto-giwifi-python/"/>
+    <url>/2024/07/02/auto-giwifi-python/</url>
+    
+    <content type="html"><![CDATA[<p>算是本人的第一个有点儿实际意义的项目，尽管代码大部分是GPT-4o生成的😅</p><span id="more"></span><p>早在大一的时候，就想白嫖 giwifi 了，奈何资源和技术都有限，所以也仅仅是有过这个想法而已。</p><p>直到今年6月末，买的 giwifi 到期了，到网页端认证的时候才发现，一直请求就可以无限试用，尽管每次只有10分钟。</p><p>其实很早就在网上看到过这个方法，当时那个信息就很老了。我以为 giwifi 应该早就修复了这个东西，采用一种更高明的手段，没想到……</p><p>互联网上找得到的资料(指关于如何白嫖 giwifi 的资料)，基本都比较老了。新一些的方法都是用的软路由，还是有一定的成本的。</p><p>直到我在 github 上无意间看到了 <a href="https://github.com/GiraffeLe/Auto-Giwifi">GiraffeLe&#x2F;Auto-Giwifi</a> 这个仓库，虽然最后没有直接用到，但是提供了很好的思路，让我理清了整个认证登陆的过程。</p><p>最终我用 python 实现了类似的功能(加了个循环请求的功能，就能一直白嫖辣🥰)，仓库地址在这里 <a href="https://github.com/Lilinzta/auto_giwifi_python">auto_giwifi_python</a>。遗憾的一点是我的实现并不是很好，因为有点重了，使用到了 selenium 这个库，浏览器无头模式什么的(GPT-4o纯 requests 实现碰壁了，以后可能会再试一试)。</p><p>总之，如果没有非常实时的网络需求的话，这个东西还是可以一用的。</p><p>如果对你有用的话，不妨给个 🌟 (图穷匕见了，haha)</p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>giwifi</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>在没有按住 Shift 键时隐藏 GRUB 界面</title>
     <link href="/2024/05/09/%E5%9C%A8%E6%B2%A1%E6%9C%89%E6%8C%89%E4%BD%8F-Shift-%E9%94%AE%E6%97%B6%E9%9A%90%E8%97%8F-GRUB-%E7%95%8C%E9%9D%A2/"/>
     <url>/2024/05/09/%E5%9C%A8%E6%B2%A1%E6%9C%89%E6%8C%89%E4%BD%8F-Shift-%E9%94%AE%E6%97%B6%E9%9A%90%E8%97%8F-GRUB-%E7%95%8C%E9%9D%A2/</url>
