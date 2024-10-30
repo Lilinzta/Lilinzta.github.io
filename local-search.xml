@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>rclone</title>
+    <link href="/2024/10/30/rclone/"/>
+    <url>/2024/10/30/rclone/</url>
+    
+    <content type="html"><![CDATA[<p>官方介绍：Rclone (“rsync for cloud storage”) is a command-line program to sync files and directories to and from different cloud storage providers.</p><span id="more"></span><p>最近接触到很多在 pikpak 上的资源(具体什么资源就不说了)，奈何 pikpak 并没有官方 GNU&#x2F;Linux 的客户端，浏览器也不提供下载。开始在 github 上寻找解决方案，于是就有了这篇博客。</p><h2 id="1-介绍"><a href="#1-介绍" class="headerlink" title="1. 介绍"></a>1. 介绍</h2><p><a href="https://github.com/rclone/rclone">Rclone</a> 是一个命令行工具，用于在云存储上同步文件和文件夹。它可以将本地文件夹或文件同步到云存储中，或将云存储中的文件夹或文件同步到本地(插一句话，前面这句话是 <a href="https://codeium.com/">Codeium</a> 提示的，我只按了 Tab 键。不止代码，文本也能提示，确实好用)。</p><h2 id="2-安装"><a href="#2-安装" class="headerlink" title="2. 安装"></a>2. 安装</h2><h3 id="2-1-Arch-Linux"><a href="#2-1-Arch-Linux" class="headerlink" title="2.1. Arch Linux"></a>2.1. Arch Linux</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo pacman -S rclone<br></code></pre></td></tr></table></figure><p>另外有个 <a href="https://github.com/kapitainsky/RcloneBrowser">rclone-browser</a> 的 GUI 应用，不过很久没更新了</p><h3 id="2-2-Windows"><a href="#2-2-Windows" class="headerlink" title="2.2 Windows"></a>2.2 Windows</h3><p><a href="https://github.com/rclone/rclone/releases/latest">release</a> 提供了 Windows 对应的版本</p><h2 id="3-使用"><a href="#3-使用" class="headerlink" title="3. 使用"></a>3. 使用</h2><p><code>rclone --help</code> 这种程度的大家都会，就不说了。</p><p>执行 <code>rclone config</code> 创建 remote 配置，就可以使用了。</p><p>执行 <code>rclone about [remote]</code> 查看云存储使用情况。</p><p>我添加了 dropbox：、gdrive：、mdrive：、mega：、pikpak: 这几个 remote 配置，可以用 <code>rclone listremotes</code> 查看。</p><p>登陆方式大致有两种，1. 提供用户名和密码，2. 跳转到浏览器登陆，应用会自动获取 token，然后填充到配置文件中。</p><p>更详细的说明请移步官方文档：<a href="https://rclone.org/">https://rclone.org</a></p><h2 id="4-效果"><a href="#4-效果" class="headerlink" title="4.效果"></a>4.效果</h2><p>上传文件<br><img src=/res/post/rclone/copy.jpg width=100% /></p><p>查看结果<br><img src=/res/post/rclone/pikpak.png width=100% /></p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>rclone</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>auto_giwifi_python</title>
     <link href="/2024/07/02/auto-giwifi-python/"/>
     <url>/2024/07/02/auto-giwifi-python/</url>

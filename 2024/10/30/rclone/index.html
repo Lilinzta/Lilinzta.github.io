@@ -16,21 +16,22 @@
   <meta name="author" content="Haotian Li">
   <meta name="keywords" content="">
   
-    <meta name="description" content="(2024)MBTI 16型人格测试：INFJ-T 记录一些使用 Arch Linux 的日常，以及分享一些有趣的东西。😊">
-<meta property="og:type" content="website">
-<meta property="og:title" content="关于">
-<meta property="og:url" content="https://lilinzta.github.io/about/index.html">
+    <meta name="description" content="官方介绍：Rclone (“rsync for cloud storage”) is a command-line program to sync files and directories to and from different cloud storage providers.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="rclone">
+<meta property="og:url" content="https://lilinzta.github.io/2024/10/30/rclone/index.html">
 <meta property="og:site_name" content="Lilinzta&#39;s blog">
-<meta property="og:description" content="(2024)MBTI 16型人格测试：INFJ-T 记录一些使用 Arch Linux 的日常，以及分享一些有趣的东西。😊">
+<meta property="og:description" content="官方介绍：Rclone (“rsync for cloud storage”) is a command-line program to sync files and directories to and from different cloud storage providers.">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-10-29T07:47:12.395Z">
-<meta property="article:modified_time" content="2024-10-29T07:47:12.395Z">
+<meta property="article:published_time" content="2024-10-30T12:53:10.000Z">
+<meta property="article:modified_time" content="2024-10-30T13:55:10.699Z">
 <meta property="article:author" content="Haotian Li">
+<meta property="article:tag" content="rclone">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>关于 - Lilinzta&#39;s blog</title>
+  <title>rclone - Lilinzta&#39;s blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -91,7 +92,7 @@
   <header>
     
 
-<div class="header-inner" style="height: 60vh;">
+<div class="header-inner" style="height: 70vh;">
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand" href="/">
@@ -203,15 +204,55 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('/res/banner/about.png') no-repeat center center; background-size: cover;">
+     style="background: url('/res/banner/post.png') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="关于"></span>
+            <span id="subtitle" data-typed-text="rclone"></span>
           
         </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-10-30 20:53" pubdate>
+          2024年10月30日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          340 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          3 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
 
         
       </div>
@@ -227,113 +268,178 @@
 
   <main>
     
-      <div class="container nopadding-x-md">
-        <div id="board"
-          >
-          
-            <div class="about-avatar">
-              <img src="/res/about/avatar.jpg" srcset="/img/loading.gif" lazyload class="img-fluid" alt="avatar">
-            </div>
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
-                
+      
 
-<div class="text-center">
-  <div class="about-info">
-    <div class="about-name">Haotian Li</div>
-    <div class="about-intro">Archer、Reader、ACGNer、Hacker(ฅ⁠^⁠•⁠ﻌ⁠•⁠^⁠ฅ)</div>
-    <div class="about-icons">
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
       
-        
-        
-        
-        <a href=https://github.com/Lilinzta class="
-           hint--bottom hint--rounded"
-           aria-label=GitHub
-           target="_blank"
-        >
-          <i class="iconfont icon-github-fill" aria-hidden="true"></i>
-          
-        </a>
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">rclone</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>官方介绍：Rclone (“rsync for cloud storage”) is a command-line program to sync files and directories to and from different cloud storage providers.</p>
+<span id="more"></span>
+
+<p>最近接触到很多在 pikpak 上的资源(具体什么资源就不说了)，奈何 pikpak 并没有官方 GNU&#x2F;Linux 的客户端，浏览器也不提供下载。开始在 github 上寻找解决方案，于是就有了这篇博客。</p>
+<h2 id="1-介绍"><a href="#1-介绍" class="headerlink" title="1. 介绍"></a>1. 介绍</h2><p><a target="_blank" rel="noopener" href="https://github.com/rclone/rclone">Rclone</a> 是一个命令行工具，用于在云存储上同步文件和文件夹。它可以将本地文件夹或文件同步到云存储中，或将云存储中的文件夹或文件同步到本地(插一句话，前面这句话是 <a target="_blank" rel="noopener" href="https://codeium.com/">Codeium</a> 提示的，我只按了 Tab 键。不止代码，文本也能提示，确实好用)。</p>
+<h2 id="2-安装"><a href="#2-安装" class="headerlink" title="2. 安装"></a>2. 安装</h2><h3 id="2-1-Arch-Linux"><a href="#2-1-Arch-Linux" class="headerlink" title="2.1. Arch Linux"></a>2.1. Arch Linux</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo pacman -S rclone<br></code></pre></td></tr></table></figure>
+
+<p>另外有个 <a target="_blank" rel="noopener" href="https://github.com/kapitainsky/RcloneBrowser">rclone-browser</a> 的 GUI 应用，不过很久没更新了</p>
+<h3 id="2-2-Windows"><a href="#2-2-Windows" class="headerlink" title="2.2 Windows"></a>2.2 Windows</h3><p><a target="_blank" rel="noopener" href="https://github.com/rclone/rclone/releases/latest">release</a> 提供了 Windows 对应的版本</p>
+<h2 id="3-使用"><a href="#3-使用" class="headerlink" title="3. 使用"></a>3. 使用</h2><p><code>rclone --help</code> 这种程度的大家都会，就不说了。</p>
+<p>执行 <code>rclone config</code> 创建 remote 配置，就可以使用了。</p>
+<p>执行 <code>rclone about [remote]</code> 查看云存储使用情况。</p>
+<p>我添加了 dropbox：、gdrive：、mdrive：、mega：、pikpak: 这几个 remote 配置，可以用 <code>rclone listremotes</code> 查看。</p>
+<p>登陆方式大致有两种，1. 提供用户名和密码，2. 跳转到浏览器登陆，应用会自动获取 token，然后填充到配置文件中。</p>
+<p>更详细的说明请移步官方文档：<a target="_blank" rel="noopener" href="https://rclone.org/">https://rclone.org</a></p>
+<h2 id="4-效果"><a href="#4-效果" class="headerlink" title="4.效果"></a>4.效果</h2><p>上传文件<br><img src=/res/post/rclone/copy.jpg width=100% /></p>
+<p>查看结果<br><img src=/res/post/rclone/pikpak.png width=100% /></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
       
-        
-        
-        
-        <a  class="qr-trigger
-           "
-           
-           target="_self"
-        >
-          <i class="iconfont icon-wechat-fill" aria-hidden="true"></i>
-          
-            <img class="qr-img" src="/res/about/wechat.jpg" srcset="/img/loading.gif" lazyload alt="qrcode" />
-          
-        </a>
+        <a href="/tags/rclone/" class="print-no-link">#rclone</a>
       
-        
-        
-        
-        <a href=mailto:lilinzta@gmail.com class="
-           hint--bottom hint--rounded"
-           aria-label=Gmail
-           target="_blank"
-        >
-          <i class="iconfont icon-mail" aria-hidden="true"></i>
-          
-        </a>
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>rclone</div>
+      <div>https://lilinzta.github.io/2024/10/30/rclone/</div>
+    </div>
+    <div class="license-meta">
       
-        
-        
-        
-        <a href=https://twitter.com/Lilinzta class="
-           hint--bottom hint--rounded"
-           aria-label=X
-           target="_blank"
-        >
-          <i class="iconfont icon-twitter-fill" aria-hidden="true"></i>
-          
-        </a>
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Haotian Li</div>
+        </div>
       
-        
-        
-        
-        <a href=https://t.me/Lilinzta class="
-           hint--bottom hint--rounded"
-           aria-label=TG
-           target="_blank"
-        >
-          <i class="iconfont icon-telegram-fill" aria-hidden="true"></i>
-          
-        </a>
       
-        
-        
-        
-        <a href=https://lilinzta.github.io/atom.xml class="
-           hint--bottom hint--rounded"
-           aria-label=RSS
-           target="_blank"
-        >
-          <i class="iconfont icon-rss" aria-hidden="true"></i>
-          
-        </a>
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年10月30日</div>
+        </div>
       
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/07/02/auto-giwifi-python/" title="auto_giwifi_python">
+                        <span class="hidden-mobile">auto_giwifi_python</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="gitalk-container"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#gitalk-container', function() {
+      Fluid.utils.createCssLink('/css/gitalk.css')
+      Fluid.utils.createScript('https://lib.baomitu.com/gitalk/1.8.0/gitalk.min.js', function() {
+        var options = Object.assign(
+          {"clientID":"9d74ad43577ce767f34d","clientSecret":"bcb1e82eff718d70dfa74c53fe966ab7765dc3b2","repo":"Lilinzta.github.io","owner":"Lilinzta","admin":["Lilinzta"],"language":"zh-CN","labels":["Gitalk"],"perPage":10,"pagerDirection":"last","distractionFreeMode":false,"createIssueManually":false,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token"},
+          {
+            id: '6d0595353224e03e26350e1546a38809'
+          }
+        )
+        var gitalk = new Gitalk(options);
+        gitalk.render('gitalk-container');
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
     </div>
   </div>
 </div>
 
-<article class="about-content page-content mt-5">
-  <div class="markdown-body">
-    <p>(2024)MBTI 16型人格测试：<a target="_blank" rel="noopener" href="https://www.16personalities.com/ch/%E7%BB%93%E6%9E%9C/infj-t/x/ji2goaq3a">INFJ-T</a></p>
-<p>记录一些使用 Arch Linux 的日常，以及分享一些有趣的东西。😊</p>
-
-  </div>
-
-  
-</article>
-
 
 
 
@@ -360,11 +466,8 @@
 
 
 
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+
+
     
 
     
@@ -457,6 +560,46 @@
   
 
 
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
 
 
   <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
