@@ -24,7 +24,7 @@
 <meta property="og:description" content="目的是在 linux(proton&#x2F;wine) 和 windows 虚拟机之间共享一些东西。例如：游戏存档和，好吧，游戏存档。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-11-07T12:07:56.000Z">
-<meta property="article:modified_time" content="2024-11-07T14:16:53.629Z">
+<meta property="article:modified_time" content="2024-11-07T14:19:31.936Z">
 <meta property="article:author" content="Haotian Li">
 <meta property="article:tag" content="proton">
 <meta name="twitter:card" content="summary_large_image">
@@ -296,7 +296,8 @@
 <p>proton 和 wine 的区别在于(对于我来说)，proton 自带或者说捆绑了一些依赖，对于某些含有 CG 动画、OP 和 ED 的游戏支持更好(实测可以播放千原万神中的视频，即使终端会报 gstreamer 的 WARNING)。另外，据说对于大型游戏，proton 的帧数更高。我装的<a target="_blank" rel="noopener" href="https://aur.archlinux.org/packages?O=0&K=proton-ge-custom-bin">proton-ge-custom-bin</a>这个包。</p>
 <h2 id="2-This-is-also-a-title"><a href="#2-This-is-also-a-title" class="headerlink" title="2.This is also a title"></a>2.This is also a title</h2><p>在实际开始之前，我以为 windows 的快捷方式就对应于 linux 下的软链接。实际上，终端 <code>dir</code> 输出的结果是 *.lnk，这很明显就不对了，问了一下 gpt，windows 创建软链接的格式是这样的 <code>mklink [选项] &lt;链接&gt; &lt;目标&gt;</code>，使用 &#x2F;D 选项创建目录的软链接。</p>
 <p>有意思的部分开始了。我想着虚拟机里也没啥有价值的东西，索性直接把原有的 AppData 删了，直接创建软链接。但是，windows 运行中需要 AppData 文件夹，直接删删不掉，改名呢？又不让改。</p>
-<p>一不做二不休，我进了 PE，备份了 AppData，创建了软链接。重启，结果直接来到了 Temp 用户。<br>事后一想，这个结果也确实很合理，windows 开机的时候就需要 AppData 这个文件夹，而这时候，vmware tools 还没有启动，共享文件夹没生效，软链接指向为空，自然就加载不了用户的 AppData 文件夹，就使用 Temp 用户登录了。</p>
+<p>一不做二不休，我进了 PE，备份了 AppData，创建了软链接。重启，结果直接来到了 Temp 用户。</p>
+<p>事后一想，这个结果也确实很合理，windows 开机的时候就需要 AppData 这个文件夹，而这时候，vmware tools 还没有启动，共享文件夹没生效，软链接指向为空，自然就加载不了用户的 AppData 文件夹，就使用 Temp 用户登录了。</p>
 
                 
               </div>
