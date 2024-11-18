@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>AUR 打包初体验</title>
+    <link href="/2024/11/18/AUR-%E6%89%93%E5%8C%85%E5%88%9D%E4%BD%93%E9%AA%8C/"/>
+    <url>/2024/11/18/AUR-%E6%89%93%E5%8C%85%E5%88%9D%E4%BD%93%E9%AA%8C/</url>
+    
+    <content type="html"><![CDATA[<p>第一次往 AUR 上传 PKGBUILD，并没有什么特别的感觉，因为是二进制包，只做了文件的拷贝。</p><span id="more"></span><h2 id="1-注册-AUR-账户并上传-ssh-公钥"><a href="#1-注册-AUR-账户并上传-ssh-公钥" class="headerlink" title="1. 注册 AUR 账户并上传 ssh 公钥"></a>1. 注册 AUR 账户并上传 ssh 公钥</h2><p>archlinux 的论坛和 AUR 用的不是同一个账号，需要单独注册一个 AUR 账号，然后在个人设置里添加 ssh 公钥，上传 ssh 公钥后，才可以上传 PKGBUILD。</p><p>wiki 推荐单独为 AUR 创建新的 ssh 密钥对，而不是使用现有的 ssh 密钥对。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">ssh-keygen -f ~/.ssh/aur<br></code></pre></td></tr></table></figure><p>然后编辑 ~&#x2F;.ssh&#x2F;config 文件，添加如下内容:</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">Host aur.archlinux.org<br>  IdentityFile ~/.ssh/aur<br>  User aur<br></code></pre></td></tr></table></figure><h2 id="2-创建软件包仓库"><a href="#2-创建软件包仓库" class="headerlink" title="2. 创建软件包仓库"></a>2. 创建软件包仓库</h2><blockquote><p>Tips: &lt;pkgname&gt; 中不应包含大写字母，否则会创建失败。</p></blockquote><p>从零开始创建一个 package</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git -c init.defaultBranch=master <span class="hljs-built_in">clone</span> ssh://aur@aur.archlinux.org/&lt;pkgname&gt;.git<br></code></pre></td></tr></table></figure><p>本地已经有了一个 package</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">git -c init.defaultBranch=master init<br>git remote add &lt;label&gt; ssh://aur@aur.archlinux.org/&lt;pkgname&gt;.git<br></code></pre></td></tr></table></figure><p>使用 <code>git config user.name</code> 和 <code>git config user.email</code> 为 package 设置提交者信息，否则会使用全局的提交者信息</p><h2 id="3-关于-PKGBUILD-的编写"><a href="#3-关于-PKGBUILD-的编写" class="headerlink" title="3. 关于 PKGBUILD 的编写"></a>3. 关于 PKGBUILD 的编写</h2><p>新上传的 package 要在 PKGBUILD 头部加上如下内容</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># Maintainer: Your Name &lt;address at domain dot tld&gt;</span><br></code></pre></td></tr></table></figure><p>如果是从别人那里接手的 package</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># Maintainer: Your name &lt;address at domain dot tld&gt;</span><br><span class="hljs-comment"># Maintainer: Other maintainer&#x27;s name &lt;address at domain dot tld&gt;</span><br><span class="hljs-comment"># Contributor: Previous maintainer&#x27;s name &lt;address at domain dot tld&gt;</span><br><span class="hljs-comment"># Contributor: Original submitter&#x27;s name &lt;address at domain dot tld&gt;</span><br></code></pre></td></tr></table></figure><p>另外，关于 PKGBUILD 的主体内容。感觉大家编写风格各异，可以多参考一下别人的 PKGBUILD，能 work 即可，之后再考虑其它的问题。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>Linux</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>AUR</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>proton(wine) 和 windows 虚拟机共用同一个 AppData</title>
     <link href="/2024/11/07/proton-wine-%E5%92%8C-windows-%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%85%B1%E7%94%A8%E5%90%8C%E4%B8%80%E4%B8%AA-AppData/"/>
     <url>/2024/11/07/proton-wine-%E5%92%8C-windows-%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%85%B1%E7%94%A8%E5%90%8C%E4%B8%80%E4%B8%AA-AppData/</url>
@@ -70,7 +95,7 @@
     
     <categories>
       
-      <category>GNU/Linux</category>
+      <category>Linux</category>
       
     </categories>
     
@@ -95,7 +120,7 @@
     
     <categories>
       
-      <category>GNU/Linux</category>
+      <category>Linux</category>
       
     </categories>
     
@@ -120,7 +145,7 @@
     
     <categories>
       
-      <category>GNU/Linux</category>
+      <category>Linux</category>
       
     </categories>
     
@@ -145,7 +170,7 @@
     
     <categories>
       
-      <category>Arch Linux</category>
+      <category>Linux</category>
       
     </categories>
     
@@ -168,12 +193,6 @@
     <content type="html"><![CDATA[<h2 id="ollama"><a href="#ollama" class="headerlink" title="ollama"></a><a href="https://ollama.com/">ollama</a></h2><p>Run Llama 2, Code Llama, and other models. Customize and create your own.<br>运行 Llama 2、Code Llama 和其他模型。自定义并创建您自己的。</p><h2 id="installation"><a href="#installation" class="headerlink" title="installation"></a>installation</h2><p><a href="https://ollama.com/download/Ollama-darwin.zip">macOS</a><br><a href="https://ollama.com/download/OllamaSetup.exe">Windows preview</a><br>Linux:</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">curl -fsSL https://ollama.com/install.sh | sh<br></code></pre></td></tr></table></figure><p>Arch Linux:</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo pacman -S ollama<br><span class="hljs-comment"># or</span><br>sudo pacman -S ollama-cuda<br></code></pre></td></tr></table></figure><h2 id="Docker-and-cpu-only"><a href="#Docker-and-cpu-only" class="headerlink" title="Docker and cpu only"></a>Docker and cpu only</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># CPU only</span><br>docker run -d -v ollama:/root/.ollama -p 11434:11434 --name ollama ollama/ollama<br><br><span class="hljs-comment"># Run model locally</span><br>docker <span class="hljs-built_in">exec</span> -it ollama ollama run llama2<br><br></code></pre></td></tr></table></figure><h2 id="preview"><a href="#preview" class="headerlink" title="preview"></a>preview</h2><p>本人Intel核显，视频是在朋友的电脑上运行的。</p><video id="video" width="100%" height="100%" controls="" preload="none" poster="/res/post/ollama/eos_ollama.png">      <source id="show" src="/res/post/ollama/eos_ollama.mp4" type="video/mp4"></videos>]]></content>
     
     
-    <categories>
-      
-      <category>Share</category>
-      
-    </categories>
-    
     
     <tags>
       
@@ -195,16 +214,10 @@
     
     <categories>
       
-      <category>Arch Linux</category>
+      <category>Linux</category>
       
     </categories>
     
-    
-    <tags>
-      
-      <tag>Linux</tag>
-      
-    </tags>
     
   </entry>
   
@@ -220,7 +233,7 @@
     
     <categories>
       
-      <category>Arch Linux</category>
+      <category>Linux</category>
       
     </categories>
     
@@ -262,12 +275,6 @@
     <content type="html"><![CDATA[<h2 id="source-code-and-requirements"><a href="#source-code-and-requirements" class="headerlink" title="source code and requirements"></a><a href="https://github.com/Lilinzta/ai">source code and requirements</a></h2><h2 id="0-实验环境"><a href="#0-实验环境" class="headerlink" title="0.实验环境"></a>0.实验环境</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">OS: Arch Linux(rolling)<br>LANG: Python 3.11.5<br></code></pre></td></tr></table></figure><h2 id="4-运行"><a href="#4-运行" class="headerlink" title="4.运行"></a>4.运行</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">python another_lab4/main.py<br></code></pre></td></tr></table></figure><blockquote><p>another_lab4&#x2F;main.py</p></blockquote><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> torch<br><span class="hljs-keyword">from</span> torch.utils.data <span class="hljs-keyword">import</span> DataLoader<br><span class="hljs-keyword">from</span> torchvision <span class="hljs-keyword">import</span> transforms<br><span class="hljs-keyword">from</span> torchvision.datasets <span class="hljs-keyword">import</span> MNIST<br><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt<br><br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Net</span>(torch.nn.Module):<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-built_in">super</span>().__init__()<br>        self.fc1 = torch.nn.Linear(<span class="hljs-number">28</span>*<span class="hljs-number">28</span>, <span class="hljs-number">64</span>)<br>        self.fc2 = torch.nn.Linear(<span class="hljs-number">64</span>, <span class="hljs-number">64</span>)<br>        self.fc3 = torch.nn.Linear(<span class="hljs-number">64</span>, <span class="hljs-number">64</span>)<br>        self.fc4 = torch.nn.Linear(<span class="hljs-number">64</span>, <span class="hljs-number">10</span>)<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">forward</span>(<span class="hljs-params">self, x</span>):<br>        x = torch.nn.functional.relu(self.fc1(x))<br>        x = torch.nn.functional.relu(self.fc2(x))<br>        x = torch.nn.functional.relu(self.fc3(x))<br>        x = torch.nn.functional.log_softmax(self.fc4(x), dim=<span class="hljs-number">1</span>)<br>        <span class="hljs-keyword">return</span> x<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">get_data_loader</span>(<span class="hljs-params">is_train</span>):<br>    to_tensor = transforms.Compose([transforms.ToTensor()])<br>    data_set = MNIST(<span class="hljs-string">&quot;&quot;</span>, is_train, transform=to_tensor, download=<span class="hljs-literal">True</span>)<br>    <span class="hljs-keyword">return</span> DataLoader(data_set, batch_size=<span class="hljs-number">15</span>, shuffle=<span class="hljs-literal">True</span>)<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">evaluate</span>(<span class="hljs-params">test_data, net</span>):<br>    n_correct = <span class="hljs-number">0</span><br>    n_total = <span class="hljs-number">0</span><br>    <span class="hljs-keyword">with</span> torch.no_grad():<br>        <span class="hljs-keyword">for</span> (x, y) <span class="hljs-keyword">in</span> test_data:<br>            outputs = net.forward(x.view(-<span class="hljs-number">1</span>, <span class="hljs-number">28</span>*<span class="hljs-number">28</span>))<br>            <span class="hljs-keyword">for</span> i, output <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(outputs):<br>                <span class="hljs-keyword">if</span> torch.argmax(output) == y[i]:<br>                    n_correct += <span class="hljs-number">1</span><br>                n_total += <span class="hljs-number">1</span><br>    <span class="hljs-keyword">return</span> n_correct / n_total<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">main</span>():<br><br>    train_data = get_data_loader(is_train=<span class="hljs-literal">True</span>)<br>    test_data = get_data_loader(is_train=<span class="hljs-literal">False</span>)<br>    net = Net()<br><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;initial accuracy:&quot;</span>, evaluate(test_data, net))<br>    optimizer = torch.optim.Adam(net.parameters(), lr=<span class="hljs-number">0.001</span>)<br>    <span class="hljs-keyword">for</span> epoch <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">2</span>):<br>        <span class="hljs-keyword">for</span> (x, y) <span class="hljs-keyword">in</span> train_data:<br>            net.zero_grad()<br>            output = net.forward(x.view(-<span class="hljs-number">1</span>, <span class="hljs-number">28</span>*<span class="hljs-number">28</span>))<br>            loss = torch.nn.functional.nll_loss(output, y)<br>            loss.backward()<br>            optimizer.step()<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;epoch&quot;</span>, epoch, <span class="hljs-string">&quot;accuracy:&quot;</span>, evaluate(test_data, net))<br><br>    <span class="hljs-keyword">for</span> (n, (x, _)) <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(test_data):<br>        <span class="hljs-keyword">if</span> n &gt; <span class="hljs-number">3</span>:<br>            <span class="hljs-keyword">break</span><br>        predict = torch.argmax(net.forward(x[<span class="hljs-number">0</span>].view(-<span class="hljs-number">1</span>, <span class="hljs-number">28</span>*<span class="hljs-number">28</span>)))<br>        plt.figure(n)<br>        plt.imshow(x[<span class="hljs-number">0</span>].view(<span class="hljs-number">28</span>, <span class="hljs-number">28</span>))<br>        plt.title(<span class="hljs-string">&quot;prediction: &quot;</span> + <span class="hljs-built_in">str</span>(<span class="hljs-built_in">int</span>(predict)))<br>    plt.show()<br><br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br>    main()<br></code></pre></td></tr></table></figure><h2 id="5-实验结果"><a href="#5-实验结果" class="headerlink" title="5.实验结果"></a>5.实验结果</h2><img src=/res/post/ai/another_lab4-result.jpg width=100% />]]></content>
     
     
-    <categories>
-      
-      <category>人工智能技术</category>
-      
-    </categories>
-    
     
     <tags>
       
@@ -286,12 +293,6 @@
     
     <content type="html"><![CDATA[<h2 id="source-code-and-requirements"><a href="#source-code-and-requirements" class="headerlink" title="source code and requirements"></a><a href="https://github.com/Lilinzta/ai">source code and requirements</a></h2><h2 id="0-实验环境"><a href="#0-实验环境" class="headerlink" title="0.实验环境"></a>0.实验环境</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">OS: Arch Linux(rolling)<br>LANG: Python 3.11.5<br></code></pre></td></tr></table></figure><h2 id="4-运行"><a href="#4-运行" class="headerlink" title="4.运行"></a>4.运行</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">python lab3/main.py<br></code></pre></td></tr></table></figure><blockquote><p>lab3&#x2F;main.py</p></blockquote><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 导入必要的库</span><br><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt<br><span class="hljs-keyword">from</span> sklearn.datasets <span class="hljs-keyword">import</span> fetch_california_housing<br><span class="hljs-keyword">from</span> sklearn.model_selection <span class="hljs-keyword">import</span> train_test_split<br><span class="hljs-keyword">from</span> sklearn.linear_model <span class="hljs-keyword">import</span> linearregression<br><span class="hljs-keyword">from</span> sklearn.metrics <span class="hljs-keyword">import</span> mean_squared_error<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">main</span>():<br><br>    <span class="hljs-comment"># 加载加利福尼亚州房价数据集</span><br>    housing_22 = fetch_california_housing()<br>    x_22, y_22 = housing_22.data, housing_22.target<br><br>    <span class="hljs-comment"># 划分数据集为训练集和测试集</span><br>    x_train_22, x_test_22, y_train_22, y_test_22 = train_test_split(<br>        x_22, y_22, test_size=<span class="hljs-number">0.2</span>, random_state=<span class="hljs-number">42</span>)<br><br>    <span class="hljs-comment"># 初始化线性回归模型</span><br>    model_22 = linearregression()<br><br>    <span class="hljs-comment"># 训练模型</span><br>    model_22.fit(x_train_22, y_train_22)<br><br>    <span class="hljs-comment"># 在测试集上进行预测</span><br>    y_pred_22 = model_22.predict(x_test_22)<br><br>    <span class="hljs-comment"># 评估模型性能</span><br>    mse_22 = mean_squared_error(y_test_22, y_pred_22)<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&#x27;mean squared error on test set: <span class="hljs-subst">&#123;mse_22&#125;</span>&#x27;</span>)<br><br>    <span class="hljs-comment"># 绘制真实值与预测值的对比图</span><br>    plt.scatter(y_test_22, y_pred_22)<br>    plt.xlabel(<span class="hljs-string">&#x27;true values&#x27;</span>)<br>    plt.ylabel(<span class="hljs-string">&#x27;predictions&#x27;</span>)<br>    plt.title(<span class="hljs-string">&#x27;true values vs. predictions&#x27;</span>)<br>    plt.show()<br><br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br>    main()<br><br><br></code></pre></td></tr></table></figure><h2 id="5-实验结果"><a href="#5-实验结果" class="headerlink" title="5.实验结果"></a>5.实验结果</h2><img src=/res/post/ai/lab3-result.jpg width=100% />]]></content>
     
-    
-    <categories>
-      
-      <category>人工智能技术</category>
-      
-    </categories>
     
     
     <tags>
@@ -312,12 +313,6 @@
     <content type="html"><![CDATA[<h2 id="source-code-and-requirements"><a href="#source-code-and-requirements" class="headerlink" title="source code and requirements"></a><a href="https://github.com/Lilinzta/ai">source code and requirements</a></h2><h2 id="0-实验环境"><a href="#0-实验环境" class="headerlink" title="0.实验环境"></a>0.实验环境</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">OS: Arch Linux(rolling)<br>LANG: Python 3.11.5<br></code></pre></td></tr></table></figure><h2 id="4-运行"><a href="#4-运行" class="headerlink" title="4.运行"></a>4.运行</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">python lab2/main.py<br></code></pre></td></tr></table></figure><blockquote><p>lab2&#x2F;main.py</p></blockquote><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># Source: https://scikit-learn.org/stable/auto_examples/cluster/plot_kmeans_digits.html</span><br><br><span class="hljs-comment"># 导入必要的库</span><br><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt<br><span class="hljs-keyword">from</span> sklearn.datasets <span class="hljs-keyword">import</span> load_digits<br><span class="hljs-keyword">from</span> sklearn.decomposition <span class="hljs-keyword">import</span> PCA<br><span class="hljs-keyword">from</span> sklearn.cluster <span class="hljs-keyword">import</span> KMeans<br><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><br><span class="hljs-comment"># 使用load_digits()加载数字数据集，并提取特征和标签。确定了样本数、特征数和唯一标签的数量。</span><br>data_22, labels_22 = load_digits(return_X_y=<span class="hljs-literal">True</span>)<br>(n_samples, n_features), n_digits_22 = data_22.shape, np.unique(labels_22).size<br><br><span class="hljs-comment"># 使用PCA将数据的维度减少为2个，以便进行可视化。</span><br>reduced_data_22 = PCA(n_components=<span class="hljs-number">2</span>).fit_transform(data_22)<br><br><span class="hljs-comment"># 在减少的数据上应用K均值，并创建一个2D散点图以可视化聚类。</span><br>kmeans_22 = KMeans(init=<span class="hljs-string">&quot;k-means++&quot;</span>, n_clusters=n_digits_22, n_init=<span class="hljs-number">4</span>)<br>kmeans_22.fit(reduced_data_22)<br><br><span class="hljs-comment"># 定义一个网格中的点的步长</span><br>h = <span class="hljs-number">0.02</span><br><br>x_min, x_max = reduced_data_22[:, <span class="hljs-number">0</span>].<span class="hljs-built_in">min</span>() - <span class="hljs-number">1</span>, reduced_data_22[:, <span class="hljs-number">0</span>].<span class="hljs-built_in">max</span>() + <span class="hljs-number">1</span><br>y_min, y_max = reduced_data_22[:, <span class="hljs-number">1</span>].<span class="hljs-built_in">min</span>() - <span class="hljs-number">1</span>, reduced_data_22[:, <span class="hljs-number">1</span>].<span class="hljs-built_in">max</span>() + <span class="hljs-number">1</span><br><br><span class="hljs-comment"># 生成一个网格，以便在图中可视化聚类的结果</span><br>xx_22, yy_22 = np.meshgrid(np.arange(x_min, x_max, h),<br>                           np.arange(y_min, y_max, h))<br><br>Z = kmeans_22.predict(np.c_[xx_22.ravel(), yy_22.ravel()])<br><br>Z = Z.reshape(xx_22.shape)<br>plt.figure(<span class="hljs-number">1</span>)<br>plt.clf()<br><br><span class="hljs-comment"># 在2D空间上绘制聚类结果，用白色十字标记聚类中心。</span><br>plt.imshow(Z,<br>           interpolation=<span class="hljs-string">&quot;nearest&quot;</span>,<br>           extent=(xx_22.<span class="hljs-built_in">min</span>(),<br>                   xx_22.<span class="hljs-built_in">max</span>(),<br>                   yy_22.<span class="hljs-built_in">min</span>(),<br>                   yy_22.<span class="hljs-built_in">max</span>()),<br>           cmap=plt.cm.Paired,<br>           aspect=<span class="hljs-string">&quot;auto&quot;</span>,<br>           origin=<span class="hljs-string">&quot;lower&quot;</span>,)<br><br>plt.plot(reduced_data_22[:, <span class="hljs-number">0</span>], reduced_data_22[:, <span class="hljs-number">1</span>], <span class="hljs-string">&quot;k.&quot;</span>, markersize=<span class="hljs-number">2</span>)<br>centroids = kmeans_22.cluster_centers_<br>plt.scatter(centroids[:, <span class="hljs-number">0</span>],<br>            centroids[:, <span class="hljs-number">1</span>],<br>            marker=<span class="hljs-string">&quot;x&quot;</span>,<br>            s=<span class="hljs-number">169</span>,<br>            linewidths=<span class="hljs-number">3</span>,<br>            color=<span class="hljs-string">&quot;w&quot;</span>,<br>            zorder=<span class="hljs-number">10</span>)<br>plt.title(<br>    <span class="hljs-string">&quot;K-means clustering on the digits dataset (PCA-reduced data)\n&quot;</span><br>    <span class="hljs-string">&quot;Centroids are marked with white cross&quot;</span><br>)<br>plt.xlim(x_min, x_max)<br>plt.ylim(y_min, y_max)<br>plt.xticks(())<br>plt.yticks(())<br><br><span class="hljs-comment"># 显示绘图</span><br>plt.show()<br></code></pre></td></tr></table></figure><h2 id="5-实验结果"><a href="#5-实验结果" class="headerlink" title="5.实验结果"></a>5.实验结果</h2><img src=/res/post/ai/lab2-result.jpg width=100% />]]></content>
     
     
-    <categories>
-      
-      <category>人工智能技术</category>
-      
-    </categories>
-    
     
     <tags>
       
@@ -336,12 +331,6 @@
     
     <content type="html"><![CDATA[<h2 id="source-code-and-requirements"><a href="#source-code-and-requirements" class="headerlink" title="source code and requirements"></a><a href="https://github.com/Lilinzta/ai">source code and requirements</a></h2><h2 id="0-实验环境"><a href="#0-实验环境" class="headerlink" title="0.实验环境"></a>0.实验环境</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">OS: Arch Linux(rolling)<br>LANG: Python 3.11.5<br></code></pre></td></tr></table></figure><h2 id="1-创建虚拟环境"><a href="#1-创建虚拟环境" class="headerlink" title="1.创建虚拟环境"></a>1.创建虚拟环境</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">python -m venv venv<br></code></pre></td></tr></table></figure><h2 id="2-激活虚拟环境"><a href="#2-激活虚拟环境" class="headerlink" title="2.激活虚拟环境"></a>2.激活虚拟环境</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">source</span> venv/bin/activate<br></code></pre></td></tr></table></figure><h2 id="3-安装依赖"><a href="#3-安装依赖" class="headerlink" title="3.安装依赖"></a>3.安装依赖</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">pip install -r requirements.txt<br></code></pre></td></tr></table></figure><h2 id="4-运行"><a href="#4-运行" class="headerlink" title="4.运行"></a>4.运行</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">python lab1/main.py<br></code></pre></td></tr></table></figure><blockquote><p>lab1&#x2F;main.py</p></blockquote><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># Source: https://tjxlab.gitbooks.io/bigdata/content/da-shu-ju-fen-xi-yu-wa-jue-shi-yan/shi-yanyi-ff1a-knn-fen-lei-shi-yan.html</span><br><br><span class="hljs-comment"># numpy 库用于科学计算，matplotlib 库用于绘图</span><br><span class="hljs-comment"># Scikit-learn 库中的 neighbors 模块和 datasets 模块分别包含KNN分类器和一些常用的数据集</span><br><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt<br><span class="hljs-keyword">from</span> matplotlib.colors <span class="hljs-keyword">import</span> ListedColormap<br><span class="hljs-keyword">from</span> sklearn <span class="hljs-keyword">import</span> neighbors, datasets<br><br><span class="hljs-comment"># 定义邻居个数，设定KNN算法中邻居个数为15</span><br>n_neighbors_22 = <span class="hljs-number">15</span><br><br><span class="hljs-comment"># 加载iris数据集，使用 Scikit-learn 中的 load_iris() 函数加载鸢尾花数据集</span><br>iris_22 = datasets.load_iris()<br><br><span class="hljs-comment"># 选择特征，使用了鸢尾花数据集中的前两个特征</span><br>X_22 = iris_22.data[:, :<span class="hljs-number">2</span>]<br>y_22 = iris_22.target<br><br><span class="hljs-comment"># 设置步长和创建颜色映射，h 是在可视化决策边界时使用的步长</span><br><span class="hljs-comment"># cmap_light 和 cmap_bold 是两个颜色映射，用于可视化轻量级背景和加粗版背景颜色</span><br>h_22 = <span class="hljs-number">.02</span>  <span class="hljs-comment"># step size in the mesh</span><br>cmap_light = ListedColormap([<span class="hljs-string">&#x27;#FFAAAA&#x27;</span>, <span class="hljs-string">&#x27;#AAFFAA&#x27;</span>, <span class="hljs-string">&#x27;#AAAAFF&#x27;</span>])<br>cmap_bold = ListedColormap([<span class="hljs-string">&#x27;#FF0000&#x27;</span>, <span class="hljs-string">&#x27;#00FF00&#x27;</span>, <span class="hljs-string">&#x27;#0000FF&#x27;</span>])<br><br><span class="hljs-comment"># 循环进行KNN分类和可视化</span><br><span class="hljs-keyword">for</span> weights <span class="hljs-keyword">in</span> [<span class="hljs-string">&#x27;uniform&#x27;</span>, <span class="hljs-string">&#x27;distance&#x27;</span>]:<br>    <span class="hljs-comment"># 使用循环，分别使用两种权重（uniform和distance）创建KNN分类器实例，并对数据进行拟合。</span><br>    clf = neighbors.KNeighborsClassifier(n_neighbors_22, weights=weights)<br>    clf.fit(X_22, y_22)<br><br>    <span class="hljs-comment"># 为了绘制决策边界，定义一个网格，并在网格上计算模型的预测值</span><br>    x_min, x_max = X_22[:, <span class="hljs-number">0</span>].<span class="hljs-built_in">min</span>() - <span class="hljs-number">1</span>, X_22[:, <span class="hljs-number">0</span>].<span class="hljs-built_in">max</span>() + <span class="hljs-number">1</span><br>    y_min, y_max = X_22[:, <span class="hljs-number">1</span>].<span class="hljs-built_in">min</span>() - <span class="hljs-number">1</span>, X_22[:, <span class="hljs-number">1</span>].<span class="hljs-built_in">max</span>() + <span class="hljs-number">1</span><br>    xx, yy = np.meshgrid(np.arange(x_min, x_max, h_22),<br>                         np.arange(y_min, y_max, h_22))<br><br>    <span class="hljs-comment"># 使用模型对网格中的点进行预测</span><br>    Z = clf.predict(np.c_[xx.ravel(), yy.ravel()])<br><br>    <span class="hljs-comment"># 将预测结果以颜色的形式绘制在网格上</span><br>    Z = Z.reshape(xx.shape)<br>    plt.figure()<br>    plt.pcolormesh(xx, yy, Z, cmap=cmap_light)<br><br>    <span class="hljs-comment"># 将训练数据集上的点用散点图表示，并显示图表的标题</span><br>    plt.scatter(X_22[:, <span class="hljs-number">0</span>], X_22[:, <span class="hljs-number">1</span>], c=y_22, cmap=cmap_bold,<br>                edgecolor=<span class="hljs-string">&#x27;k&#x27;</span>, s=<span class="hljs-number">20</span>)<br>    plt.xlim(xx.<span class="hljs-built_in">min</span>(), xx.<span class="hljs-built_in">max</span>())<br>    plt.ylim(yy.<span class="hljs-built_in">min</span>(), yy.<span class="hljs-built_in">max</span>())<br>    plt.title(<span class="hljs-string">&quot;3-Class classification (k = %i, weights = &#x27;%s&#x27;)&quot;</span><br>              % (n_neighbors_22, weights))<br><br><span class="hljs-comment"># 最后，通过 plt.show() 将图形显示出来</span><br>plt.show()<br></code></pre></td></tr></table></figure><h2 id="5-实验结果"><a href="#5-实验结果" class="headerlink" title="5.实验结果"></a>5.实验结果</h2><img src=/res/post/ai/lab1-result.jpg width=100% />]]></content>
     
-    
-    <categories>
-      
-      <category>人工智能技术</category>
-      
-    </categories>
     
     
     <tags>
@@ -364,7 +353,7 @@
     
     <categories>
       
-      <category>Arch Linux</category>
+      <category>Linux</category>
       
     </categories>
     
@@ -387,12 +376,6 @@
     <content type="html"><![CDATA[<p>正如课程名字所言：“计算机教学中消失的一个学期”，这门课将会教会你许多大学的课堂上不会涉及但却对每个 CSer 无比重要的工具或者知识点。</p><span id="more"></span><p>例如 Shell 编程、命令行配置、Git、Vim、tmux、ssh 等等。如果你是一个计算机小白，那么非常建议你学习一下这门课。</p><p>学习时长：10小时</p><h2 id="课程资源"><a href="#课程资源" class="headerlink" title="课程资源"></a>课程资源</h2><ul><li>课程网站：<a href="https://missing.csail.mit.edu/2020/">https://missing.csail.mit.edu/2020/</a></li><li>课程中文网站: <a href="https://missing-semester-cn.github.io/">https://missing-semester-cn.github.io/</a></li><li>课程视频：<a href="https://www.youtube.com/playlist?list=PLyzOVJj3bHQuloKGG59rS43e29ro7I57J">https://www.youtube.com/playlist?list=PLyzOVJj3bHQuloKGG59rS43e29ro7I57J</a></li><li>课程中文字幕视频：<ul><li>Missing<em>Semi</em>中译组（未完结）：<a href="https://space.bilibili.com/1010983811?spm_id_from=333.337.search-card.all.click">https://space.bilibili.com/1010983811?spm_id_from=333.337.search-card.all.click</a></li><li>刘黑黑a（已完结）：<a href="https://space.bilibili.com/518734451?spm_id_from=333.337.search-card.all.click">https://space.bilibili.com/518734451?spm_id_from=333.337.search-card.all.click</a></li></ul></li><li>课程作业：一些随堂小练习，具体见课程网站。<blockquote><p>source: <a href="https://csdiy.wiki/">cs自学指南</a></p></blockquote></li></ul>]]></content>
     
     
-    <categories>
-      
-      <category>Share</category>
-      
-    </categories>
-    
     
     <tags>
       
@@ -411,12 +394,6 @@
     
     <content type="html"><![CDATA[<h2 id="由-GPT-3-和-GPT-4-提供支持的命令行生产力工具将帮助您更快、更高效地完成任务"><a href="#由-GPT-3-和-GPT-4-提供支持的命令行生产力工具将帮助您更快、更高效地完成任务" class="headerlink" title="由 GPT-3 和 GPT-4 提供支持的命令行生产力工具将帮助您更快、更高效地完成任务"></a>由 GPT-3 和 GPT-4 提供支持的命令行生产力工具将帮助您更快、更高效地完成任务</h2><span id="more"></span><blockquote><p>Tips: 下面都是废话，可以直接看这两个链接：<a href="https://github.com/chatanywhere/GPT_API_free">GPT_API_free</a>和<a href="https://github.com/TheR1D/shell_gpt">shell_gpt</a></p></blockquote><h2 id="获取一个免费的GPT-API"><a href="#获取一个免费的GPT-API" class="headerlink" title="获取一个免费的GPT_API"></a>获取一个免费的GPT_API</h2><p>点击第一个链接，获取免费的 GPT_API，当然也可以付费获得更好的体验。</p><p>与官方的 API 使用步骤基本相同，需要额外设置代理，具体使用可以详细阅读文档。</p><h2 id="shell-gpt-使用-GPT-API-free"><a href="#shell-gpt-使用-GPT-API-free" class="headerlink" title="shell_gpt 使用 GPT_API_free"></a>shell_gpt 使用 GPT_API_free</h2><p>第二个链接，使用方法说的很详细。配置文件在<code>$HOME/.config/shell_gpt/.sgptrc</code>,需要配置(修改)以下两个变量:</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">OPENAI_API_KEY=领取的免费API(一般为 sk- 开头)<br>OPENAI_API_HOST=https://api.chatanywhere.cn 或者 https://api.chatanywhere.com.cn<br></code></pre></td></tr></table></figure>]]></content>
     
-    
-    <categories>
-      
-      <category>Share</category>
-      
-    </categories>
     
     
     <tags>
@@ -496,7 +473,7 @@
     
     <categories>
       
-      <category>Arch Linux</category>
+      <category>Linux</category>
       
     </categories>
     
@@ -521,16 +498,10 @@
     
     <categories>
       
-      <category>Arch Linux</category>
+      <category>Linux</category>
       
     </categories>
     
-    
-    <tags>
-      
-      <tag>Linux</tag>
-      
-    </tags>
     
   </entry>
   

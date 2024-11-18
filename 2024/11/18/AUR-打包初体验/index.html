@@ -16,22 +16,22 @@
   <meta name="author" content="Haotian Li">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Arch Linux 从 AUR 源安装 VMware Workstation">
+    <meta name="description" content="第一次往 AUR 上传 PKGBUILD，并没有什么特别的感觉，因为是二进制包，只做了文件的拷贝。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Arch Linux 安装 VMware Workstation">
-<meta property="og:url" content="https://lilinzta.github.io/2023/08/07/Arch-Linux-%E5%AE%89%E8%A3%85-VMware-Workstation/index.html">
+<meta property="og:title" content="AUR 打包初体验">
+<meta property="og:url" content="https://lilinzta.github.io/2024/11/18/AUR-%E6%89%93%E5%8C%85%E5%88%9D%E4%BD%93%E9%AA%8C/index.html">
 <meta property="og:site_name" content="Lilinzta&#39;s blog">
-<meta property="og:description" content="Arch Linux 从 AUR 源安装 VMware Workstation">
+<meta property="og:description" content="第一次往 AUR 上传 PKGBUILD，并没有什么特别的感觉，因为是二进制包，只做了文件的拷贝。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-08-07T00:43:57.000Z">
-<meta property="article:modified_time" content="2024-11-18T03:20:48.628Z">
+<meta property="article:published_time" content="2024-11-18T02:28:19.000Z">
+<meta property="article:modified_time" content="2024-11-18T03:19:51.120Z">
 <meta property="article:author" content="Haotian Li">
-<meta property="article:tag" content="VMware">
+<meta property="article:tag" content="AUR">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>Arch Linux 安装 VMware Workstation - Lilinzta&#39;s blog</title>
+  <title>AUR 打包初体验 - Lilinzta&#39;s blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -210,7 +210,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Arch Linux 安装 VMware Workstation"></span>
+            <span id="subtitle" data-typed-text="AUR 打包初体验"></span>
           
         </div>
 
@@ -221,8 +221,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-08-07 08:43" pubdate>
-          2023年8月7日 早上
+        <time datetime="2024-11-18 10:28" pubdate>
+          2024年11月18日 上午
         </time>
       </span>
     
@@ -233,7 +233,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          43 字
+          348 字
         
       </span>
     
@@ -244,7 +244,7 @@
         
         
         
-          1 分钟
+          3 分钟
         
       </span>
     
@@ -281,21 +281,38 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Arch Linux 安装 VMware Workstation</h1>
+            <h1 id="seo-header">AUR 打包初体验</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="Arch-Linux-从-AUR-源安装-VMware-Workstation"><a href="#Arch-Linux-从-AUR-源安装-VMware-Workstation" class="headerlink" title="Arch Linux 从 AUR 源安装 VMware Workstation"></a>Arch Linux 从 AUR 源安装 VMware Workstation</h2><span id="more"></span>
+                <p>第一次往 AUR 上传 PKGBUILD，并没有什么特别的感觉，因为是二进制包，只做了文件的拷贝。</p>
+<span id="more"></span>
 
-<p>更完整的安装说明请参考 <a target="_blank" rel="noopener" href="https://wiki.archlinuxcn.org/wiki/VMware">Arch Wiki</a></p>
-<h2 id="1-安装依赖"><a href="#1-安装依赖" class="headerlink" title="1.安装依赖"></a>1.安装依赖</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo pacman -S fuse2 gtkmm linux-headers ncurses libcanberra pcsclite<br></code></pre></td></tr></table></figure>
+<h2 id="1-注册-AUR-账户并上传-ssh-公钥"><a href="#1-注册-AUR-账户并上传-ssh-公钥" class="headerlink" title="1. 注册 AUR 账户并上传 ssh 公钥"></a>1. 注册 AUR 账户并上传 ssh 公钥</h2><p>archlinux 的论坛和 AUR 用的不是同一个账号，需要单独注册一个 AUR 账号，然后在个人设置里添加 ssh 公钥，上传 ssh 公钥后，才可以上传 PKGBUILD。</p>
+<p>wiki 推荐单独为 AUR 创建新的 ssh 密钥对，而不是使用现有的 ssh 密钥对。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">ssh-keygen -f ~/.ssh/aur<br></code></pre></td></tr></table></figure>
 
-<h2 id="2-安装-VMware-Workstation"><a href="#2-安装-VMware-Workstation" class="headerlink" title="2.安装 VMware Workstation"></a>2.安装 VMware Workstation</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">yay -S vmware-workstation<br></code></pre></td></tr></table></figure>
+<p>然后编辑 ~&#x2F;.ssh&#x2F;config 文件，添加如下内容:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">Host aur.archlinux.org<br>  IdentityFile ~/.ssh/aur<br>  User aur<br></code></pre></td></tr></table></figure>
 
-<h2 id="3-开启服务"><a href="#3-开启服务" class="headerlink" title="3.开启服务"></a>3.开启服务</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">systemctl start vmware-networks.service<br>systemctl start vmware-usbarbitrator.service<br></code></pre></td></tr></table></figure>
+<h2 id="2-创建软件包仓库"><a href="#2-创建软件包仓库" class="headerlink" title="2. 创建软件包仓库"></a>2. 创建软件包仓库</h2><blockquote>
+<p>Tips: &lt;pkgname&gt; 中不应包含大写字母，否则会创建失败。</p>
+</blockquote>
+<p>从零开始创建一个 package</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git -c init.defaultBranch=master <span class="hljs-built_in">clone</span> ssh://aur@aur.archlinux.org/&lt;pkgname&gt;.git<br></code></pre></td></tr></table></figure>
 
-<h2 id="4-加载-VMware-模块"><a href="#4-加载-VMware-模块" class="headerlink" title="4.加载 VMware 模块"></a>4.加载 VMware 模块</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo modprobe -a vmw_vmci vmmon<br></code></pre></td></tr></table></figure>
+<p>本地已经有了一个 package</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">git -c init.defaultBranch=master init<br>git remote add &lt;label&gt; ssh://aur@aur.archlinux.org/&lt;pkgname&gt;.git<br></code></pre></td></tr></table></figure>
+
+<p>使用 <code>git config user.name</code> 和 <code>git config user.email</code> 为 package 设置提交者信息，否则会使用全局的提交者信息</p>
+<h2 id="3-关于-PKGBUILD-的编写"><a href="#3-关于-PKGBUILD-的编写" class="headerlink" title="3. 关于 PKGBUILD 的编写"></a>3. 关于 PKGBUILD 的编写</h2><p>新上传的 package 要在 PKGBUILD 头部加上如下内容</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># Maintainer: Your Name &lt;address at domain dot tld&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>如果是从别人那里接手的 package</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># Maintainer: Your name &lt;address at domain dot tld&gt;</span><br><span class="hljs-comment"># Maintainer: Other maintainer&#x27;s name &lt;address at domain dot tld&gt;</span><br><span class="hljs-comment"># Contributor: Previous maintainer&#x27;s name &lt;address at domain dot tld&gt;</span><br><span class="hljs-comment"># Contributor: Original submitter&#x27;s name &lt;address at domain dot tld&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>另外，关于 PKGBUILD 的主体内容。感觉大家编写风格各异，可以多参考一下别人的 PKGBUILD，能 work 即可，之后再考虑其它的问题。</p>
 
                 
               </div>
@@ -329,7 +346,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/VMware/" class="print-no-link">#VMware</a>
+        <a href="/tags/AUR/" class="print-no-link">#AUR</a>
       
     </div>
   
@@ -341,8 +358,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Arch Linux 安装 VMware Workstation</div>
-      <div>https://lilinzta.github.io/2023/08/07/Arch-Linux-安装-VMware-Workstation/</div>
+      <div>AUR 打包初体验</div>
+      <div>https://lilinzta.github.io/2024/11/18/AUR-打包初体验/</div>
     </div>
     <div class="license-meta">
       
@@ -354,7 +371,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年8月7日</div>
+          <div>2024年11月18日</div>
         </div>
       
       
@@ -386,18 +403,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/08/08/kde-connect/" title="kde-connect">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">kde-connect</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/07/16/Arch-base-install/" title="Arch base install">
-                        <span class="hidden-mobile">Arch base install</span>
+                      <a href="/2024/11/07/proton-wine-%E5%92%8C-windows-%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%85%B1%E7%94%A8%E5%90%8C%E4%B8%80%E4%B8%AA-AppData/" title="proton(wine) 和 windows 虚拟机共用同一个 AppData">
+                        <span class="hidden-mobile">proton(wine) 和 windows 虚拟机共用同一个 AppData</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -420,7 +431,7 @@
         var options = Object.assign(
           {"clientID":"9d74ad43577ce767f34d","clientSecret":"bcb1e82eff718d70dfa74c53fe966ab7765dc3b2","repo":"Lilinzta.github.io","owner":"Lilinzta","admin":["Lilinzta"],"language":"zh-CN","labels":["Gitalk"],"perPage":10,"pagerDirection":"last","distractionFreeMode":false,"createIssueManually":false,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token"},
           {
-            id: '0cd960560b9a85cdc17f25cf4d71caf1'
+            id: '4bd65f934f8e5e592e2e44f6ef0ef42c'
           }
         )
         var gitalk = new Gitalk(options);
