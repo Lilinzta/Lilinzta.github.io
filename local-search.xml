@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>mise - 开发利器</title>
+    <link href="/2025/03/07/mise-%E5%BC%80%E5%8F%91%E5%88%A9%E5%99%A8/"/>
+    <url>/2025/03/07/mise-%E5%BC%80%E5%8F%91%E5%88%A9%E5%99%A8/</url>
+    
+    <content type="html"><![CDATA[<p>你说的对，但是 <a href="https://github.com/jdx/mise">mise</a> 是由 <a href="https://www.rust-lang.org/">rust</a> 编程语言独立开发的管理开发工具的工具</p><span id="more"></span><h2 id="1-quickstart"><a href="#1-quickstart" class="headerlink" title="1. quickstart"></a>1. quickstart</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">mise use -g python@latest<br></code></pre></td></tr></table></figure><p>下载 python latest version 到 .local&#x2F;share&#x2F;mise 下，windows 大概是 AppData 类似的目录，并添加到环境变量</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">~<br>❯  <span class="hljs-built_in">which</span> python<br>/home/lilin/.local/share/mise/installs/python/3.13.2/bin/python<br></code></pre></td></tr></table></figure><p>或者，在编辑 mise 的配置文件后，简单执行 <code>mise install</code> 命令(在迁移系统时很有用，感觉可以直接放到 dotfiles 里了)</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs bash">~<br>❯ bat .config/mise/config.toml<br>───────┬─────────────────────────────────────────────────<br>       │ File: .config/mise/config.toml<br>───────┼─────────────────────────────────────────────────<br>   1   │ [tools]<br>   2   │ deno = <span class="hljs-string">&quot;latest&quot;</span><br>   3   │ flutter = <span class="hljs-string">&quot;latest&quot;</span><br>   4   │ gcc-arm-none-eabi = <span class="hljs-string">&quot;latest&quot;</span><br>   5   │ node = <span class="hljs-string">&quot;latest&quot;</span><br>   6   │ python = <span class="hljs-string">&quot;latest&quot;</span><br>   7   │<br>   8   │ [<span class="hljs-built_in">env</span>]<br>───────┴─────────────────────────────────────────────────<br></code></pre></td></tr></table></figure><h2 id="2-use-with-uv"><a href="#2-use-with-uv" class="headerlink" title="2. use with uv"></a>2. use with uv</h2><p><a href="https://github.com/astral-sh/uv">uv</a> 是一个极快的 python 包和项目的管理器，只需把原来的 <code>pip install</code> 换成 <code>uv pip install</code> 就能肉眼可见地感受到 uv 的快</p><p>当使用 <a href="https://mamba.readthedocs.io/en/latest/user_guide/micromamba.html">micromamba</a> 的 env 时，可以直接使用 <code>uv pip install</code> 来安装包，而使用 mise 时，则需添加 <code>--system</code> 参数，安装的包会放在 mise 相关的目录下而非系统目录，在运行 <code>uv pip install</code> 命令时会有提示</p><blockquote><p>tips: 建议 alias pip&#x3D;’uv pip’</p></blockquote><h2 id="3-Ending"><a href="#3-Ending" class="headerlink" title="3. Ending"></a>3. Ending</h2><p>GNU&#x2F;Linux 发行版通常自带 python 作为系统依赖，以及一些 python-xxx 的 python 包，并不是每一个 python 包都被每一个发行版所打包，我们需要虚拟环境</p><p>而不同的人喜欢不同的工具，所以同时使用 micromamba 和 mise，对于一些 conda 项目，使用 micromamba 更为方便，而对于一些小型的 python 项目和自己写的 python 代码则可以使用 mise 安装的 python，并且可以装一些非常非常常用的包，作为日常使用的环境</p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>mise</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>netlify 使用体验</title>
     <link href="/2025/03/03/netlify-%E4%BD%BF%E7%94%A8%E4%BD%93%E9%AA%8C/"/>
     <url>/2025/03/03/netlify-%E4%BD%BF%E7%94%A8%E4%BD%93%E9%AA%8C/</url>

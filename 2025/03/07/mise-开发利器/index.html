@@ -19,22 +19,22 @@
   <meta name="author" content="Haotian Li">
   <meta name="keywords" content="">
   
-    <meta name="description" content="事情的起因是：我打算让 shell_gpt 使用 gemini api">
+    <meta name="description" content="你说的对，但是 mise 是由 rust 编程语言独立开发的管理开发工具的工具">
 <meta property="og:type" content="article">
-<meta property="og:title" content="netlify 使用体验">
-<meta property="og:url" content="https://lilinzta.github.io/2025/03/03/netlify-%E4%BD%BF%E7%94%A8%E4%BD%93%E9%AA%8C/index.html">
+<meta property="og:title" content="mise - 开发利器">
+<meta property="og:url" content="https://lilinzta.github.io/2025/03/07/mise-%E5%BC%80%E5%8F%91%E5%88%A9%E5%99%A8/index.html">
 <meta property="og:site_name" content="Lilinzta&#39;s blog">
-<meta property="og:description" content="事情的起因是：我打算让 shell_gpt 使用 gemini api">
+<meta property="og:description" content="你说的对，但是 mise 是由 rust 编程语言独立开发的管理开发工具的工具">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2025-03-03T03:32:40.000Z">
-<meta property="article:modified_time" content="2025-03-03T09:49:51.617Z">
+<meta property="article:published_time" content="2025-03-07T12:19:21.000Z">
+<meta property="article:modified_time" content="2025-03-07T13:16:58.608Z">
 <meta property="article:author" content="Haotian Li">
-<meta property="article:tag" content="netlify">
+<meta property="article:tag" content="mise">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>netlify 使用体验 - Lilinzta&#39;s blog</title>
+  <title>mise - 开发利器 - Lilinzta&#39;s blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -213,7 +213,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="netlify 使用体验"></span>
+            <span id="subtitle" data-typed-text="mise - 开发利器"></span>
           
         </div>
 
@@ -224,8 +224,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2025-03-03 11:32" pubdate>
-          2025年3月3日 中午
+        <time datetime="2025-03-07 20:19" pubdate>
+          2025年3月7日 晚上
         </time>
       </span>
     
@@ -236,7 +236,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          218 字
+          390 字
         
       </span>
     
@@ -247,7 +247,7 @@
         
         
         
-          2 分钟
+          4 分钟
         
       </span>
     
@@ -284,20 +284,29 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">netlify 使用体验</h1>
+            <h1 id="seo-header">mise - 开发利器</h1>
             
             
               <div class="markdown-body">
                 
-                <p>事情的起因是：我打算让 shell_gpt 使用 gemini api</p>
+                <p>你说的对，但是 <a target="_blank" rel="noopener" href="https://github.com/jdx/mise">mise</a> 是由 <a target="_blank" rel="noopener" href="https://www.rust-lang.org/">rust</a> 编程语言独立开发的管理开发工具的工具</p>
 <span id="more"></span>
 
-<p>shell_gpt 在 github 上有仓库，所以直接点开 issues 搜索 gemini, 找到了这个 <a target="_blank" rel="noopener" href="https://github.com/TheR1D/shell_gpt/issues/514#issuecomment-2005454545">issue</a> 和这个仓库 <a target="_blank" rel="noopener" href="https://github.com/PublicAffairs/openai-gemini">openai-gemini</a></p>
-<p>仓库的 README 中写了多种 serverless 部署的方案，包括 Vercel、Netlify、Cloudflare、Deno 和本地部署，因为不想占用本地资源，所以从 Vercel 开始一个一个往后试，只有 Netlify 在使用 github 登陆之后，无需任何其它操作就可以直接使用。</p>
-<p>部署完成后，修改 shell_gpt 配置中的 <code>API_BASE_URL=https://&#123;site-name&#125;.netlify.app/v1</code></p>
-<p>在搞定 shell_gpt 使用 gemini api 之后，发现 Netlify 居然可以直连，速度也是很快。</p>
-<p>于是乎，选择新建站点，从 github 创建，选择本博客的 github 仓库，最后换一个自己喜欢的 site name，就大功告成了。</p>
-<p>现在可以通过 <a href="https://lilinzta.github.io/">https://lilinzta.github.io</a> 或 <a target="_blank" rel="noopener" href="https://lilinzta.netlify.app/">https://lilinzta.netlify.app</a> 访问本博客了，白嫖党大胜利！</p>
+<h2 id="1-quickstart"><a href="#1-quickstart" class="headerlink" title="1. quickstart"></a>1. quickstart</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">mise use -g python@latest<br></code></pre></td></tr></table></figure>
+
+<p>下载 python latest version 到 .local&#x2F;share&#x2F;mise 下，windows 大概是 AppData 类似的目录，并添加到环境变量</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">~<br>❯  <span class="hljs-built_in">which</span> python<br>/home/lilin/.local/share/mise/installs/python/3.13.2/bin/python<br></code></pre></td></tr></table></figure>
+
+<p>或者，在编辑 mise 的配置文件后，简单执行 <code>mise install</code> 命令(在迁移系统时很有用，感觉可以直接放到 dotfiles 里了)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs bash">~<br>❯ bat .config/mise/config.toml<br>───────┬─────────────────────────────────────────────────<br>       │ File: .config/mise/config.toml<br>───────┼─────────────────────────────────────────────────<br>   1   │ [tools]<br>   2   │ deno = <span class="hljs-string">&quot;latest&quot;</span><br>   3   │ flutter = <span class="hljs-string">&quot;latest&quot;</span><br>   4   │ gcc-arm-none-eabi = <span class="hljs-string">&quot;latest&quot;</span><br>   5   │ node = <span class="hljs-string">&quot;latest&quot;</span><br>   6   │ python = <span class="hljs-string">&quot;latest&quot;</span><br>   7   │<br>   8   │ [<span class="hljs-built_in">env</span>]<br>───────┴─────────────────────────────────────────────────<br></code></pre></td></tr></table></figure>
+
+<h2 id="2-use-with-uv"><a href="#2-use-with-uv" class="headerlink" title="2. use with uv"></a>2. use with uv</h2><p><a target="_blank" rel="noopener" href="https://github.com/astral-sh/uv">uv</a> 是一个极快的 python 包和项目的管理器，只需把原来的 <code>pip install</code> 换成 <code>uv pip install</code> 就能肉眼可见地感受到 uv 的快</p>
+<p>当使用 <a target="_blank" rel="noopener" href="https://mamba.readthedocs.io/en/latest/user_guide/micromamba.html">micromamba</a> 的 env 时，可以直接使用 <code>uv pip install</code> 来安装包，而使用 mise 时，则需添加 <code>--system</code> 参数，安装的包会放在 mise 相关的目录下而非系统目录，在运行 <code>uv pip install</code> 命令时会有提示</p>
+<blockquote>
+<p>tips: 建议 alias pip&#x3D;’uv pip’</p>
+</blockquote>
+<h2 id="3-Ending"><a href="#3-Ending" class="headerlink" title="3. Ending"></a>3. Ending</h2><p>GNU&#x2F;Linux 发行版通常自带 python 作为系统依赖，以及一些 python-xxx 的 python 包，并不是每一个 python 包都被每一个发行版所打包，我们需要虚拟环境</p>
+<p>而不同的人喜欢不同的工具，所以同时使用 micromamba 和 mise，对于一些 conda 项目，使用 micromamba 更为方便，而对于一些小型的 python 项目和自己写的 python 代码则可以使用 mise 安装的 python，并且可以装一些非常非常常用的包，作为日常使用的环境</p>
 
                 
               </div>
@@ -306,32 +315,11 @@
             <div>
               <div class="post-metas my-3">
   
-    <div class="post-meta mr-3 d-flex align-items-center">
-      <i class="iconfont icon-category"></i>
-      
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/LLM/" class="category-chain-item">LLM</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-    </div>
-  
   
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/netlify/" class="print-no-link">#netlify</a>
+        <a href="/tags/mise/" class="print-no-link">#mise</a>
       
     </div>
   
@@ -343,8 +331,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>netlify 使用体验</div>
-      <div>https://lilinzta.github.io/2025/03/03/netlify-使用体验/</div>
+      <div>mise - 开发利器</div>
+      <div>https://lilinzta.github.io/2025/03/07/mise-开发利器/</div>
     </div>
     <div class="license-meta">
       
@@ -356,7 +344,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2025年3月3日</div>
+          <div>2025年3月7日</div>
         </div>
       
       
@@ -388,18 +376,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/03/07/mise-%E5%BC%80%E5%8F%91%E5%88%A9%E5%99%A8/" title="mise - 开发利器">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">mise - 开发利器</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/11/26/clash-verge-rev-%E5%AE%8C%E5%85%A8%E9%85%8D%E7%BD%AE/" title="clash-verge-rev 完全配置">
-                        <span class="hidden-mobile">clash-verge-rev 完全配置</span>
+                      <a href="/2025/03/03/netlify-%E4%BD%BF%E7%94%A8%E4%BD%93%E9%AA%8C/" title="netlify 使用体验">
+                        <span class="hidden-mobile">netlify 使用体验</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -422,7 +404,7 @@
         var options = Object.assign(
           {"clientID":"9d74ad43577ce767f34d","clientSecret":"bcb1e82eff718d70dfa74c53fe966ab7765dc3b2","repo":"Lilinzta.github.io","owner":"Lilinzta","admin":["Lilinzta"],"language":"zh-CN","labels":["Gitalk"],"perPage":10,"pagerDirection":"last","distractionFreeMode":false,"createIssueManually":false,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token"},
           {
-            id: 'cd7457b2568e121c87778052e4ffc5a0'
+            id: '821f3870815001bc638b32ccdfc54536'
           }
         )
         var gitalk = new Gitalk(options);
