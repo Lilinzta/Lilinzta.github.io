@@ -27,7 +27,7 @@
 <meta property="og:description" content="Arch Linux 从 AUR 源安装 VMware Workstation">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-08-07T00:43:57.000Z">
-<meta property="article:modified_time" content="2024-11-18T03:20:48.628Z">
+<meta property="article:modified_time" content="2025-03-10T02:03:51.537Z">
 <meta property="article:author" content="Haotian Li">
 <meta property="article:tag" content="VMware">
 <meta name="twitter:card" content="summary_large_image">
@@ -294,7 +294,7 @@
 <p>更完整的安装说明请参考 <a target="_blank" rel="noopener" href="https://wiki.archlinuxcn.org/wiki/VMware">Arch Wiki</a></p>
 <h2 id="1-安装依赖"><a href="#1-安装依赖" class="headerlink" title="1.安装依赖"></a>1.安装依赖</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> pacman -S fuse2 gtkmm linux-headers ncurses libcanberra pcsclite<br></code></pre></td></tr></table></figure>
 
-<h2 id="2-安装-VMware-Workstation"><a href="#2-安装-VMware-Workstation" class="headerlink" title="2.安装 VMware Workstation"></a>2.安装 VMware Workstation</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">yay -S vmware-workstation<br></code></pre></td></tr></table></figure>
+<h2 id="2-安装-VMware-Workstation"><a href="#2-安装-VMware-Workstation" class="headerlink" title="2.安装 VMware Workstation"></a>2.安装 VMware Workstation</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">paru -S vmware-workstation<br></code></pre></td></tr></table></figure>
 
 <h2 id="3-开启服务"><a href="#3-开启服务" class="headerlink" title="3.开启服务"></a>3.开启服务</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">systemctl start vmware-networks.service<br>systemctl start vmware-usbarbitrator.service<br></code></pre></td></tr></table></figure>
 
